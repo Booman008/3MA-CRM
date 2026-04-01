@@ -3,12 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const db = require('./database');
 const { requireAuth } = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const buildDir = path.join(__dirname, '..', 'client', 'build');
+const publicDir = path.join(__dirname, '..', 'client', 'public');
+const clientDir = fs.existsSync(buildDir) ? buildDir : publicDir;
 
 const allowedOrigins = (process.env.CORS_ORIGIN || '')
   .split(',')
@@ -23,7 +27,7 @@ app.use(cors(
 app.use(express.json());
 
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
+app.use(express.static(clientDir));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
@@ -39,7 +43,7 @@ app.use('/api/settings', require('./routes/settings'));
 
 // Fallback to index.html for client-side routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+  res.sendFile(path.join(clientDir, 'index.html'));
 });
 
 // Wait for database to be ready, then start server
