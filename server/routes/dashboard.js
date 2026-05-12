@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const [membersResult, leadsResult, recentContactsResult] = await Promise.all([
+    const [membersResult, leadsResult, recentContactsResult, todayTasksResult, overdueTasksResult] = await Promise.all([
       db.query(
         `
           SELECT id, "businessName", "licenseNo", "licenseType", county, "ownerName", phone, email,
@@ -31,6 +31,18 @@ router.get('/', async (req, res) => {
           ORDER BY "contactDate" DESC, "createdAt" DESC
           LIMIT 10
         `
+      ),
+      db.query(
+        `SELECT id, title, "dueDate", priority, "entityType", "entityId", "entityName"
+         FROM tasks
+         WHERE completed = FALSE AND "dueDate" = to_char(now() AT TIME ZONE 'UTC', 'YYYY-MM-DD')
+         ORDER BY CASE priority WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 ELSE 3 END`
+      ),
+      db.query(
+        `SELECT id, title, "dueDate", priority, "entityType", "entityId", "entityName"
+         FROM tasks
+         WHERE completed = FALSE AND "dueDate" IS NOT NULL AND "dueDate" < to_char(now() AT TIME ZONE 'UTC', 'YYYY-MM-DD')
+         ORDER BY "dueDate" ASC LIMIT 20`
       ),
     ]);
 
@@ -91,6 +103,8 @@ router.get('/', async (req, res) => {
       upcomingRenewals,
       leadsByStage: leadsResult.rows,
       recentContacts: recentContactsResult.rows,
+      todayTasks: todayTasksResult.rows,
+      overdueTasks: overdueTasksResult.rows,
     });
   } catch (error) {
     console.error('Failed to load dashboard:', error);

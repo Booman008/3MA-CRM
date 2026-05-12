@@ -3,16 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 
 const db = require('./database');
 const { requireAuth } = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const buildDir = path.join(__dirname, '..', 'client', 'build');
-const publicDir = path.join(__dirname, '..', 'client', 'public');
-const clientDir = fs.existsSync(buildDir) ? buildDir : publicDir;
+const clientDir = path.join(__dirname, '..', 'client', 'build');
 
 const allowedOrigins = (process.env.CORS_ORIGIN || '')
   .split(',')
@@ -40,6 +37,9 @@ app.use('/api/leads', require('./routes/leads'));
 app.use('/api/contacts', require('./routes/contacts'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/settings', require('./routes/settings'));
+app.use('/api/search', require('./routes/search'));
+app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/attachments', require('./routes/attachments'));
 
 // Fallback to index.html for client-side routing
 app.get('*', (req, res) => {

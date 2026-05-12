@@ -3,32 +3,37 @@ const fs = require('fs');
 const path = require('path');
 
 const projectRoot = path.resolve(__dirname, '..');
-const publicDir = path.join(projectRoot, 'client', 'public');
-const buildDir = path.join(projectRoot, 'client', 'build');
+const clientDir = path.join(projectRoot, 'client');
+const srcDir = path.join(clientDir, 'src');
+const buildDir = path.join(clientDir, 'build');
+const watch = process.argv.includes('--watch');
 
 async function build() {
   fs.rmSync(buildDir, { recursive: true, force: true });
   fs.mkdirSync(buildDir, { recursive: true });
 
-  await esbuild.build({
-    entryPoints: [path.join(publicDir, 'app.jsx')],
+  const config = {
+    entryPoints: [path.join(srcDir, 'main.jsx')],
     outfile: path.join(buildDir, 'app.js'),
     bundle: true,
-    minify: true,
-    sourcemap: false,
+    minify: !watch,
+    sourcemap: watch,
     target: ['es2019'],
-    loader: {
-      '.js': 'jsx',
-      '.jsx': 'jsx',
-    },
-  });
+    jsx: 'automatic',
+    loader: { '.js': 'jsx', '.jsx': 'jsx' },
+    define: { 'process.env.NODE_ENV': watch ? '"development"' : '"production"' },
+  };
 
-  const indexPath = path.join(publicDir, 'index.html');
-  const indexHtml = fs.readFileSync(indexPath, 'utf8')
-    .replace(/<script src="https:\/\/unpkg\.com\/@babel\/standalone\/babel\.min\.js"><\/script>\s*/i, '')
-    .replace(/<script type="text\/babel" src="app\.jsx"><\/script>/i, '<script src="app.js"></script>');
+  fs.copyFileSync(path.join(clientDir, 'index.html'), path.join(buildDir, 'index.html'));
 
-  fs.writeFileSync(path.join(buildDir, 'index.html'), indexHtml);
+  if (watch) {
+    const ctx = await esbuild.context(config);
+    await ctx.watch();
+    console.log('esbuild: watching client/src for changes...');
+  } else {
+    await esbuild.build(config);
+    console.log('esbuild: built client to', buildDir);
+  }
 }
 
 build().catch((error) => {

@@ -131,6 +131,39 @@ async function ready() {
           "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
 
+        CREATE TABLE IF NOT EXISTS attachments (
+          id SERIAL PRIMARY KEY,
+          "entityType" TEXT NOT NULL CHECK ("entityType" IN ('member', 'lead')),
+          "entityId" INTEGER NOT NULL,
+          filename TEXT NOT NULL,
+          "mimeType" TEXT,
+          "sizeBytes" BIGINT,
+          "r2Key" TEXT NOT NULL UNIQUE,
+          "uploadedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_attachments_entity ON attachments ("entityType", "entityId");
+
+        CREATE TABLE IF NOT EXISTS tasks (
+          id SERIAL PRIMARY KEY,
+          title TEXT NOT NULL,
+          description TEXT,
+          "dueDate" TEXT,
+          completed BOOLEAN NOT NULL DEFAULT FALSE,
+          "completedAt" TIMESTAMP,
+          priority TEXT DEFAULT 'Medium',
+          "entityType" TEXT CHECK ("entityType" IN ('member', 'lead')),
+          "entityId" INTEGER,
+          "entityName" TEXT,
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_tasks_due ON tasks ("dueDate") WHERE completed = FALSE;
+        CREATE INDEX IF NOT EXISTS idx_tasks_entity ON tasks ("entityType", "entityId");
+
+        ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS subject TEXT;
+        ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS direction TEXT CHECK (direction IN ('inbound', 'outbound'));
+
         CREATE TABLE IF NOT EXISTS users (
           id SERIAL PRIMARY KEY,
           email TEXT NOT NULL UNIQUE,
