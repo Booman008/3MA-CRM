@@ -18,6 +18,17 @@ export function normalizeLicenseRow(row) {
   };
 }
 
+export function licenseRowKey(row) {
+  const normalized = normalizeLicenseRow(row);
+  return [
+    normalized.number,
+    normalized.type,
+    normalized.county,
+    normalized.name,
+    normalized.status,
+  ].join('\u001f');
+}
+
 export function parseLicenseRows(value) {
   if (!value) return [{ ...EMPTY_LICENSE_ROW }];
   try {
@@ -36,6 +47,20 @@ export function serializeLicenseRows(rows) {
     .map(normalizeLicenseRow)
     .filter(row => row.number || row.type || row.county || row.name);
   return normalized.length ? JSON.stringify(normalized) : null;
+}
+
+export function dedupeLicenseRows(rows) {
+  const seen = new Set();
+  const deduped = [];
+  for (const row of rows || []) {
+    const normalized = normalizeLicenseRow(row);
+    if (!(normalized.number || normalized.type || normalized.county || normalized.name)) continue;
+    const key = licenseRowKey(normalized);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(normalized);
+  }
+  return deduped;
 }
 
 export function parseLicenseNumbers(value) {
