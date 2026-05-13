@@ -1,7 +1,7 @@
 // 3MA-brand styles for the CRM. Same `S.*` API as before — only values
 // changed so existing JSX inline-style consumers pick the new look up.
 //
-// Brand rules:
+// Brand rules (from /projects/172d6a2d-e49c-4623-ac37-e55dfee42eb9/):
 //   • Navy leads. Gold is the only primary CTA. Red is rationed to alerts.
 //   • Montserrat (uppercase, tracked) for headings/CTAs/labels/badges.
 //   • Raleway for body copy.
@@ -190,25 +190,6 @@ export const S = {
     color: WHITE,
     whiteSpace: 'nowrap',
   }),
-  openableName: (active = false) => ({
-    background: 'none',
-    border: 'none',
-    padding: 0,
-    margin: 0,
-    textAlign: 'left',
-    cursor: 'pointer',
-    color: active ? GOLD_HOVER : NAVY,
-    font: 'inherit',
-    fontWeight: 'inherit',
-    lineHeight: 'inherit',
-    textDecoration: active ? 'underline' : 'none',
-    textUnderlineOffset: '0.14em',
-    textDecorationThickness: '0.08em',
-    transition: 'color .15s, text-decoration-color .15s, box-shadow .15s',
-    borderRadius: 2,
-    boxShadow: active ? `0 0 0 2px ${GOLD}33` : 'none',
-    outline: 'none',
-  }),
 
   // ── Modal ─────────────────────────────────────────────────
   overlay: {
@@ -226,7 +207,7 @@ export const S = {
     borderRadius: 12,
     padding: '28px 32px',
     width: '100%',
-    maxWidth: 840,
+    maxWidth: 600,
     maxHeight: '90vh',
     overflowY: 'auto',
     boxShadow: 'var(--shadow-lg)',
