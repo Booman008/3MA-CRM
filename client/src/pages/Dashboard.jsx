@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../api.js';
 import { S } from '../styles.js';
 import { fmt, renewalStatus } from '../format.js';
+import { isArchivedStage, stageColor as stageColorMap } from '../stages.js';
 
 const priorityColor = { Low: 'var(--info)', Medium: 'var(--warning)', High: 'var(--danger)' };
 
@@ -27,8 +28,14 @@ export function Dashboard() {
   if (loading) return <div style={S.emptyState}>Loading dashboard...</div>;
   if (!data) return <div style={S.emptyState}>Failed to load dashboard</div>;
 
-  const stageColors = { 'New': 'var(--info)', 'Contacted': 'var(--green-500)', 'Qualified': 'var(--warning)', 'Proposal': '#7b1fa2', 'Won': 'var(--green-700)', 'Lost': 'var(--danger)' };
-  const maxStageCount = Math.max(...(data.leadsByStage.map(s => s.count)), 1);
+  const stageColors = stageColorMap;
+  const activeLeadsByStage = data.leadsByStage.filter(s => !isArchivedStage(s.stage));
+  const archivedLeadsByStage = data.leadsByStage.filter(s => isArchivedStage(s.stage));
+  const maxStageCount = Math.max(...(activeLeadsByStage.map(s => s.count)), 1);
+  const activeLeadCount = activeLeadsByStage.reduce((a, s) => a + s.count, 0);
+  const archivedLeadCount = archivedLeadsByStage.reduce((a, s) => a + s.count, 0);
+  const totalTracked = data.totalMembers + activeLeadCount + archivedLeadCount;
+  const pct = (n) => totalTracked > 0 ? ((n / totalTracked) * 100).toFixed(1) : '0.0';
 
   return (
     <div>
@@ -65,6 +72,63 @@ export function Dashboard() {
         </div>
       </div>
 
+      <div style={{ ...S.card, marginBottom: 16 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
+          <div style={{ fontWeight: 700, color: 'var(--green-800)' }}>Marketplace Coverage</div>
+          <div style={{ fontSize: '.8rem', color: 'var(--text-light)' }}>
+            {totalTracked} total license{totalTracked === 1 ? '' : 's'} tracked
+          </div>
+        </div>
+        {totalTracked === 0 ? (
+          <div style={{ color: 'var(--text-light)', fontSize: '.9rem' }}>No records yet</div>
+        ) : (
+          <>
+            <div style={{ display: 'flex', height: 28, borderRadius: 6, overflow: 'hidden', marginBottom: 14, background: '#eee' }}>
+              {data.totalMembers > 0 && (
+                <div title={`Members: ${data.totalMembers}`} style={{ width: `${pct(data.totalMembers)}%`, background: 'var(--green-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.78rem', fontWeight: 600 }}>
+                  {pct(data.totalMembers) >= 6 ? `${pct(data.totalMembers)}%` : ''}
+                </div>
+              )}
+              {activeLeadCount > 0 && (
+                <div title={`Active pipeline: ${activeLeadCount}`} style={{ width: `${pct(activeLeadCount)}%`, background: 'var(--info)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.78rem', fontWeight: 600 }}>
+                  {pct(activeLeadCount) >= 6 ? `${pct(activeLeadCount)}%` : ''}
+                </div>
+              )}
+              {archivedLeadCount > 0 && (
+                <div title={`Archived: ${archivedLeadCount}`} style={{ width: `${pct(archivedLeadCount)}%`, background: '#9e9e9e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.78rem', fontWeight: 600 }}>
+                  {pct(archivedLeadCount) >= 6 ? `${pct(archivedLeadCount)}%` : ''}
+                </div>
+              )}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, fontSize: '.88rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 12, height: 12, borderRadius: 3, background: 'var(--green-700)', display: 'inline-block' }} />
+                <span>Members <strong>{data.totalMembers}</strong> ({pct(data.totalMembers)}%)</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 12, height: 12, borderRadius: 3, background: 'var(--info)', display: 'inline-block' }} />
+                <span>Active pipeline <strong>{activeLeadCount}</strong> ({pct(activeLeadCount)}%)</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 12, height: 12, borderRadius: 3, background: '#9e9e9e', display: 'inline-block' }} />
+                <span>Archived / not pursuing <strong>{archivedLeadCount}</strong> ({pct(archivedLeadCount)}%)</span>
+              </div>
+            </div>
+            {archivedLeadsByStage.length > 0 && (
+              <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid var(--border)', fontSize: '.82rem', color: 'var(--text-light)' }}>
+                Archived breakdown:{' '}
+                {archivedLeadsByStage.map((s, i) => (
+                  <span key={s.stage}>
+                    {i > 0 ? ' · ' : ''}
+                    {s.stage} <strong>{s.count}</strong>
+                  </span>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
       {((data.todayTasks || []).length > 0 || (data.overdueTasks || []).length > 0) && (
         <div style={{ ...S.card, marginBottom: 16 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
@@ -97,9 +161,9 @@ export function Dashboard() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         <div style={S.card}>
-          <div style={{ fontWeight: 700, marginBottom: 14, color: 'var(--green-800)' }}>Lead Pipeline</div>
-          {data.leadsByStage.length === 0 && <div style={{ color: 'var(--text-light)', fontSize: '.9rem' }}>No leads yet</div>}
-          {data.leadsByStage.map(s => (
+          <div style={{ fontWeight: 700, marginBottom: 14, color: 'var(--green-800)' }}>Lead Pipeline <span style={{ fontSize: '.75rem', color: 'var(--text-light)', fontWeight: 400 }}>(active only)</span></div>
+          {activeLeadsByStage.length === 0 && <div style={{ color: 'var(--text-light)', fontSize: '.9rem' }}>No active leads</div>}
+          {activeLeadsByStage.map(s => (
             <div key={s.stage} style={{ marginBottom: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.85rem', marginBottom: 3 }}>
                 <span>{s.stage}</span><span style={{ fontWeight: 600 }}>{s.count}</span>

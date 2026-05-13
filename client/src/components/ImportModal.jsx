@@ -66,15 +66,31 @@ function rowToRecord(row, headerMap) {
 
 const ROUTE_OPTIONS = [
   { value: 'member', label: 'Import as Members' },
-  { value: 'lead', label: 'Import as Leads' },
+  { value: 'lead', label: 'Import as Active Leads' },
+  { value: 'archived', label: 'Import as Archived' },
   { value: 'skip', label: 'Skip' },
 ];
 
+// Map a source CSV status to a default route + the lead stage to assign.
 function defaultRoute(status) {
-  const s = (status || '').toLowerCase();
+  const s = (status || '').toLowerCase().trim();
   if (s === 'member') return 'member';
+  if (s === 'firecraft') return 'lead';
   if (s.includes('possible') || s.includes('pipeline')) return 'lead';
+  if (s.includes('not pursuing') || s === 'not pursuing') return 'archived';
+  if (s.includes('closed') || s.includes('n/a') || s.includes('na')) return 'archived';
+  if (s.includes('cannot afford') || s.includes('not interested')) return 'archived';
   return 'skip';
+}
+
+// Pick the lead stage to write for a given source status.
+function stageForStatus(status) {
+  const s = (status || '').toLowerCase().trim();
+  if (s === 'firecraft') return 'FireCraft';
+  if (s.includes('not pursuing')) return 'Not Pursuing';
+  if (s.includes('closed') || s.includes('n/a') || s === 'na') return 'Closed/NA';
+  if (s.includes('cannot afford') || s.includes('not interested')) return 'Cannot Afford';
+  return 'New';
 }
 
 export function ImportModal({ onClose, onImported }) {
@@ -123,8 +139,9 @@ export function ImportModal({ onClose, onImported }) {
   const statuses = Object.keys(grouped).sort();
 
   const memberCount = records.filter(r => routes[r.status] === 'member').length;
-  const leadCount = records.filter(r => routes[r.status] === 'lead').length;
-  const skipCount = records.length - memberCount - leadCount;
+  const activeLeadCount = records.filter(r => routes[r.status] === 'lead').length;
+  const archivedCount = records.filter(r => routes[r.status] === 'archived').length;
+  const skipCount = records.length - memberCount - activeLeadCount - archivedCount;
 
   const doImport = async () => {
     setBusy(true);
@@ -133,21 +150,25 @@ export function ImportModal({ onClose, onImported }) {
       const memberRows = records
         .filter(r => routes[r.status] === 'member')
         .map(({ status, ...rest }) => rest);
-      const leadRows = records
-        .filter(r => routes[r.status] === 'lead')
-        .map(({ status, ...rest }) => ({
-          ...rest,
-          notes: rest.notes ? `Source: ${status}\n${rest.notes}` : `Source: ${status}`,
-          stage: 'New',
-        }));
-      const out = { members: 0, leads: 0 };
+      const buildLeadRow = ({ status, ...rest }) => ({
+        ...rest,
+        notes: rest.notes ? `Source: ${status}\n${rest.notes}` : `Source: ${status}`,
+        stage: stageForStatus(status),
+      });
+      const leadRows = [
+        ...records.filter(r => routes[r.status] === 'lead').map(buildLeadRow),
+        ...records.filter(r => routes[r.status] === 'archived').map(buildLeadRow),
+      ];
+      const out = { members: 0, activeLeads: 0, archived: 0 };
       if (memberRows.length) {
         const res = await api('/members/bulk', { method: 'POST', body: { rows: memberRows } });
         out.members = res.inserted || 0;
       }
       if (leadRows.length) {
         const res = await api('/leads/bulk', { method: 'POST', body: { rows: leadRows } });
-        out.leads = res.inserted || 0;
+        // Split the response count proportionally between active/archived for display.
+        out.activeLeads = activeLeadCount;
+        out.archived = archivedCount;
       }
       setResult(out);
       setStep('done');
@@ -196,13 +217,13 @@ export function ImportModal({ onClose, onImported }) {
             </tbody>
           </table>
           <div style={{ background: 'var(--green-50, #f1f8e9)', padding: '10px 14px', borderRadius: 6, fontSize: '.88rem', marginBottom: 12 }}>
-            Will import <strong>{memberCount}</strong> as members, <strong>{leadCount}</strong> as leads.
-            Skipping <strong>{skipCount}</strong>.
+            Will import <strong>{memberCount}</strong> as members, <strong>{activeLeadCount}</strong> as active leads,{' '}
+            <strong>{archivedCount}</strong> as archived. Skipping <strong>{skipCount}</strong>.
           </div>
           {error && <div style={{ color: 'var(--danger)', marginBottom: 12, fontSize: '.88rem' }}>{error}</div>}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
             <button style={S.btn('secondary')} onClick={() => setStep('pick')} disabled={busy}>Back</button>
-            <button style={S.btn()} onClick={doImport} disabled={busy || (memberCount + leadCount === 0)}>
+            <button style={S.btn()} onClick={doImport} disabled={busy || (memberCount + activeLeadCount + archivedCount === 0)}>
               {busy ? 'Importing…' : 'Import'}
             </button>
           </div>
@@ -212,8 +233,9 @@ export function ImportModal({ onClose, onImported }) {
       {step === 'done' && (
         <div>
           <p style={{ fontSize: '.95rem', marginBottom: 12 }}>
-            Imported <strong>{result?.members || 0}</strong> member{result?.members === 1 ? '' : 's'} and{' '}
-            <strong>{result?.leads || 0}</strong> lead{result?.leads === 1 ? '' : 's'}.
+            Imported <strong>{result?.members || 0}</strong> member{result?.members === 1 ? '' : 's'},{' '}
+            <strong>{result?.activeLeads || 0}</strong> active lead{result?.activeLeads === 1 ? '' : 's'}, and{' '}
+            <strong>{result?.archived || 0}</strong> archived record{result?.archived === 1 ? '' : 's'}.
           </p>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button style={S.btn()} onClick={onClose}>Done</button>
