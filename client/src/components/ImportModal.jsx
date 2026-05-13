@@ -159,16 +159,19 @@ export function ImportModal({ onClose, onImported }) {
         ...records.filter(r => routes[r.status] === 'lead').map(buildLeadRow),
         ...records.filter(r => routes[r.status] === 'archived').map(buildLeadRow),
       ];
-      const out = { members: 0, activeLeads: 0, archived: 0 };
+      const out = { members: 0, activeLeads: 0, archived: 0, failures: [] };
       if (memberRows.length) {
         const res = await api('/members/bulk', { method: 'POST', body: { rows: memberRows } });
         out.members = res.inserted || 0;
+        if (res.failures?.length) out.failures.push(...res.failures.map(f => ({ ...f, kind: 'member' })));
       }
       if (leadRows.length) {
         const res = await api('/leads/bulk', { method: 'POST', body: { rows: leadRows } });
-        // Split the response count proportionally between active/archived for display.
-        out.activeLeads = activeLeadCount;
-        out.archived = archivedCount;
+        const totalInserted = res.inserted || 0;
+        // Distribute success count between active/archived (active rows come first in leadRows).
+        out.activeLeads = Math.min(activeLeadCount, totalInserted);
+        out.archived = Math.max(0, totalInserted - out.activeLeads);
+        if (res.failures?.length) out.failures.push(...res.failures.map(f => ({ ...f, kind: 'lead' })));
       }
       setResult(out);
       setStep('done');
@@ -237,6 +240,18 @@ export function ImportModal({ onClose, onImported }) {
             <strong>{result?.activeLeads || 0}</strong> active lead{result?.activeLeads === 1 ? '' : 's'}, and{' '}
             <strong>{result?.archived || 0}</strong> archived record{result?.archived === 1 ? '' : 's'}.
           </p>
+          {result?.failures?.length > 0 && (
+            <div style={{ background: '#fff3e0', border: '1px solid #ffe0b2', borderRadius: 6, padding: '10px 14px', marginBottom: 12 }}>
+              <div style={{ fontWeight: 600, color: '#e65100', marginBottom: 6, fontSize: '.88rem' }}>
+                {result.failures.length} row{result.failures.length === 1 ? '' : 's'} failed:
+              </div>
+              <ul style={{ margin: 0, paddingLeft: 18, fontSize: '.82rem', color: 'var(--text-light)' }}>
+                {result.failures.slice(0, 10).map((f, i) => (
+                  <li key={i}>{f.businessName || `row ${f.index}`}: {f.error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button style={S.btn()} onClick={onClose}>Done</button>
           </div>
