@@ -48,4 +48,12 @@ async function getDownloadUrl(key, filename) {
   return getSignedUrl(getClient(), cmd, { expiresIn: 300 });
 }
 
-module.exports = { isConfigured, uploadObject, deleteObject, getDownloadUrl };
+async function getInlineUrl(key) {
+  const cmd = new GetObjectCommand({
+    Bucket: bucket,
+    Key: key,
+  });
+  return getSignedUrl(getClient(), cmd, { expiresIn: 300 });
+}
+
+module.exports = { isConfigured, uploadObject, deleteObject, getDownloadUrl, getInlineUrl };

@@ -1,12 +1,22 @@
 const express = require('express');
 
 const db = require('../database');
+const r2 = require('../r2');
 
 const router = express.Router();
 
+function parseLicenseCount(licenseNo) {
+  if (!licenseNo) return 0;
+  try {
+    const parsed = JSON.parse(licenseNo);
+    if (Array.isArray(parsed)) return parsed.length;
+  } catch {}
+  return licenseNo.split(',').map((value) => value.trim()).filter(Boolean).length;
+}
+
 router.get('/', async (req, res) => {
   try {
-    const [membersResult, leadsResult, recentContactsResult, todayTasksResult, overdueTasksResult] = await Promise.all([
+    const [membersResult, leadsResult, recentContactsResult, todayTasksResult, overdueTasksResult, logoMembersResult, logoLeadsResult] = await Promise.all([
       db.query(
         `
           SELECT id, "businessName", "licenseNo", "licenseType", county, "ownerName", phone, email,
@@ -44,6 +54,22 @@ router.get('/', async (req, res) => {
          WHERE completed = FALSE AND "dueDate" IS NOT NULL AND "dueDate" < to_char(now() AT TIME ZONE 'UTC', 'YYYY-MM-DD')
          ORDER BY "dueDate" ASC LIMIT 20`
       ),
+      db.query(
+        `SELECT m.id AS "entityId", 'member' AS "entityType", m."businessName", m."ownerName", m."membershipTier",
+                m."createdAt" AS "updatedAt", a."r2Key" AS "logoR2Key"
+         FROM members m
+         JOIN attachments a ON a.id = m."logoAttachmentId"
+         ORDER BY m."createdAt" DESC
+         LIMIT 8`
+      ),
+      db.query(
+        `SELECT l.id AS "entityId", 'lead' AS "entityType", l."businessName", l."ownerName", l.stage,
+                l."createdAt" AS "updatedAt", a."r2Key" AS "logoR2Key"
+         FROM leads l
+         JOIN attachments a ON a.id = l."logoAttachmentId"
+         ORDER BY l."createdAt" DESC
+         LIMIT 8`
+      ),
     ]);
 
     const members = membersResult.rows.map((row) => ({
@@ -61,16 +87,7 @@ router.get('/', async (req, res) => {
       return Math.ceil((date - today) / (1000 * 60 * 60 * 24));
     };
 
-    const totalLicenses = members.reduce((sum, member) => {
-      if (!member.licenseNo) return sum;
-
-      try {
-        const parsed = JSON.parse(member.licenseNo);
-        if (Array.isArray(parsed)) return sum + parsed.length;
-      } catch {}
-
-      return sum + member.licenseNo.split(',').map((value) => value.trim()).filter(Boolean).length;
-    }, 0);
+    const totalLicenses = members.reduce((sum, member) => sum + parseLicenseCount(member.licenseNo), 0);
 
     const pastDueMembers = members
       .filter((member) => {
@@ -93,6 +110,27 @@ router.get('/', async (req, res) => {
 
     const totalDues = members.reduce((sum, member) => sum + (member.duesAmount || 0), 0);
 
+    const logoEntities = [...logoMembersResult.rows, ...logoLeadsResult.rows]
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+      .slice(0, 8);
+
+    const resolvedLogoEntities = await Promise.all(logoEntities.map(async (row) => {
+      let logoUrl = null;
+      if (row.logoR2Key && r2.isConfigured()) {
+        try { logoUrl = await r2.getInlineUrl(row.logoR2Key); } catch {}
+      }
+      return {
+        entityType: row.entityType,
+        entityId: row.entityId,
+        businessName: row.businessName,
+        ownerName: row.ownerName,
+        stage: row.stage || null,
+        membershipTier: row.membershipTier || null,
+        updatedAt: row.updatedAt,
+        logoUrl,
+      };
+    }));
+
     res.json({
       totalMembers: members.length,
       totalLicenses,
@@ -105,6 +143,7 @@ router.get('/', async (req, res) => {
       recentContacts: recentContactsResult.rows,
       todayTasks: todayTasksResult.rows,
       overdueTasks: overdueTasksResult.rows,
+      logoEntities: resolvedLogoEntities,
     });
   } catch (error) {
     console.error('Failed to load dashboard:', error);

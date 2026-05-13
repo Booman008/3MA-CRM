@@ -163,6 +163,8 @@ async function ready() {
 
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS subject TEXT;
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS direction TEXT CHECK (direction IN ('inbound', 'outbound'));
+        ALTER TABLE members ADD COLUMN IF NOT EXISTS "logoAttachmentId" INTEGER REFERENCES attachments(id) ON DELETE SET NULL;
+        ALTER TABLE leads ADD COLUMN IF NOT EXISTS "logoAttachmentId" INTEGER REFERENCES attachments(id) ON DELETE SET NULL;
 
         CREATE TABLE IF NOT EXISTS users (
           id SERIAL PRIMARY KEY,

@@ -56,7 +56,7 @@ function rowToRecord(row, headerMap) {
     // Tag each imported license with its county so multi-site operators
     // (different sites in different counties) keep that detail post-import.
     licenseNo: license
-      ? JSON.stringify([{ number: license, type: get('licenseType') || '', county: county || '' }])
+      ? JSON.stringify([{ number: license, type: get('licenseType') || '', county: county || '', name: '', status: 'Active' }])
       : null,
     licenseType: get('licenseType') || null,
     county,
