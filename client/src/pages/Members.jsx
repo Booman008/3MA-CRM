@@ -63,6 +63,7 @@ export function Members() {
   const [sortBy, setSortBy] = useState('');
   const [sortDir, setSortDir] = useState('asc');
   const [showImport, setShowImport] = useState(false);
+  const [activeNameId, setActiveNameId] = useState(null);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -227,8 +228,21 @@ export function Members() {
                   const types = parseLicenseTypes(m.licenseNo);
                   const memberCounties = allCountiesFor(m);
                   return (
-                    <tr key={m.id} style={{ cursor: 'pointer', background: rs.bgColor, transition: 'background .15s' }} onDoubleClick={() => openEdit(m)}>
-                      <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>{m.businessName}</td>
+                    <tr key={m.id} style={{ background: rs.bgColor, transition: 'background .15s' }}>
+                      <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>
+                        <button
+                          type="button"
+                          onClick={() => openEdit(m)}
+                          onMouseEnter={() => setActiveNameId(m.id)}
+                          onMouseLeave={() => setActiveNameId(current => current === m.id ? null : current)}
+                          onFocus={() => setActiveNameId(m.id)}
+                          onBlur={() => setActiveNameId(current => current === m.id ? null : current)}
+                          style={S.openableName(activeNameId === m.id)}
+                          title={`Open ${m.businessName}`}
+                        >
+                          {m.businessName}
+                        </button>
+                      </td>
                       <td style={S.td}>{m.ownerName || '—'}</td>
                       <td style={S.td}>
                         {licenses.length

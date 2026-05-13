@@ -1,0 +1,7 @@
+Feature Requests:
+
+1. Sort features - need to be able to sort by renewal date, Owner, etc.
+
+2. Mass Import - See spreadsheet. Licenses in the "Master Sheet" are color coded (Member, Not Pursuing, Possible Member, Closed/NA, Cannot Afford/Not Interested, Firecraft). Want to mass import the licenses and then sort into member/non member/etc.
+
+3. 
