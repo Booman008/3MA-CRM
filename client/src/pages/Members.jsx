@@ -7,74 +7,28 @@ import { Field } from '../components/Field.jsx';
 import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
 import { ContactsPanel } from '../components/ContactsPanel.jsx';
 import { ImportModal } from '../components/ImportModal.jsx';
+import { LogoUploader } from '../components/LogoUploader.jsx';
 import { useSettings } from '../useSettings.js';
 import { getAllLicenseTypes } from '../licenseTypes.js';
+import {
+  EMPTY_LICENSE_ROW,
+  LICENSE_STATUS_OPTIONS,
+  firstLicenseType,
+  parseLicenseCounties,
+  parseLicenseNumbers,
+  parseLicenseRows,
+  parseLicenseTypes,
+  serializeLicenseRows,
+} from '../licenses.js';
 
 const MEMBER_DEFAULTS = {
   businessName: '', licenseNo: '', licenseType: '', county: '',
   ownerName: '', phone: '', email: '',
   joinDate: '', renewalDate: '', duesAmount: '', membershipTier: '', notes: '',
+  logoAttachmentId: null, logoUrl: null,
 };
-// Each license row now carries its own county so operators with sites in
-// multiple counties (e.g. Kudzu Cannabis — dispensaries in Meridian and
-// Jackson, cultivation in Vicksburg) can be represented accurately.
-const EMPTY_LICENSE_ROW = { number: '', type: '', county: '' };
 
-function parseLicenses(licenseNo) {
-  if (!licenseNo) return [{ ...EMPTY_LICENSE_ROW }];
-  try {
-    const parsed = JSON.parse(licenseNo);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed.map(l => ({
-        number: l.number || '',
-        type: l.type || '',
-        county: l.county || '',
-      }));
-    }
-  } catch {}
-  const parts = licenseNo.split(',').map(s => s.trim()).filter(Boolean);
-  if (parts.length > 0) return parts.map(n => ({ number: n, type: '', county: '' }));
-  return [{ ...EMPTY_LICENSE_ROW }];
-}
-
-export function parseLicenseTypes(licenseNo) {
-  if (!licenseNo) return [];
-  try {
-    const parsed = JSON.parse(licenseNo);
-    if (Array.isArray(parsed)) return parsed.map(l => l.type).filter(Boolean);
-  } catch {}
-  return [];
-}
-
-export function parseLicenseNumbers(licenseNo) {
-  if (!licenseNo) return [];
-  try {
-    const parsed = JSON.parse(licenseNo);
-    if (Array.isArray(parsed)) return parsed.map(l => l.number).filter(Boolean);
-  } catch {}
-  return licenseNo.split(',').map(s => s.trim()).filter(Boolean);
-}
-
-// Return every county tagged on a member's licenses (deduped, in order).
-export function parseLicenseCounties(licenseNo) {
-  if (!licenseNo) return [];
-  try {
-    const parsed = JSON.parse(licenseNo);
-    if (Array.isArray(parsed)) {
-      const out = [];
-      for (const l of parsed) {
-        const c = (l.county || '').trim();
-        if (c && !out.includes(c)) out.push(c);
-      }
-      return out;
-    }
-  } catch {}
-  return [];
-}
-
-// All counties associated with a member: per-license counties plus the
-// primary `county` field as fallback/billing county.
-export function allCountiesFor(member) {
+function allCountiesFor(member) {
   const fromLicenses = parseLicenseCounties(member.licenseNo);
   if (fromLicenses.length === 0) return member.county ? [member.county] : [];
   if (member.county && !fromLicenses.includes(member.county)) {
@@ -135,7 +89,6 @@ export function Members() {
   }, []);
 
   const licenseTypesInUse = [...new Set(allMembers.flatMap(m => parseLicenseTypes(m.licenseNo)).filter(Boolean))].sort();
-  // County filter draws from per-license counties + primary county.
   const counties = [...new Set(allMembers.flatMap(allCountiesFor).filter(Boolean))].sort();
 
   const filteredMembers = allMembers.filter(m => {
@@ -172,7 +125,7 @@ export function Members() {
   const openAdd = () => { setForm(MEMBER_DEFAULTS); setLicenseRows([{ ...EMPTY_LICENSE_ROW }]); setEditId(null); setModal('add'); };
   const openEdit = (m) => {
     setForm({ ...MEMBER_DEFAULTS, ...m, duesAmount: m.duesAmount ?? '' });
-    setLicenseRows(parseLicenses(m.licenseNo));
+    setLicenseRows(parseLicenseRows(m.licenseNo));
     setEditId(m.id); setModal('edit');
   };
   const close = () => setModal(null);
@@ -182,17 +135,13 @@ export function Members() {
   const removeLicenseRow = (idx) => setLicenseRows(prev => prev.filter((_, i) => i !== idx));
 
   const save = async () => {
-    const licenses = licenseRows.filter(r => r.number.trim() || r.type || r.county);
-    const licenseNo = licenses.length > 0 ? JSON.stringify(licenses) : null;
-    const licenseType = licenses.length > 0 ? licenses[0].type : null;
-    // If the operator left the primary County blank but tagged each
-    // license, use the first license's county as the billing/primary one.
-    const primaryCounty = form.county || (licenses.find(l => l.county) || {}).county || null;
+    const licenseNo = serializeLicenseRows(licenseRows);
+    const primaryCounty = form.county || (licenseRows.find(l => l.county) || {}).county || null;
     const body = {
       ...form,
       county: primaryCounty,
       licenseNo,
-      licenseType,
+      licenseType: firstLicenseType(licenseNo),
       duesAmount: form.duesAmount !== '' ? Number(form.duesAmount) : null,
     };
     if (modal === 'add') await api('/members', { method: 'POST', body });
@@ -207,9 +156,6 @@ export function Members() {
   };
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
-
-  // Display all license-type values used across members + any operator-defined
-  // ones, so the filter dropdown reflects what's currently in the data.
   const filterTypeOptions = [...new Set([...licenseTypeOptions, ...licenseTypesInUse])];
 
   return (
@@ -238,8 +184,8 @@ export function Members() {
         <select style={{
           ...S.select,
           ...(renewalFilter === 'pastDue' ? { borderColor: 'var(--color-red)', color: 'var(--color-red)' }
-             : renewalFilter === 'urgent' ? { borderColor: 'var(--color-gold)', color: 'var(--color-navy)' }
-             : {}),
+            : renewalFilter === 'urgent' ? { borderColor: 'var(--color-gold)', color: 'var(--color-navy)' }
+            : {}),
         }} value={renewalFilter} onChange={e => setRenewalFilter(e.target.value)}>
           {RENEWAL_FILTERS.map(f => <option key={f.value} value={f.value}>{f.label}</option>)}
         </select>
@@ -276,48 +222,50 @@ export function Members() {
               <tbody>
                 {members.map(m => {
                   const rs = renewalStatus(m.renewalDate);
-                  const licenses = (() => {
-                    try { const p = JSON.parse(m.licenseNo); return Array.isArray(p) ? p : null; } catch { return null; }
-                  })();
+                  const licenses = parseLicenseRows(m.licenseNo).filter(l => l.number || l.type || l.county || l.name);
                   const nums = parseLicenseNumbers(m.licenseNo);
                   const types = parseLicenseTypes(m.licenseNo);
                   const memberCounties = allCountiesFor(m);
                   return (
-                  <tr key={m.id} style={{ cursor: 'pointer', background: rs.bgColor, transition: 'background .15s' }} onDoubleClick={() => openEdit(m)}>
-                    <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>{m.businessName}</td>
-                    <td style={S.td}>{m.ownerName || '—'}</td>
-                    <td style={S.td}>
-                      {licenses && licenses.length
-                        ? licenses.map((l, i) => (
-                            <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>
-                              {l.number || '—'}
-                              {l.county && <span style={{ color: 'var(--color-muted)', marginLeft: 6, fontSize: '.78rem' }}>· {l.county}</span>}
+                    <tr key={m.id} style={{ cursor: 'pointer', background: rs.bgColor, transition: 'background .15s' }} onDoubleClick={() => openEdit(m)}>
+                      <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>{m.businessName}</td>
+                      <td style={S.td}>{m.ownerName || '—'}</td>
+                      <td style={S.td}>
+                        {licenses.length
+                          ? licenses.map((l, i) => (
+                            <div key={i} style={{ lineHeight: 1.35, fontSize: '.85rem', marginBottom: i === licenses.length - 1 ? 0 : 6, opacity: l.status === 'Inactive' ? 0.68 : 1 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                                <span>{l.number || '—'}</span>
+                                {l.county && <span style={{ color: 'var(--color-muted)', fontSize: '.78rem' }}>· {l.county}</span>}
+                                {l.status === 'Inactive' && <span style={{ ...S.badge('var(--color-muted)'), color: '#fff' }}>Inactive</span>}
+                              </div>
+                              {l.name && <div style={{ fontSize: '.77rem', color: 'var(--color-muted)' }}>{l.name}</div>}
                             </div>
                           ))
-                        : (nums.length ? nums.map((n, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{n}</div>) : '—')}
-                    </td>
-                    <td style={S.td}>{types.length ? types.map((t, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{t}</div>) : (m.licenseType || '—')}</td>
-                    <td style={S.td}>
-                      {memberCounties.length === 0 ? '—'
-                        : memberCounties.length === 1 ? memberCounties[0]
-                        : (
-                          <div style={{ lineHeight: 1.4 }}>
-                            <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>{memberCounties.length} counties</div>
-                            <div style={{ fontSize: '.78rem', color: 'var(--color-muted)' }}>{memberCounties.join(', ')}</div>
-                          </div>
-                        )}
-                    </td>
-                    <td style={S.td}>{m.membershipTier ? <span style={{ ...S.badge('var(--color-navy)'), color: '#fff' }}>{m.membershipTier}</span> : '—'}</td>
-                    <td style={{ ...S.td, fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--color-navy)' }}>{fmt.currency(m.duesAmount)}</td>
-                    <td style={S.td}>
-                      <span style={{ color: rs.color, fontWeight: rs.status !== 'ok' && rs.status !== 'none' ? 600 : 400 }}>{fmt.date(m.renewalDate)}</span>
-                      {rs.label && <span style={{ ...S.badge(rs.badgeBg), marginLeft: 8 }}>{rs.label}</span>}
-                    </td>
-                    <td style={{ ...S.td, whiteSpace: 'nowrap' }}>
-                      <button style={{ ...S.btn('secondary'), padding: '4px 10px', marginRight: 6 }} onClick={() => openEdit(m)}>Edit</button>
-                      <button style={{ ...S.btn('danger'), padding: '4px 10px' }} onClick={() => remove(m.id)}>Del</button>
-                    </td>
-                  </tr>
+                          : (nums.length ? nums.map((n, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{n}</div>) : '—')}
+                      </td>
+                      <td style={S.td}>{types.length ? types.map((t, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{t}</div>) : (m.licenseType || '—')}</td>
+                      <td style={S.td}>
+                        {memberCounties.length === 0 ? '—'
+                          : memberCounties.length === 1 ? memberCounties[0]
+                            : (
+                              <div style={{ lineHeight: 1.4 }}>
+                                <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>{memberCounties.length} counties</div>
+                                <div style={{ fontSize: '.78rem', color: 'var(--color-muted)' }}>{memberCounties.join(', ')}</div>
+                              </div>
+                            )}
+                      </td>
+                      <td style={S.td}>{m.membershipTier ? <span style={{ ...S.badge('var(--color-navy)'), color: '#fff' }}>{m.membershipTier}</span> : '—'}</td>
+                      <td style={{ ...S.td, fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--color-navy)' }}>{fmt.currency(m.duesAmount)}</td>
+                      <td style={S.td}>
+                        <span style={{ color: rs.color, fontWeight: rs.status !== 'ok' && rs.status !== 'none' ? 600 : 400 }}>{fmt.date(m.renewalDate)}</span>
+                        {rs.label && <span style={{ ...S.badge(rs.badgeBg), marginLeft: 8 }}>{rs.label}</span>}
+                      </td>
+                      <td style={{ ...S.td, whiteSpace: 'nowrap' }}>
+                        <button style={{ ...S.btn('secondary'), padding: '4px 10px', marginRight: 6 }} onClick={() => openEdit(m)}>Edit</button>
+                        <button style={{ ...S.btn('danger'), padding: '4px 10px' }} onClick={() => remove(m.id)}>Del</button>
+                      </td>
+                    </tr>
                   );
                 })}
               </tbody>
@@ -330,6 +278,15 @@ export function Members() {
 
       {modal && (
         <Modal title={modal === 'add' ? 'Add Member' : 'Edit Member'} onClose={close}>
+          {modal === 'edit' && (
+            <LogoUploader
+              entityType="member"
+              entityId={editId}
+              entityName={form.businessName}
+              logoUrl={form.logoUrl}
+              onChange={(updated) => setForm(f => ({ ...f, ...updated }))}
+            />
+          )}
           <div style={S.formGrid}>
             <Field label="Business Name *"><input style={S.input} value={form.businessName} onChange={e => set('businessName', e.target.value)} /></Field>
             <Field label="Owner Name"><input style={S.input} value={form.ownerName} onChange={e => set('ownerName', e.target.value)} /></Field>
@@ -337,17 +294,20 @@ export function Members() {
           <div style={S.formRow}>
             <label style={S.label}>Licenses</label>
             <div style={{ fontSize: '.78rem', color: 'var(--color-muted)', marginBottom: 8 }}>
-              Add a row for each license this business holds. Counties can differ —
-              e.g. dispensaries in one county and cultivation in another.
+              Add a row for each license this business holds. Counties and location names can differ across licenses.
             </div>
             {licenseRows.map((row, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr 1fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
+              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.05fr 1.05fr 0.9fr 1.1fr 0.78fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
                 <input style={S.input} value={row.number} onChange={e => setLicenseField(idx, 'number', e.target.value)} placeholder={`License #${idx + 1}`} />
                 <select style={S.select} value={row.type} onChange={e => setLicenseField(idx, 'type', e.target.value)}>
                   <option value="">License Type...</option>
                   {licenseTypeOptions.map(t => <option key={t}>{t}</option>)}
                 </select>
                 <input style={S.input} value={row.county} onChange={e => setLicenseField(idx, 'county', e.target.value)} placeholder="County" />
+                <input style={S.input} value={row.name} onChange={e => setLicenseField(idx, 'name', e.target.value)} placeholder="License Name" />
+                <select style={S.select} value={row.status} onChange={e => setLicenseField(idx, 'status', e.target.value)}>
+                  {LICENSE_STATUS_OPTIONS.map(status => <option key={status} value={status}>{status}</option>)}
+                </select>
                 {idx > 0 ? (
                   <button type="button" onClick={() => removeLicenseRow(idx)}
                     style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '1.1rem', fontWeight: 700, padding: '2px 6px', lineHeight: 1, flexShrink: 0 }}
@@ -367,7 +327,7 @@ export function Members() {
             </button>
           </div>
           <div style={S.formGrid}>
-            <Field label="Primary County (billing)"><input style={S.input} value={form.county} onChange={e => set('county', e.target.value)} placeholder="Optional — defaults to first license's county" /></Field>
+            <Field label="Primary County (billing)"><input style={S.input} value={form.county} onChange={e => set('county', e.target.value)} placeholder="Optional — defaults to first license county" /></Field>
             <Field label="Membership Tier">
               <select style={{ ...S.select, width: '100%' }} value={form.membershipTier} onChange={e => set('membershipTier', e.target.value)}>
                 <option value="">Select...</option><option>Affiliate</option><option>Member</option><option>Board Member</option><option>Corporate Sponsor</option>
