@@ -7,12 +7,12 @@ import { Field } from '../components/Field.jsx';
 import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
 import { ContactsPanel } from '../components/ContactsPanel.jsx';
 
+import { ACTIVE_STAGES, ARCHIVED_STAGES, ALL_STAGES, STAGES, isArchivedStage, stageColor, stageHeaderBg } from '../stages.js';
+
 const LEAD_DEFAULTS = { businessName: '', licenseNo: '', licenseType: '', county: '', ownerName: '', phone: '', email: '', stage: 'New', priority: 'Medium', lastContactDate: '', nextContactDate: '', notes: '' };
-export const STAGES = ['New', 'Contacted', 'Qualified', 'Proposal', 'Won', 'Lost'];
+export { STAGES, stageColor };
 const PRIORITIES = ['Low', 'Medium', 'High'];
 const priorityColor = { Low: 'var(--info)', Medium: 'var(--warning)', High: 'var(--danger)' };
-export const stageColor = { New: 'var(--info)', Contacted: 'var(--green-500)', Qualified: 'var(--warning)', Proposal: '#7b1fa2', Won: 'var(--green-700)', Lost: 'var(--danger)' };
-const stageHeaderBg = { New: '#e3f2fd', Contacted: '#e8f5e9', Qualified: '#fff3e0', Proposal: '#f3e5f5', Won: '#e8f5e9', Lost: '#ffebee' };
 
 export function Leads() {
   const [allLeads, setAllLeads] = useState([]);
@@ -29,6 +29,7 @@ export function Leads() {
   const [dragOverStage, setDragOverStage] = useState(null);
   const [sortBy, setSortBy] = useState('');
   const [sortDir, setSortDir] = useState('asc');
+  const [showArchived, setShowArchived] = useState(false);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -58,13 +59,17 @@ export function Leads() {
 
   const leadCounties = [...new Set(allLeads.map(l => l.county).filter(Boolean))].sort();
 
+  const archivedCount = allLeads.filter(l => isArchivedStage(l.stage)).length;
   const filteredLeads = allLeads.filter(l => {
+    // Hide archived leads unless toggle is on OR the user explicitly filtered to an archived stage
+    if (!showArchived && isArchivedStage(l.stage) && stageFilter !== l.stage) return false;
     if (stageFilter && l.stage !== stageFilter) return false;
     if (priorityFilter && l.priority !== priorityFilter) return false;
     if (countyFilter && l.county !== countyFilter) return false;
     return true;
   });
   const leads = view === 'table' ? sortRecords(filteredLeads, sortBy, sortDir) : filteredLeads;
+  const visibleKanbanStages = showArchived ? ALL_STAGES : ACTIVE_STAGES;
 
   const toggleSort = (key) => {
     setSortDir(nextSortDir(sortBy, sortDir, key));
@@ -255,8 +260,18 @@ export function Leads() {
       <div style={{ ...S.toolbar, background: 'var(--card)', padding: '10px 14px', borderRadius: 8, marginBottom: 16, boxShadow: '0 1px 3px rgba(0,0,0,.06)' }}>
         <select style={S.select} value={stageFilter} onChange={e => setStageFilter(e.target.value)}>
           <option value="">All Stages</option>
-          {STAGES.map(s => <option key={s}>{s}</option>)}
+          <optgroup label="Active">
+            {ACTIVE_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
+          </optgroup>
+          <optgroup label="Archived">
+            {ARCHIVED_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
+          </optgroup>
         </select>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '.85rem', color: 'var(--text-light)', cursor: 'pointer' }}>
+          <input type="checkbox" checked={showArchived} onChange={e => setShowArchived(e.target.checked)}
+            style={{ accentColor: 'var(--green-600)', cursor: 'pointer' }} />
+          Show archived{archivedCount > 0 ? ` (${archivedCount})` : ''}
+        </label>
         <select style={S.select} value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)}>
           <option value="">All Priorities</option>
           {PRIORITIES.map(p => <option key={p}>{p}</option>)}
@@ -278,7 +293,7 @@ export function Leads() {
       {view === 'kanban' && (
         loading ? <div style={S.emptyState}>Loading...</div> : (
           <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 8, alignItems: 'flex-start' }}>
-            {STAGES.map(stage => <KanbanColumn key={stage} stage={stage} />)}
+            {visibleKanbanStages.map(stage => <KanbanColumn key={stage} stage={stage} />)}
           </div>
         )
       )}
@@ -312,7 +327,12 @@ export function Leads() {
                       <td style={S.td}>{l.county || '—'}</td>
                       <td style={S.td}>
                         <select value={l.stage} onChange={e => updateStage(l.id, e.target.value)} style={{ ...S.select, padding: '3px 8px', fontSize: '.82rem', background: stageColor[l.stage] || 'var(--green-500)', color: '#fff', border: 'none', borderRadius: 12, cursor: 'pointer' }}>
-                          {STAGES.map(s => <option key={s} style={{ color: '#333', background: '#fff' }}>{s}</option>)}
+                          <optgroup label="Active" style={{ color: '#333', background: '#fff' }}>
+                            {ACTIVE_STAGES.map(s => <option key={s} style={{ color: '#333', background: '#fff' }}>{s}</option>)}
+                          </optgroup>
+                          <optgroup label="Archived" style={{ color: '#333', background: '#fff' }}>
+                            {ARCHIVED_STAGES.map(s => <option key={s} style={{ color: '#333', background: '#fff' }}>{s}</option>)}
+                          </optgroup>
                         </select>
                       </td>
                       <td style={S.td}><span style={S.badge(priorityColor[l.priority] || 'var(--warning)')}>{l.priority}</span></td>
@@ -342,7 +362,12 @@ export function Leads() {
             <Field label="Email"><input style={S.input} type="email" value={form.email} onChange={e => set('email', e.target.value)} /></Field>
             <Field label="Stage">
               <select style={{ ...S.select, width: '100%' }} value={form.stage} onChange={e => set('stage', e.target.value)}>
-                {STAGES.map(s => <option key={s}>{s}</option>)}
+                <optgroup label="Active">
+                  {ACTIVE_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
+                </optgroup>
+                <optgroup label="Archived">
+                  {ARCHIVED_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
+                </optgroup>
               </select>
             </Field>
             <Field label="Priority">
