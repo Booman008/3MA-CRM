@@ -207,7 +207,7 @@ export const S = {
     borderRadius: 12,
     padding: '28px 32px',
     width: '100%',
-    maxWidth: 600,
+    maxWidth: 840,
     maxHeight: '90vh',
     overflowY: 'auto',
     boxShadow: 'var(--shadow-lg)',
