@@ -127,6 +127,50 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/bulk', async (req, res) => {
+  const rows = Array.isArray(req.body?.rows) ? req.body.rows : [];
+  if (rows.length === 0) return res.status(400).json({ error: 'No rows provided' });
+
+  try {
+    const inserted = await db.transaction(async (client) => {
+      const out = [];
+      for (const r of rows) {
+        if (!r.businessName) continue;
+        const result = await client.query(
+          `
+            INSERT INTO leads (
+              "businessName", "licenseNo", "licenseType", county, "ownerName", phone, email,
+              stage, priority, "lastContactDate", "nextContactDate", notes
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+            RETURNING id
+          `,
+          [
+            r.businessName,
+            r.licenseNo || null,
+            r.licenseType || null,
+            r.county || null,
+            r.ownerName || null,
+            r.phone || null,
+            r.email || null,
+            r.stage || 'New',
+            r.priority || 'Medium',
+            r.lastContactDate || null,
+            r.nextContactDate || null,
+            r.notes || null,
+          ]
+        );
+        out.push(result.rows[0].id);
+      }
+      return out;
+    });
+    res.status(201).json({ inserted: inserted.length });
+  } catch (error) {
+    console.error('Failed to bulk import leads:', error);
+    res.status(500).json({ error: 'Failed to bulk import leads' });
+  }
+});
+
 router.put('/:id', async (req, res) => {
   const {
     businessName,

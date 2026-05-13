@@ -3,6 +3,69 @@ export const fmt = {
   date: (v) => v ? new Date(v + 'T00:00:00').toLocaleDateString() : '—',
 };
 
+export function sortRecords(records, sortBy, sortDir) {
+  if (!sortBy) return records;
+  const dir = sortDir === 'desc' ? -1 : 1;
+  return [...records].sort((a, b) => {
+    const av = a[sortBy];
+    const bv = b[sortBy];
+    const aEmpty = av == null || av === '';
+    const bEmpty = bv == null || bv === '';
+    if (aEmpty && bEmpty) return 0;
+    if (aEmpty) return 1;
+    if (bEmpty) return -1;
+    if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
+    const aIso = /^\d{4}-\d{2}-\d{2}/.test(String(av));
+    const bIso = /^\d{4}-\d{2}-\d{2}/.test(String(bv));
+    if (aIso && bIso) return (String(av) < String(bv) ? -1 : String(av) > String(bv) ? 1 : 0) * dir;
+    return String(av).localeCompare(String(bv), undefined, { numeric: true, sensitivity: 'base' }) * dir;
+  });
+}
+
+export function nextSortDir(currentBy, currentDir, key) {
+  if (currentBy !== key) return 'asc';
+  return currentDir === 'asc' ? 'desc' : 'asc';
+}
+
+export function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+  const stripped = text.replace(/^﻿/, '');
+  for (let i = 0; i < stripped.length; i++) {
+    const c = stripped[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (stripped[i + 1] === '"') { cell += '"'; i++; }
+        else inQuotes = false;
+      } else cell += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(cell); cell = ''; }
+      else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+      else if (c === '\r') { /* skip */ }
+      else cell += c;
+    }
+  }
+  if (cell.length > 0 || row.length > 0) { row.push(cell); rows.push(row); }
+  return rows.filter(r => r.some(v => v && v.trim()));
+}
+
+export function parseFlexibleDate(s) {
+  if (!s) return null;
+  const t = String(s).trim();
+  if (!t) return null;
+  if (/^\d{4}-\d{2}-\d{2}/.test(t)) return t.slice(0, 10);
+  const m = t.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
+  if (m) {
+    let [, mo, d, y] = m;
+    if (y.length === 2) y = (Number(y) > 50 ? '19' : '20') + y;
+    return `${y}-${mo.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+  return null;
+}
+
 export function renewalStatus(renewalDate) {
   if (!renewalDate) return { status: 'none', color: 'inherit', bgColor: 'transparent', label: null };
   const today = new Date(); today.setHours(0, 0, 0, 0);
