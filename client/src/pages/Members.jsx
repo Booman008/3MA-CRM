@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { api } from '../api.js';
 import { S } from '../styles.js';
 import { fmt, renewalStatus, sortRecords, nextSortDir } from '../format.js';
@@ -8,11 +8,13 @@ import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
 import { ContactsPanel } from '../components/ContactsPanel.jsx';
 import { ImportModal } from '../components/ImportModal.jsx';
 import { LogoUploader } from '../components/LogoUploader.jsx';
+import { MergeMembersModal } from '../components/MergeMembersModal.jsx';
 import { useSettings } from '../useSettings.js';
 import { getAllLicenseTypes } from '../licenseTypes.js';
 import {
   EMPTY_LICENSE_ROW,
   LICENSE_STATUS_OPTIONS,
+  dedupeLicenseRows,
   firstLicenseType,
   parseLicenseCounties,
   parseLicenseNumbers,
@@ -49,6 +51,8 @@ const RENEWAL_FILTERS = [
 export function Members() {
   const settings = useSettings();
   const licenseTypeOptions = getAllLicenseTypes(settings);
+  const rowIdCounter = useRef(1);
+  const pendingScrollRestoreRef = useRef(null);
 
   const [allMembers, setAllMembers] = useState([]);
   const [search, setSearch] = useState('');
@@ -57,20 +61,38 @@ export function Members() {
   const [renewalFilter, setRenewalFilter] = useState('');
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(null);
+  const [showMergeModal, setShowMergeModal] = useState(false);
   const [form, setForm] = useState(MEMBER_DEFAULTS);
   const [editId, setEditId] = useState(null);
-  const [licenseRows, setLicenseRows] = useState([{ ...EMPTY_LICENSE_ROW }]);
+  const [licenseRows, setLicenseRows] = useState([{ ...EMPTY_LICENSE_ROW, _rowId: 'license-1' }]);
+  const [selectedLicenseRowIds, setSelectedLicenseRowIds] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [sortDir, setSortDir] = useState('asc');
   const [showImport, setShowImport] = useState(false);
   const [activeNameId, setActiveNameId] = useState(null);
+  const [selectedMemberIds, setSelectedMemberIds] = useState([]);
+
+  const withRowIds = useCallback((rows) => {
+    const source = rows.length > 0 ? rows : [{ ...EMPTY_LICENSE_ROW }];
+    return source.map(row => ({ ...row, _rowId: `license-${rowIdCounter.current++}` }));
+  }, []);
 
   const load = useCallback(() => {
     setLoading(true);
-    api(`/members?search=${encodeURIComponent(search)}`).then(setAllMembers).finally(() => setLoading(false));
+    api(`/members?search=${encodeURIComponent(search)}`)
+      .then(setAllMembers)
+      .finally(() => setLoading(false));
   }, [search]);
 
   useEffect(() => { const t = setTimeout(load, 300); return () => clearTimeout(t); }, [load]);
+
+  useEffect(() => {
+    if (!loading && pendingScrollRestoreRef.current != null) {
+      const y = pendingScrollRestoreRef.current;
+      pendingScrollRestoreRef.current = null;
+      requestAnimationFrame(() => window.scrollTo({ top: y }));
+    }
+  }, [loading, allMembers]);
 
   useEffect(() => {
     const checkOpen = async () => {
@@ -104,14 +126,22 @@ export function Members() {
     return true;
   });
   const members = sortRecords(filteredMembers, sortBy, sortDir);
+  const selectedMembers = useMemo(
+    () => allMembers.filter(member => selectedMemberIds.includes(member.id)),
+    [allMembers, selectedMemberIds]
+  );
+
+  useEffect(() => {
+    setSelectedMemberIds(prev => prev.filter(id => allMembers.some(member => member.id === id)));
+  }, [allMembers]);
 
   const toggleSort = (key) => {
     setSortDir(nextSortDir(sortBy, sortDir, key));
     setSortBy(key);
   };
-  const SortTh = ({ label, sortKey }) => (
+  const SortTh = ({ label, sortKey, children }) => (
     <th style={{ ...S.th, cursor: sortKey ? 'pointer' : 'default', userSelect: 'none' }} onClick={() => sortKey && toggleSort(sortKey)}>
-      {label}
+      {children || label}
       {sortKey && (
         <span style={{ marginLeft: 4, opacity: sortBy === sortKey ? 1 : 0.3, fontSize: '.75rem' }}>
           {sortBy === sortKey ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}
@@ -123,21 +153,47 @@ export function Members() {
   const activeFilterCount = [licenseTypeFilter, countyFilter, renewalFilter].filter(Boolean).length;
   const clearFilters = () => { setLicenseTypeFilter(''); setCountyFilter(''); setRenewalFilter(''); };
 
-  const openAdd = () => { setForm(MEMBER_DEFAULTS); setLicenseRows([{ ...EMPTY_LICENSE_ROW }]); setEditId(null); setModal('add'); };
+  const openAdd = () => {
+    setForm(MEMBER_DEFAULTS);
+    setLicenseRows(withRowIds([{ ...EMPTY_LICENSE_ROW }]));
+    setSelectedLicenseRowIds([]);
+    setEditId(null);
+    setModal('add');
+  };
   const openEdit = (m) => {
     setForm({ ...MEMBER_DEFAULTS, ...m, duesAmount: m.duesAmount ?? '' });
-    setLicenseRows(parseLicenseRows(m.licenseNo));
-    setEditId(m.id); setModal('edit');
+    setLicenseRows(withRowIds(parseLicenseRows(m.licenseNo)));
+    setSelectedLicenseRowIds([]);
+    setEditId(m.id);
+    setModal('edit');
   };
-  const close = () => setModal(null);
+  const close = () => {
+    setModal(null);
+    setSelectedLicenseRowIds([]);
+  };
 
-  const setLicenseField = (idx, field, val) => setLicenseRows(prev => prev.map((row, i) => i === idx ? { ...row, [field]: val } : row));
-  const addLicenseRow = () => setLicenseRows(prev => [...prev, { ...EMPTY_LICENSE_ROW }]);
-  const removeLicenseRow = (idx) => setLicenseRows(prev => prev.filter((_, i) => i !== idx));
+  const setLicenseField = (rowId, field, val) => setLicenseRows(prev => prev.map((row) => row._rowId === rowId ? { ...row, [field]: val } : row));
+  const addLicenseRow = () => setLicenseRows(prev => [...prev, ...withRowIds([{ ...EMPTY_LICENSE_ROW }])]);
+  const removeLicenseRow = (rowId) => {
+    setLicenseRows(prev => {
+      const next = prev.filter(row => row._rowId !== rowId);
+      return next.length > 0 ? next : withRowIds([{ ...EMPTY_LICENSE_ROW }]);
+    });
+    setSelectedLicenseRowIds(prev => prev.filter(id => id !== rowId));
+  };
+
+  const deleteSelectedLicenses = () => {
+    setLicenseRows(prev => {
+      const next = prev.filter(row => !selectedLicenseRowIds.includes(row._rowId));
+      return next.length > 0 ? next : withRowIds([{ ...EMPTY_LICENSE_ROW }]);
+    });
+    setSelectedLicenseRowIds([]);
+  };
 
   const save = async () => {
-    const licenseNo = serializeLicenseRows(licenseRows);
-    const primaryCounty = form.county || (licenseRows.find(l => l.county) || {}).county || null;
+    const normalizedRows = dedupeLicenseRows(licenseRows.map(({ _rowId, ...row }) => row));
+    const licenseNo = serializeLicenseRows(normalizedRows);
+    const primaryCounty = form.county || (normalizedRows.find(l => l.county) || {}).county || null;
     const body = {
       ...form,
       county: primaryCounty,
@@ -147,17 +203,42 @@ export function Members() {
     };
     if (modal === 'add') await api('/members', { method: 'POST', body });
     else await api(`/members/${editId}`, { method: 'PUT', body });
-    close(); load();
+    close();
+    load();
   };
 
   const remove = async (id) => {
     if (!confirm('Delete this member?')) return;
+    pendingScrollRestoreRef.current = window.scrollY;
     await api(`/members/${id}`, { method: 'DELETE' });
+    load();
+  };
+
+  const performMerge = async ({ primaryId, memberIds, mergedMember }) => {
+    pendingScrollRestoreRef.current = window.scrollY;
+    await api('/members/merge', { method: 'POST', body: { primaryId, memberIds, mergedMember } });
+    setSelectedMemberIds([]);
+    setShowMergeModal(false);
     load();
   };
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
   const filterTypeOptions = [...new Set([...licenseTypeOptions, ...licenseTypesInUse])];
+
+  const allVisibleSelected = members.length > 0 && members.every(member => selectedMemberIds.includes(member.id));
+  const toggleAllVisible = () => {
+    if (allVisibleSelected) {
+      setSelectedMemberIds(prev => prev.filter(id => !members.some(member => member.id === id)));
+      return;
+    }
+    setSelectedMemberIds(prev => [...new Set([...prev, ...members.map(member => member.id)])]);
+  };
+  const toggleMemberSelection = (id) => {
+    setSelectedMemberIds(prev => prev.includes(id) ? prev.filter(current => current !== id) : [...prev, id]);
+  };
+  const toggleLicenseSelection = (rowId) => {
+    setSelectedLicenseRowIds(prev => prev.includes(rowId) ? prev.filter(id => id !== rowId) : [...prev, rowId]);
+  };
 
   return (
     <div>
@@ -200,6 +281,16 @@ export function Members() {
         </span>
       </div>
 
+      {selectedMemberIds.length > 0 && (
+        <div style={{ ...S.card, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+          <div style={{ fontWeight: 700, color: 'var(--color-navy)' }}>{selectedMemberIds.length} member row{selectedMemberIds.length === 1 ? '' : 's'} selected</div>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button style={S.btn('secondary')} onClick={() => setSelectedMemberIds([])}>Clear Selection</button>
+            <button style={S.btn()} onClick={() => setShowMergeModal(true)} disabled={selectedMemberIds.length < 2}>Merge Selected</button>
+          </div>
+        </div>
+      )}
+
       <div style={S.card}>
         {loading ? <div style={S.emptyState}>Loading...</div> : members.length === 0 ? (
           <div style={S.emptyState}>
@@ -210,6 +301,7 @@ export function Members() {
           <div style={{ overflowX: 'auto' }}>
             <table style={S.table}>
               <thead><tr>
+                <SortTh><input type="checkbox" checked={allVisibleSelected} onChange={toggleAllVisible} style={{ accentColor: 'var(--color-gold)' }} /></SortTh>
                 <SortTh label="Business Name" sortKey="businessName" />
                 <SortTh label="Owner" sortKey="ownerName" />
                 <SortTh label="License #" />
@@ -229,6 +321,9 @@ export function Members() {
                   const memberCounties = allCountiesFor(m);
                   return (
                     <tr key={m.id} style={{ background: rs.bgColor, transition: 'background .15s' }}>
+                      <td style={S.td}>
+                        <input type="checkbox" checked={selectedMemberIds.includes(m.id)} onChange={() => toggleMemberSelection(m.id)} style={{ accentColor: 'var(--color-gold)' }} />
+                      </td>
                       <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>
                         <button
                           type="button"
@@ -289,6 +384,13 @@ export function Members() {
       </div>
 
       {showImport && <ImportModal onClose={() => setShowImport(false)} onImported={() => { setShowImport(false); load(); }} />}
+      {showMergeModal && selectedMembers.length >= 2 && (
+        <MergeMembersModal
+          members={selectedMembers}
+          onClose={() => setShowMergeModal(false)}
+          onConfirm={performMerge}
+        />
+      )}
 
       {modal && (
         <Modal title={modal === 'add' ? 'Add Member' : 'Edit Member'} onClose={close}>
@@ -306,24 +408,32 @@ export function Members() {
             <Field label="Owner Name"><input style={S.input} value={form.ownerName} onChange={e => set('ownerName', e.target.value)} /></Field>
           </div>
           <div style={S.formRow}>
-            <label style={S.label}>Licenses</label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+              <label style={S.label}>Licenses</label>
+              {selectedLicenseRowIds.length > 0 && (
+                <button type="button" style={S.btn('danger')} onClick={deleteSelectedLicenses}>
+                  Delete Selected Licenses ({selectedLicenseRowIds.length})
+                </button>
+              )}
+            </div>
             <div style={{ fontSize: '.78rem', color: 'var(--color-muted)', marginBottom: 8 }}>
               Add a row for each license this business holds. Counties and location names can differ across licenses.
             </div>
             {licenseRows.map((row, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.05fr 1.05fr 0.9fr 1.1fr 0.78fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
-                <input style={S.input} value={row.number} onChange={e => setLicenseField(idx, 'number', e.target.value)} placeholder={`License #${idx + 1}`} />
-                <select style={S.select} value={row.type} onChange={e => setLicenseField(idx, 'type', e.target.value)}>
+              <div key={row._rowId} style={{ display: 'grid', gridTemplateColumns: '24px 1.05fr 1.05fr 0.9fr 1.1fr 0.78fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
+                <input type="checkbox" checked={selectedLicenseRowIds.includes(row._rowId)} onChange={() => toggleLicenseSelection(row._rowId)} style={{ accentColor: 'var(--color-gold)' }} />
+                <input style={S.input} value={row.number} onChange={e => setLicenseField(row._rowId, 'number', e.target.value)} placeholder={`License #${idx + 1}`} />
+                <select style={S.select} value={row.type} onChange={e => setLicenseField(row._rowId, 'type', e.target.value)}>
                   <option value="">License Type...</option>
                   {licenseTypeOptions.map(t => <option key={t}>{t}</option>)}
                 </select>
-                <input style={S.input} value={row.county} onChange={e => setLicenseField(idx, 'county', e.target.value)} placeholder="County" />
-                <input style={S.input} value={row.name} onChange={e => setLicenseField(idx, 'name', e.target.value)} placeholder="License Name" />
-                <select style={S.select} value={row.status} onChange={e => setLicenseField(idx, 'status', e.target.value)}>
+                <input style={S.input} value={row.county} onChange={e => setLicenseField(row._rowId, 'county', e.target.value)} placeholder="County" />
+                <input style={S.input} value={row.name} onChange={e => setLicenseField(row._rowId, 'name', e.target.value)} placeholder="License Name" />
+                <select style={S.select} value={row.status} onChange={e => setLicenseField(row._rowId, 'status', e.target.value)}>
                   {LICENSE_STATUS_OPTIONS.map(status => <option key={status} value={status}>{status}</option>)}
                 </select>
                 {idx > 0 ? (
-                  <button type="button" onClick={() => removeLicenseRow(idx)}
+                  <button type="button" onClick={() => removeLicenseRow(row._rowId)}
                     style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '1.1rem', fontWeight: 700, padding: '2px 6px', lineHeight: 1, flexShrink: 0 }}
                     title="Remove this license">&times;</button>
                 ) : (

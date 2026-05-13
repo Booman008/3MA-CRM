@@ -255,6 +255,83 @@ router.post('/bulk', async (req, res) => {
   res.status(201).json({ inserted, failed: failures.length, failures: failures.slice(0, 10) });
 });
 
+router.post('/merge', async (req, res) => {
+  const primaryId = Number(req.body?.primaryId);
+  const memberIds = Array.isArray(req.body?.memberIds) ? req.body.memberIds.map(Number).filter(Number.isFinite) : [];
+  const mergedMember = req.body?.mergedMember || {};
+
+  if (!primaryId || memberIds.length < 2) return res.status(400).json({ error: 'primaryId and at least two memberIds are required' });
+  if (!memberIds.includes(primaryId)) return res.status(400).json({ error: 'primaryId must be included in memberIds' });
+
+  try {
+    await db.transaction(async (client) => {
+      const selected = await client.query(
+        `SELECT id FROM members WHERE id = ANY($1::int[])`,
+        [memberIds]
+      );
+      if (selected.rowCount !== memberIds.length) {
+        const err = new Error('One or more selected members were not found');
+        err.statusCode = 404;
+        throw err;
+      }
+
+      const normalizedLicenseNo = normalizeLicenseNo(mergedMember.licenseNo);
+      await client.query(
+        `
+          UPDATE members
+          SET "businessName" = COALESCE($1, "businessName"),
+              "licenseNo" = COALESCE($2, "licenseNo"),
+              "licenseType" = COALESCE($3, "licenseType"),
+              county = COALESCE($4, county),
+              "ownerName" = COALESCE($5, "ownerName"),
+              phone = COALESCE($6, phone),
+              email = COALESCE($7, email),
+              "joinDate" = COALESCE($8, "joinDate"),
+              "renewalDate" = COALESCE($9, "renewalDate"),
+              "duesAmount" = COALESCE($10, "duesAmount"),
+              "membershipTier" = COALESCE($11, "membershipTier"),
+              notes = COALESCE($12, notes)
+          WHERE id = $13
+        `,
+        [
+          mergedMember.businessName ?? null,
+          normalizedLicenseNo,
+          mergedMember.licenseType ?? null,
+          mergedMember.county ?? null,
+          mergedMember.ownerName ?? null,
+          mergedMember.phone ?? null,
+          mergedMember.email ?? null,
+          mergedMember.joinDate ?? null,
+          mergedMember.renewalDate ?? null,
+          mergedMember.duesAmount ?? null,
+          mergedMember.membershipTier ?? null,
+          mergedMember.notes ?? null,
+          primaryId,
+        ]
+      );
+
+      const otherIds = memberIds.filter(id => id !== primaryId);
+      if (otherIds.length > 0) {
+        await client.query('DELETE FROM members WHERE id = ANY($1::int[])', [otherIds]);
+      }
+    });
+
+    const updated = await db.query(
+      `SELECT ${SELECT_COLUMNS}
+       FROM members m
+       LEFT JOIN attachments a ON a.id = m."logoAttachmentId"
+       WHERE m.id = $1`,
+      [primaryId]
+    );
+
+    res.json(await withLogoUrl(updated.rows[0]));
+  } catch (error) {
+    if (error.statusCode === 404) return res.status(404).json({ error: error.message });
+    console.error('Failed to merge members:', error);
+    res.status(500).json({ error: 'Failed to merge members' });
+  }
+});
+
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
   if (!r2.isConfigured()) return res.status(503).json({ error: 'File storage is not configured. Set R2_* environment variables.' });
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
