@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../api.js';
 import { S } from '../styles.js';
-import { fmt } from '../format.js';
+import { fmt, sortRecords, nextSortDir } from '../format.js';
 import { Modal } from '../components/Modal.jsx';
 import { Field } from '../components/Field.jsx';
 import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
@@ -27,6 +27,8 @@ export function Leads() {
   const [view, setView] = useState('kanban');
   const [dragId, setDragId] = useState(null);
   const [dragOverStage, setDragOverStage] = useState(null);
+  const [sortBy, setSortBy] = useState('');
+  const [sortDir, setSortDir] = useState('asc');
 
   const load = useCallback(() => {
     setLoading(true);
@@ -56,12 +58,28 @@ export function Leads() {
 
   const leadCounties = [...new Set(allLeads.map(l => l.county).filter(Boolean))].sort();
 
-  const leads = allLeads.filter(l => {
+  const filteredLeads = allLeads.filter(l => {
     if (stageFilter && l.stage !== stageFilter) return false;
     if (priorityFilter && l.priority !== priorityFilter) return false;
     if (countyFilter && l.county !== countyFilter) return false;
     return true;
   });
+  const leads = view === 'table' ? sortRecords(filteredLeads, sortBy, sortDir) : filteredLeads;
+
+  const toggleSort = (key) => {
+    setSortDir(nextSortDir(sortBy, sortDir, key));
+    setSortBy(key);
+  };
+  const SortTh = ({ label, sortKey }) => (
+    <th style={{ ...S.th, cursor: sortKey ? 'pointer' : 'default', userSelect: 'none' }} onClick={() => sortKey && toggleSort(sortKey)}>
+      {label}
+      {sortKey && (
+        <span style={{ marginLeft: 4, opacity: sortBy === sortKey ? 1 : 0.3, fontSize: '.75rem' }}>
+          {sortBy === sortKey ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}
+        </span>
+      )}
+    </th>
+  );
 
   const activeLeadFilters = [stageFilter, priorityFilter, countyFilter].filter(Boolean).length;
   const clearLeadFilters = () => { setStageFilter(''); setPriorityFilter(''); setCountyFilter(''); };
@@ -276,7 +294,14 @@ export function Leads() {
             <div style={{ overflowX: 'auto' }}>
               <table style={S.table}>
                 <thead><tr>
-                  <th style={S.th}>Business Name</th><th style={S.th}>Owner</th><th style={S.th}>License #</th><th style={S.th}>County</th><th style={S.th}>Stage</th><th style={S.th}>Priority</th><th style={S.th}>Next Contact</th><th style={S.th}>Actions</th>
+                  <SortTh label="Business Name" sortKey="businessName" />
+                  <SortTh label="Owner" sortKey="ownerName" />
+                  <SortTh label="License #" sortKey="licenseNo" />
+                  <SortTh label="County" sortKey="county" />
+                  <SortTh label="Stage" sortKey="stage" />
+                  <SortTh label="Priority" sortKey="priority" />
+                  <SortTh label="Next Contact" sortKey="nextContactDate" />
+                  <SortTh label="Actions" />
                 </tr></thead>
                 <tbody>
                   {leads.map(l => (

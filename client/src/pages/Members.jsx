@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../api.js';
 import { S } from '../styles.js';
-import { fmt, renewalStatus } from '../format.js';
+import { fmt, renewalStatus, sortRecords, nextSortDir } from '../format.js';
 import { Modal } from '../components/Modal.jsx';
 import { Field } from '../components/Field.jsx';
 import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
 import { ContactsPanel } from '../components/ContactsPanel.jsx';
+import { ImportModal } from '../components/ImportModal.jsx';
 
 const MEMBER_DEFAULTS = { businessName: '', licenseNo: '', licenseType: '', county: '', ownerName: '', phone: '', email: '', joinDate: '', renewalDate: '', duesAmount: '', membershipTier: '', notes: '' };
 const LICENSE_TYPES = ['Dispensary', 'Cultivator Facility', 'Micro-Cultivation', 'Processing Facility', 'Micro-Processing', 'Transportation Entity', 'Testing Facility', 'Disposal Entity', 'Ancillary', 'Practitioner'];
@@ -60,6 +61,9 @@ export function Members() {
   const [form, setForm] = useState(MEMBER_DEFAULTS);
   const [editId, setEditId] = useState(null);
   const [licenseRows, setLicenseRows] = useState([{ ...EMPTY_LICENSE_ROW }]);
+  const [sortBy, setSortBy] = useState('');
+  const [sortDir, setSortDir] = useState('asc');
+  const [showImport, setShowImport] = useState(false);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -88,7 +92,7 @@ export function Members() {
   const licenseTypes = [...new Set(allMembers.flatMap(m => parseLicenseTypes(m.licenseNo)).filter(Boolean))].sort();
   const counties = [...new Set(allMembers.map(m => m.county).filter(Boolean))].sort();
 
-  const members = allMembers.filter(m => {
+  const filteredMembers = allMembers.filter(m => {
     if (licenseTypeFilter && !parseLicenseTypes(m.licenseNo).includes(licenseTypeFilter)) return false;
     if (countyFilter && m.county !== countyFilter) return false;
     if (renewalFilter) {
@@ -99,6 +103,22 @@ export function Members() {
     }
     return true;
   });
+  const members = sortRecords(filteredMembers, sortBy, sortDir);
+
+  const toggleSort = (key) => {
+    setSortDir(nextSortDir(sortBy, sortDir, key));
+    setSortBy(key);
+  };
+  const SortTh = ({ label, sortKey }) => (
+    <th style={{ ...S.th, cursor: sortKey ? 'pointer' : 'default', userSelect: 'none' }} onClick={() => sortKey && toggleSort(sortKey)}>
+      {label}
+      {sortKey && (
+        <span style={{ marginLeft: 4, opacity: sortBy === sortKey ? 1 : 0.3, fontSize: '.75rem' }}>
+          {sortBy === sortKey ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}
+        </span>
+      )}
+    </th>
+  );
 
   const activeFilterCount = [licenseTypeFilter, countyFilter, renewalFilter].filter(Boolean).length;
   const clearFilters = () => { setLicenseTypeFilter(''); setCountyFilter(''); setRenewalFilter(''); };
@@ -137,7 +157,10 @@ export function Members() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={S.pageTitle}>Members</div>
-        <button style={S.btn()} onClick={openAdd}>+ Add Member</button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button style={S.btn('secondary')} onClick={() => setShowImport(true)}>Import CSV</button>
+          <button style={S.btn()} onClick={openAdd}>+ Add Member</button>
+        </div>
       </div>
 
       <div style={S.toolbar}>
@@ -177,7 +200,15 @@ export function Members() {
           <div style={{ overflowX: 'auto' }}>
             <table style={S.table}>
               <thead><tr>
-                <th style={S.th}>Business Name</th><th style={S.th}>Owner</th><th style={S.th}>License #</th><th style={S.th}>Type</th><th style={S.th}>County</th><th style={S.th}>Tier</th><th style={S.th}>Dues</th><th style={S.th}>Renewal</th><th style={S.th}>Actions</th>
+                <SortTh label="Business Name" sortKey="businessName" />
+                <SortTh label="Owner" sortKey="ownerName" />
+                <SortTh label="License #" />
+                <SortTh label="Type" sortKey="licenseType" />
+                <SortTh label="County" sortKey="county" />
+                <SortTh label="Tier" sortKey="membershipTier" />
+                <SortTh label="Dues" sortKey="duesAmount" />
+                <SortTh label="Renewal" sortKey="renewalDate" />
+                <SortTh label="Actions" />
               </tr></thead>
               <tbody>
                 {members.map(m => {
@@ -207,6 +238,8 @@ export function Members() {
           </div>
         )}
       </div>
+
+      {showImport && <ImportModal onClose={() => setShowImport(false)} onImported={() => { setShowImport(false); load(); }} />}
 
       {modal && (
         <Modal title={modal === 'add' ? 'Add Member' : 'Edit Member'} onClose={close}>
