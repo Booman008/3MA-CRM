@@ -2,9 +2,20 @@ import { useState, useEffect } from 'react';
 import { api } from '../api.js';
 import { S } from '../styles.js';
 import { Field } from '../components/Field.jsx';
+import { DEFAULT_LICENSE_TYPES, extractCustomLicenseTypes } from '../licenseTypes.js';
+import { setCachedSettings, refreshSettings } from '../useSettings.js';
 
-const DEFAULT_LICENSE_TYPES = ['Retail', 'Grower/Processor', 'Dispensary', 'Transport', 'Testing Lab', 'Micro', 'Practitioner', 'Other'];
 const DEFAULT_TIERS = ['Affiliate', 'Member', 'Board Member', 'Corporate Sponsor'];
+
+// Brand-aligned tier badge colours — gold leads, red rationed to alerts only.
+const tierBadgeBg = {
+  Affiliate:           'var(--color-navy)',
+  Member:              'var(--color-navy-hover)',
+  'Board Member':      'var(--color-gold)',
+  'Corporate Sponsor': 'var(--color-gold-hover)',
+};
+const tierBadgeText = (tier) =>
+  tier === 'Board Member' || tier === 'Corporate Sponsor' ? 'var(--color-navy)' : '#fff';
 
 export function Settings() {
   const [settings, setSettings] = useState(null);
@@ -25,10 +36,11 @@ export function Settings() {
       setUserName(s.userName || '');
       setUserTitle(s.userTitle || '');
       setOrganizationName(s.organizationName || '');
-      const tp = typeof s.tierPricing === 'object' ? s.tierPricing : {};
+      const tp = typeof s.tierPricing === 'object' && s.tierPricing !== null ? s.tierPricing : {};
       setTierPricing(tp);
-      const allLicTypes = Object.keys(tp);
-      setCustomLicenseTypes(allLicTypes.filter(t => !DEFAULT_LICENSE_TYPES.includes(t)));
+      setCustomLicenseTypes(extractCustomLicenseTypes(s));
+      // Seed the cross-page settings cache so Members / Leads see the same data.
+      setCachedSettings(s);
     }).finally(() => setLoading(false));
   }, []);
 
@@ -65,10 +77,16 @@ export function Settings() {
     setSaving(true);
     setSaved(false);
     try {
-      await api('/settings', {
+      const updated = await api('/settings', {
         method: 'PUT',
-        body: { userName, userTitle, organizationName, tierPricing },
+        body: { userName, userTitle, organizationName, tierPricing, customLicenseTypes },
       });
+      setSettings(updated);
+      // Refresh the cross-page cache so the Members and Leads dropdowns
+      // pick up any new custom license types immediately.
+      setCachedSettings(updated);
+      // Belt-and-braces: re-fetch from the server in the background.
+      refreshSettings().catch(() => {});
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
     } finally {
@@ -79,14 +97,19 @@ export function Settings() {
   if (loading) return <div style={S.emptyState}>Loading settings...</div>;
 
   const sectionStyle = { ...S.card, marginBottom: 24 };
-  const sectionTitle = { fontSize: '1.05rem', fontWeight: 700, color: 'var(--green-800)', marginBottom: 16, paddingBottom: 10, borderBottom: '1px solid var(--border)' };
+  const sectionTitle = {
+    fontFamily: 'var(--font-heading)', fontSize: '0.82rem', fontWeight: 800,
+    letterSpacing: '0.08em', textTransform: 'uppercase',
+    color: 'var(--color-navy)', marginBottom: 16, paddingBottom: 10,
+    borderBottom: '1px solid var(--color-divider)',
+  };
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={S.pageTitle}>Settings</div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          {saved && <span style={{ color: 'var(--green-600)', fontWeight: 500, fontSize: '.9rem' }}>Settings saved!</span>}
+          {saved && <span style={{ color: 'var(--color-success)', fontWeight: 600, fontSize: '.9rem' }}>Settings saved!</span>}
           <button style={S.btn()} onClick={save} disabled={saving}>
             {saving ? 'Saving...' : 'Save Settings'}
           </button>
@@ -116,15 +139,17 @@ export function Settings() {
 
       <div style={sectionStyle}>
         <div style={sectionTitle}>Default Membership Tier Pricing by License Type</div>
-        <p style={{ fontSize: '.85rem', color: 'var(--text-light)', marginBottom: 16 }}>
-          Set the default annual dues for each license type and membership tier. These values will be used as defaults when adding new members.
+        <p style={{ fontSize: '.85rem', color: 'var(--color-muted)', marginBottom: 16 }}>
+          Set the default annual dues for each license type and membership tier.
+          Custom license types added below become available in the Members and Leads
+          dropdowns immediately after saving.
         </p>
 
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, alignItems: 'flex-end' }}>
           <div style={{ flex: 1, maxWidth: 280 }}>
             <Field label="Add Custom License Type">
               <input style={S.input} value={newLicenseType} onChange={e => setNewLicenseType(e.target.value)}
-                placeholder="e.g. Cultivation" onKeyDown={e => { if (e.key === 'Enter') addLicenseType(); }} />
+                placeholder="e.g. Delivery Service" onKeyDown={e => { if (e.key === 'Enter') addLicenseType(); }} />
             </Field>
           </div>
           <button style={{ ...S.btn(), marginBottom: 14 }} onClick={addLicenseType} disabled={!newLicenseType.trim()}>Add</button>
@@ -134,10 +159,10 @@ export function Settings() {
           <table style={S.table}>
             <thead>
               <tr>
-                <th style={{ ...S.th, minWidth: 160 }}>License Type</th>
+                <th style={{ ...S.th, minWidth: 200 }}>License Type</th>
                 {DEFAULT_TIERS.map(tier => (
-                  <th key={tier} style={{ ...S.th, minWidth: 120, textAlign: 'center' }}>
-                    <span style={S.badge(tier === 'Corporate Sponsor' ? '#7b1fa2' : tier === 'Board Member' ? 'var(--warning)' : tier === 'Member' ? 'var(--green-600)' : 'var(--info)')}>{tier}</span>
+                  <th key={tier} style={{ ...S.th, minWidth: 130, textAlign: 'center' }}>
+                    <span style={{ ...S.badge(tierBadgeBg[tier] || 'var(--color-navy)'), color: tierBadgeText(tier) }}>{tier}</span>
                   </th>
                 ))}
                 <th style={S.th}></th>
@@ -147,15 +172,15 @@ export function Settings() {
               {allLicenseTypes.map(licType => {
                 const isCustom = !DEFAULT_LICENSE_TYPES.includes(licType);
                 return (
-                  <tr key={licType} style={{ background: isCustom ? 'var(--green-50)' : 'transparent' }}>
-                    <td style={{ ...S.td, fontWeight: 600, fontSize: '.88rem' }}>
+                  <tr key={licType} style={{ background: isCustom ? 'var(--color-callout-gold-bg)' : 'transparent' }}>
+                    <td style={{ ...S.td, fontWeight: 600, fontSize: '.88rem', color: 'var(--color-navy)' }}>
                       {licType}
-                      {isCustom && <span style={{ fontSize: '.72rem', color: 'var(--text-light)', marginLeft: 6 }}>(custom)</span>}
+                      {isCustom && <span style={{ fontSize: '.66rem', fontFamily: 'var(--font-heading)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold-hover)', marginLeft: 8, fontWeight: 800 }}>Custom</span>}
                     </td>
                     {DEFAULT_TIERS.map(tier => (
                       <td key={tier} style={{ ...S.td, textAlign: 'center' }}>
                         <div style={{ position: 'relative', display: 'inline-block' }}>
-                          <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: '#999', fontSize: '.85rem', pointerEvents: 'none' }}>$</span>
+                          <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '.85rem', pointerEvents: 'none' }}>$</span>
                           <input
                             type="number" step="0.01" min="0"
                             style={{ ...S.input, width: 110, textAlign: 'right', paddingLeft: 22 }}
@@ -169,7 +194,11 @@ export function Settings() {
                     <td style={S.td}>
                       {isCustom && (
                         <button onClick={() => removeLicenseType(licType)}
-                          style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', fontSize: '.8rem', padding: '4px 8px' }}>
+                          style={{
+                            background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer',
+                            fontFamily: 'var(--font-heading)', fontSize: '.66rem', fontWeight: 800,
+                            letterSpacing: '.1em', textTransform: 'uppercase', padding: '4px 8px',
+                          }}>
                           Remove
                         </button>
                       )}
@@ -183,7 +212,7 @@ export function Settings() {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, alignItems: 'center' }}>
-        {saved && <span style={{ color: 'var(--green-600)', fontWeight: 500, fontSize: '.9rem' }}>Settings saved!</span>}
+        {saved && <span style={{ color: 'var(--color-success)', fontWeight: 600, fontSize: '.9rem' }}>Settings saved!</span>}
         <button style={S.btn()} onClick={save} disabled={saving}>
           {saving ? 'Saving...' : 'Save Settings'}
         </button>

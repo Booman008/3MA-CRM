@@ -49,12 +49,17 @@ function rowToRecord(row, headerMap) {
   if (dba) noteParts.push(`DBA: ${dba}`);
   const lastTouch = get('lastTouch');
   if (lastTouch) noteParts.push(`Last Touch: ${lastTouch}`);
+  const county = get('county') || null;
   return {
     status: get('status') || '(blank)',
     businessName,
-    licenseNo: license ? JSON.stringify([{ number: license, type: get('licenseType') || '' }]) : null,
+    // Tag each imported license with its county so multi-site operators
+    // (different sites in different counties) keep that detail post-import.
+    licenseNo: license
+      ? JSON.stringify([{ number: license, type: get('licenseType') || '', county: county || '' }])
+      : null,
     licenseType: get('licenseType') || null,
-    county: get('county') || null,
+    county,
     ownerName: get('ownerName') || null,
     phone: get('phone') || null,
     email: get('email') || null,
@@ -187,18 +192,22 @@ export function ImportModal({ onClose, onImported }) {
     <Modal title="Mass Import from CSV" onClose={onClose}>
       {step === 'pick' && (
         <div>
-          <p style={{ color: 'var(--text-light)', fontSize: '.9rem', marginBottom: 16 }}>
+          <p style={{ color: 'var(--color-muted)', fontSize: '.9rem', marginBottom: 16 }}>
             Upload your master sheet CSV. The importer will read the <strong>Status</strong> column and let you choose
             where each status routes (Members, Leads, or Skip).
           </p>
           <input type="file" accept=".csv,text/csv" onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
-          {error && <div style={{ color: 'var(--danger)', marginTop: 12, fontSize: '.88rem' }}>{error}</div>}
+          {error && <div style={{
+            color: 'var(--color-red)', marginTop: 12, fontSize: '.88rem',
+            padding: '8px 12px', background: 'var(--color-callout-red-bg)',
+            borderLeft: '3px solid var(--color-red)', borderRadius: 4,
+          }}>{error}</div>}
         </div>
       )}
 
       {step === 'review' && (
         <div>
-          <div style={{ marginBottom: 12, fontSize: '.88rem', color: 'var(--text-light)' }}>
+          <div style={{ marginBottom: 12, fontSize: '.88rem', color: 'var(--color-muted)' }}>
             <strong>{filename}</strong> — {records.length} row{records.length !== 1 ? 's' : ''} parsed.
           </div>
           <table style={{ ...S.table, marginBottom: 16 }}>
@@ -219,11 +228,20 @@ export function ImportModal({ onClose, onImported }) {
               ))}
             </tbody>
           </table>
-          <div style={{ background: 'var(--green-50, #f1f8e9)', padding: '10px 14px', borderRadius: 6, fontSize: '.88rem', marginBottom: 12 }}>
+          <div style={{
+            background: 'var(--color-callout-gold-bg)',
+            borderLeft: '4px solid var(--color-gold)',
+            padding: '10px 14px', borderRadius: 6,
+            fontSize: '.88rem', marginBottom: 12, color: 'var(--color-navy)',
+          }}>
             Will import <strong>{memberCount}</strong> as members, <strong>{activeLeadCount}</strong> as active leads,{' '}
             <strong>{archivedCount}</strong> as archived. Skipping <strong>{skipCount}</strong>.
           </div>
-          {error && <div style={{ color: 'var(--danger)', marginBottom: 12, fontSize: '.88rem' }}>{error}</div>}
+          {error && <div style={{
+            color: 'var(--color-red)', marginBottom: 12, fontSize: '.88rem',
+            padding: '8px 12px', background: 'var(--color-callout-red-bg)',
+            borderLeft: '3px solid var(--color-red)', borderRadius: 4,
+          }}>{error}</div>}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
             <button style={S.btn('secondary')} onClick={() => setStep('pick')} disabled={busy}>Back</button>
             <button style={S.btn()} onClick={doImport} disabled={busy || (memberCount + activeLeadCount + archivedCount === 0)}>
@@ -241,11 +259,18 @@ export function ImportModal({ onClose, onImported }) {
             <strong>{result?.archived || 0}</strong> archived record{result?.archived === 1 ? '' : 's'}.
           </p>
           {result?.failures?.length > 0 && (
-            <div style={{ background: '#fff3e0', border: '1px solid #ffe0b2', borderRadius: 6, padding: '10px 14px', marginBottom: 12 }}>
-              <div style={{ fontWeight: 600, color: '#e65100', marginBottom: 6, fontSize: '.88rem' }}>
-                {result.failures.length} row{result.failures.length === 1 ? '' : 's'} failed:
+            <div style={{
+              background: 'var(--color-callout-red-bg)',
+              borderLeft: '4px solid var(--color-red)',
+              borderRadius: 6, padding: '10px 14px', marginBottom: 12,
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--color-red)',
+                marginBottom: 6, fontSize: '.78rem', letterSpacing: '.08em', textTransform: 'uppercase',
+              }}>
+                {result.failures.length} row{result.failures.length === 1 ? '' : 's'} failed
               </div>
-              <ul style={{ margin: 0, paddingLeft: 18, fontSize: '.82rem', color: 'var(--text-light)' }}>
+              <ul style={{ margin: 0, paddingLeft: 18, fontSize: '.82rem', color: 'var(--color-muted)' }}>
                 {result.failures.slice(0, 10).map((f, i) => (
                   <li key={i}>{f.businessName || `row ${f.index}`}: {f.error}</li>
                 ))}
