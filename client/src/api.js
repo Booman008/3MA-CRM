@@ -17,12 +17,19 @@ export async function api(path, opts = {}) {
   }
 
   if (!res.ok) {
-    let message = res.statusText;
-    try {
-      const errorBody = await res.json();
-      message = errorBody.error || message;
-    } catch {}
-    throw new Error(message);
+    let message = '';
+    let rawText = '';
+    try { rawText = await res.text(); } catch {}
+    if (rawText) {
+      try {
+        const parsed = JSON.parse(rawText);
+        message = parsed.error || parsed.message || '';
+      } catch {
+        message = rawText.slice(0, 300);
+      }
+    }
+    if (!message) message = res.statusText || `HTTP ${res.status}`;
+    throw new Error(`${message} (status ${res.status})`);
   }
 
   return res.json();

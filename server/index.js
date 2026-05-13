@@ -21,7 +21,7 @@ app.use(cors(
     ? { origin: allowedOrigins }
     : undefined
 ));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // Serve static frontend files
 app.use(express.static(clientDir));
