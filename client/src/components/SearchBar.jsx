@@ -59,8 +59,19 @@ export function SearchBar() {
     else if (e.key === 'Escape') { setOpen(false); }
   };
 
-  const sectionTitle = { padding: '6px 12px', fontSize: '.7rem', fontWeight: 700, color: '#999', textTransform: 'uppercase', letterSpacing: 0.5 };
-  const itemStyle = (active) => ({ padding: '8px 12px', cursor: 'pointer', background: active ? 'var(--green-50)' : 'transparent', borderLeft: active ? '3px solid var(--green-500)' : '3px solid transparent' });
+  const sectionTitle = {
+    padding: '8px 14px 4px',
+    fontFamily: 'var(--font-heading)',
+    fontSize: '0.6rem', fontWeight: 700,
+    color: 'var(--color-muted)',
+    textTransform: 'uppercase', letterSpacing: '0.14em',
+  };
+  const itemStyle = (active) => ({
+    padding: '9px 14px',
+    cursor: 'pointer',
+    background: active ? 'var(--color-callout-gold-bg)' : 'transparent',
+    borderLeft: active ? '3px solid var(--color-gold)' : '3px solid transparent',
+  });
 
   let cursor = 0;
   const renderSection = (title, list, kind) => {
@@ -81,10 +92,10 @@ export function SearchBar() {
             <div key={`${kind}-${item.id}`} style={itemStyle(activeIdx === idx)}
               onMouseEnter={() => setActiveIdx(idx)}
               onMouseDown={(e) => { e.preventDefault(); pick(flat[idx]); }}>
-              <div style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--green-900)' }}>
+              <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--color-navy)' }}>
                 {kind === 'contact' ? (item.entityName || 'Contact') : item.businessName}
               </div>
-              {sub && <div style={{ fontSize: '.75rem', color: 'var(--text-light)', marginTop: 1 }}>{sub}</div>}
+              {sub && <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: 1 }}>{sub}</div>}
             </div>
           );
         })}
@@ -95,29 +106,33 @@ export function SearchBar() {
   const hasResults = flat.length > 0;
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,.1)' }}>
+    <div ref={wrapRef} style={{ position: 'relative', padding: '14px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
       <input
         type="text"
         value={q}
         onChange={e => { setQ(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         onKeyDown={onKeyDown}
-        placeholder="Search members, leads, contacts..."
+        placeholder="Search members, leads, contacts…"
         style={{
-          width: '100%', padding: '8px 12px', borderRadius: 6, border: 'none',
-          background: 'rgba(255,255,255,.12)', color: '#fff', fontSize: '.85rem', outline: 'none',
+          width: '100%', padding: '9px 12px', borderRadius: 6, border: 'none',
+          background: 'rgba(255,255,255,0.12)', color: '#fff',
+          fontSize: '0.82rem', outline: 'none',
+          fontFamily: 'var(--font-body)',
         }}
       />
       {open && q.trim().length >= 2 && (
         <div style={{
           position: 'absolute', top: '100%', left: 16, right: 16, marginTop: 4,
           background: '#fff', color: 'var(--text)', borderRadius: 8,
-          boxShadow: '0 12px 32px rgba(0,0,0,.25)', maxHeight: '70vh', overflowY: 'auto', zIndex: 1100,
+          boxShadow: '0 12px 32px rgba(7,31,64,0.25)',
+          maxHeight: '70vh', overflowY: 'auto', zIndex: 1100,
+          borderTop: '3px solid var(--color-gold)',
         }}>
           {loading && !hasResults ? (
-            <div style={{ padding: 16, fontSize: '.85rem', color: 'var(--text-light)' }}>Searching...</div>
+            <div style={{ padding: 16, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Searching...</div>
           ) : !hasResults ? (
-            <div style={{ padding: 16, fontSize: '.85rem', color: 'var(--text-light)' }}>No matches</div>
+            <div style={{ padding: 16, fontSize: '0.85rem', color: 'var(--color-muted)' }}>No matches</div>
           ) : (
             <>
               {renderSection('Members', results.members, 'member')}

@@ -4,29 +4,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3MA CRM</title>
+
+  <!-- 3MA brand fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
     :root {
-      --green-900: #0d3b0d;
-      --green-800: #145214;
-      --green-700: #1b5e20;
-      --green-600: #2e7d32;
-      --green-500: #388e3c;
-      --green-400: #4caf50;
-      --green-300: #81c784;
-      --green-200: #a5d6a7;
-      --green-100: #c8e6c9;
-      --green-50: #e8f5e9;
-      --bg: #f0f2f5;
-      --card: #ffffff;
-      --text: #1a1a2e;
-      --text-light: #666;
-      --border: #e0e0e0;
-      --danger: #d32f2f;
-      --warning: #f57c00;
-      --info: #1976d2;
+      /* ── 3MA Brand palette ───────────────────────────────── */
+      --color-navy:        #071f40;
+      --color-navy-hover:  #0d2d5c;
+      --color-navy-deep:   #04152b;
+      --color-gold:        #ebab22;
+      --color-gold-hover:  #f5bc33;
+      --color-gold-soft:   #fdf6e3;
+      --color-red:         #c21f32;
+      --color-red-hover:   #a91a2a;
+      --color-white:       #ffffff;
+      --color-light-gray:  #f4f5f7;
+      --color-dark-gray:   #1f2937;
+      --color-divider:     #dde1e7;
+      --color-muted:       #5b6573;
+
+      --color-callout-gold-bg: #fdf6e3;
+      --color-callout-navy-bg: #e8edf4;
+      --color-callout-red-bg:  #fdecea;
+
+      /* Success status colour — used only for "Won" lead stage */
+      --color-success: #1f8a5b;
+
+      /* ── Type ────────────────────────────────────────────── */
+      --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body:    'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      /* ── Shadows ─────────────────────────────────────────── */
+      --shadow-sm:   0 1px 3px rgba(7,31,64,0.10);
+      --shadow-md:   0 4px 12px rgba(7,31,64,0.12);
+      --shadow-lg:   0 8px 28px rgba(7,31,64,0.16);
+      --shadow-card: 0 2px 8px rgba(7,31,64,0.10);
+
+      /* ── Radii ───────────────────────────────────────────── */
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 10px;
+
+      /* ── Layout ──────────────────────────────────────────── */
+      --bg: var(--color-light-gray);
+      --card: var(--color-white);
+      --text: var(--color-dark-gray);
+      --text-light: var(--color-muted);
+      --border: var(--color-divider);
+
+      /* ── Semantic alerts ─────────────────────────────────── */
+      --danger:  var(--color-red);
+      --warning: var(--color-gold);
+      --info:    var(--color-navy);
+
+      /* ── Legacy --green-* tokens — repointed to brand ────── */
+      /* Existing inline styles in *.jsx reference these names; we
+         repoint them so the codebase picks up the brand palette
+         without any per-file color edits. */
+      --green-900: var(--color-navy);
+      --green-800: var(--color-navy);
+      --green-700: var(--color-navy);
+      --green-600: var(--color-gold);
+      --green-500: var(--color-gold);
+      --green-400: var(--color-gold);
+      --green-300: var(--color-divider);
+      --green-200: var(--color-gold);
+      --green-100: var(--color-callout-gold-bg);
+      --green-50:  var(--color-callout-gold-bg);
     }
+
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* Default form element font (inputs/selects/buttons still need this in Safari) */
+    input, select, textarea, button { font-family: inherit; }
+
+    /* Headings default to Montserrat — pages may still set their own size/weight. */
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-navy); }
+
+    /* Focus ring tuned to the brand */
+    :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
+
+    /* Light scrollbar that doesn't clash with navy sidebar */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(7,31,64,0.18); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(7,31,64,0.32); }
+
     #root { display: flex; min-height: 100vh; }
   </style>
 </head>

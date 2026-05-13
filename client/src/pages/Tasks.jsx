@@ -7,7 +7,13 @@ import { Field } from '../components/Field.jsx';
 
 const TASK_DEFAULTS = { title: '', description: '', dueDate: '', priority: 'Medium', entityType: '', entityId: '', entityName: '' };
 const PRIORITIES = ['Low', 'Medium', 'High'];
-const priorityColor = { Low: 'var(--info)', Medium: 'var(--warning)', High: 'var(--danger)' };
+
+// Brand priority colours.
+const priorityColor = {
+  Low:    'var(--color-navy)',
+  Medium: 'var(--color-gold)',
+  High:   'var(--color-red)',
+};
 
 const FILTERS = [
   { value: 'today', label: 'Today' },
@@ -22,9 +28,9 @@ function dueStatus(dueDate, completed) {
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const due = new Date(dueDate + 'T00:00:00');
   const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
-  if (diff < 0) return { color: 'var(--danger)', label: `${Math.abs(diff)}d overdue`, badgeBg: 'var(--danger)' };
-  if (diff === 0) return { color: 'var(--warning)', label: 'Today', badgeBg: 'var(--warning)' };
-  if (diff <= 3) return { color: '#f57f17', label: `${diff}d`, badgeBg: '#fbc02d' };
+  if (diff < 0) return { color: 'var(--color-red)', label: `${Math.abs(diff)}d overdue`, badgeBg: 'var(--color-red)' };
+  if (diff === 0) return { color: 'var(--color-navy)', label: 'Today', badgeBg: 'var(--color-gold)' };
+  if (diff <= 3) return { color: 'var(--color-navy)', label: `${diff}d`, badgeBg: 'var(--color-gold)' };
   return { color: 'inherit', label: null };
 }
 
@@ -106,16 +112,20 @@ export function Tasks() {
         <button style={S.btn()} onClick={openAdd}>+ Add Task</button>
       </div>
 
-      <div style={S.toolbar}>
+      {/* Tab-style filter row (brand: navy text, gold underline on active) */}
+      <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--color-divider)', marginBottom: 18 }}>
         {FILTERS.map(f => (
           <button key={f.value} onClick={() => setFilter(f.value)} style={{
-            padding: '6px 14px', fontSize: '.85rem', fontWeight: 500, cursor: 'pointer',
-            border: '1px solid var(--green-300)', borderRadius: 20,
-            background: filter === f.value ? 'var(--green-700)' : '#fff',
-            color: filter === f.value ? '#fff' : 'var(--green-700)',
+            padding: '10px 18px', cursor: 'pointer', background: 'transparent', border: 'none',
+            fontFamily: 'var(--font-heading)', fontSize: '0.72rem', fontWeight: 700,
+            letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: filter === f.value ? 'var(--color-navy)' : 'var(--color-muted)',
+            borderBottom: `3px solid ${filter === f.value ? 'var(--color-gold)' : 'transparent'}`,
+            marginBottom: -1,
+            transition: 'color .15s, border-color .15s',
           }}>{f.label}</button>
         ))}
-        <span style={{ color: 'var(--text-light)', fontSize: '.85rem', marginLeft: 'auto' }}>
+        <span style={{ marginLeft: 'auto', alignSelf: 'center', color: 'var(--color-muted)', fontSize: '0.82rem' }}>
           {tasks.length} task{tasks.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -130,21 +140,21 @@ export function Tasks() {
               return (
                 <div key={t.id} style={{
                   display: 'flex', alignItems: 'center', gap: 12,
-                  padding: '10px 4px', borderBottom: '1px solid var(--border)',
+                  padding: '12px 4px', borderBottom: '1px solid var(--color-divider)',
                   opacity: t.completed ? 0.55 : 1,
                 }}>
                   <input type="checkbox" checked={t.completed} onChange={() => toggleDone(t)}
-                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--green-600)' }} />
+                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-gold)' }} />
                   <div style={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={() => openEdit(t)}>
                     <div style={{
-                      fontSize: '.95rem', fontWeight: 500,
+                      fontSize: '0.92rem', fontWeight: 600, color: 'var(--color-navy)',
                       textDecoration: t.completed ? 'line-through' : 'none',
-                      color: t.completed ? 'var(--text-light)' : 'var(--text)',
+                      opacity: t.completed ? 0.6 : 1,
                     }}>{t.title}</div>
                     {(t.description || t.entityName) && (
-                      <div style={{ fontSize: '.8rem', color: 'var(--text-light)', marginTop: 2 }}>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--color-muted)', marginTop: 2 }}>
                         {t.entityName && (
-                          <span style={{ color: 'var(--green-700)', cursor: 'pointer', marginRight: 8 }}
+                          <span style={{ color: 'var(--color-navy)', cursor: 'pointer', marginRight: 8, fontWeight: 600 }}
                             onClick={e => { e.stopPropagation(); jumpToEntity(t); }}>
                             ↗ {t.entityName}
                           </span>
@@ -153,17 +163,17 @@ export function Tasks() {
                       </div>
                     )}
                   </div>
-                  <span style={{ ...S.badge(priorityColor[t.priority] || 'var(--warning)'), fontSize: '.7rem' }}>{t.priority}</span>
+                  <span style={{ ...S.badge(priorityColor[t.priority] || 'var(--color-gold)'), color: t.priority === 'Medium' ? 'var(--color-navy)' : '#fff' }}>{t.priority}</span>
                   <div style={{ minWidth: 110, textAlign: 'right' }}>
                     {t.dueDate && (
                       <>
-                        <div style={{ fontSize: '.8rem', color: ds.color, fontWeight: ds.label ? 600 : 400 }}>{fmt.date(t.dueDate)}</div>
-                        {ds.label && <span style={{ ...S.badge(ds.badgeBg), fontSize: '.68rem', marginTop: 2 }}>{ds.label}</span>}
+                        <div style={{ fontSize: '0.8rem', color: ds.color, fontWeight: ds.label ? 700 : 400 }}>{fmt.date(t.dueDate)}</div>
+                        {ds.label && <span style={{ ...S.badge(ds.badgeBg), marginTop: 2, color: ds.badgeBg === 'var(--color-gold)' ? 'var(--color-navy)' : '#fff' }}>{ds.label}</span>}
                       </>
                     )}
                   </div>
                   <button onClick={() => remove(t.id)}
-                    style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', fontSize: '.8rem', opacity: 0.6 }}
+                    style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}
                     onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.6'}>
                     Del
                   </button>

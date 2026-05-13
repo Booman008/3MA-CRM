@@ -7,14 +7,33 @@ import { Field } from '../components/Field.jsx';
 import { AttachmentsPanel } from '../components/AttachmentsPanel.jsx';
 import { ContactsPanel } from '../components/ContactsPanel.jsx';
 
-import { ACTIVE_STAGES, ARCHIVED_STAGES, ALL_STAGES, STAGES, isArchivedStage, stageColor, stageHeaderBg } from '../stages.js';
+import {
+  ACTIVE_STAGES, ARCHIVED_STAGES, ALL_STAGES, STAGES,
+  isArchivedStage, stageColor, stageHeaderBg, stageNeedsDarkText,
+} from '../stages.js';
+import { useSettings } from '../useSettings.js';
+import { getAllLicenseTypes } from '../licenseTypes.js';
 
-const LEAD_DEFAULTS = { businessName: '', licenseNo: '', licenseType: '', county: '', ownerName: '', phone: '', email: '', stage: 'New', priority: 'Medium', lastContactDate: '', nextContactDate: '', notes: '' };
+const LEAD_DEFAULTS = {
+  businessName: '', licenseNo: '', licenseType: '', county: '',
+  ownerName: '', phone: '', email: '',
+  stage: 'New', priority: 'Medium',
+  lastContactDate: '', nextContactDate: '', notes: '',
+};
 export { STAGES, stageColor };
 const PRIORITIES = ['Low', 'Medium', 'High'];
-const priorityColor = { Low: 'var(--info)', Medium: 'var(--warning)', High: 'var(--danger)' };
+
+// Brand-aligned priority colours: navy = informational, gold = attention, red = urgent.
+const priorityColor = {
+  Low:    'var(--color-navy)',
+  Medium: 'var(--color-gold)',
+  High:   'var(--color-red)',
+};
 
 export function Leads() {
+  const settings = useSettings();
+  const licenseTypeOptions = getAllLicenseTypes(settings);
+
   const [allLeads, setAllLeads] = useState([]);
   const [search, setSearch] = useState('');
   const [stageFilter, setStageFilter] = useState('');
@@ -144,9 +163,18 @@ export function Leads() {
   };
 
   const viewBtn = (v) => ({
-    padding: '6px 14px', fontSize: '.85rem', fontWeight: 500, cursor: 'pointer', border: '1px solid var(--green-300)',
-    background: view === v ? 'var(--green-700)' : '#fff', color: view === v ? '#fff' : 'var(--green-700)',
-    borderRadius: v === 'table' ? '6px 0 0 6px' : '0 6px 6px 0', transition: 'all .15s',
+    padding: '7px 16px',
+    fontFamily: 'var(--font-heading)',
+    fontSize: '0.7rem',
+    fontWeight: 800,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    cursor: 'pointer',
+    border: '1px solid var(--color-divider)',
+    background: view === v ? 'var(--color-navy)' : '#fff',
+    color: view === v ? '#fff' : 'var(--color-navy)',
+    borderRadius: v === 'table' ? '6px 0 0 6px' : '0 6px 6px 0',
+    transition: 'all .15s',
   });
 
   const KanbanCard = ({ lead }) => {
@@ -158,27 +186,30 @@ export function Leads() {
         onDragEnd={onDragEnd}
         onClick={() => openEdit(lead)}
         style={{
-          background: '#fff', borderRadius: 8, padding: '12px 14px', marginBottom: 8,
-          boxShadow: isDragging ? '0 8px 24px rgba(0,0,0,.18)' : '0 1px 3px rgba(0,0,0,.1)',
+          background: '#fff', borderRadius: 6, padding: '12px 13px', marginBottom: 8,
+          boxShadow: isDragging ? 'var(--shadow-md)' : '0 1px 2px rgba(7,31,64,0.06)',
           cursor: 'grab', transition: 'box-shadow .15s, transform .15s',
           transform: isDragging ? 'rotate(2deg) scale(1.02)' : 'none',
-          borderLeft: `3px solid ${priorityColor[lead.priority] || 'var(--warning)'}`,
+          borderLeft: `3px solid ${priorityColor[lead.priority] || 'var(--color-gold)'}`,
         }}
-        onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 3px 12px rgba(0,0,0,.12)'; }}
-        onMouseLeave={e => { if (!isDragging) e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,.1)'; }}
+        onMouseEnter={e => { e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+        onMouseLeave={e => { if (!isDragging) e.currentTarget.style.boxShadow = '0 1px 2px rgba(7,31,64,0.06)'; }}
       >
-        <div style={{ fontWeight: 600, fontSize: '.88rem', marginBottom: 4, color: 'var(--green-900)' }}>{lead.businessName}</div>
-        {lead.ownerName && <div style={{ fontSize: '.8rem', color: 'var(--text-light)', marginBottom: 6 }}>{lead.ownerName}</div>}
+        <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.82rem', marginBottom: 4, color: 'var(--color-navy)' }}>{lead.businessName}</div>
+        {lead.ownerName && <div style={{ fontSize: '0.78rem', color: 'var(--color-muted)', marginBottom: 8 }}>{lead.ownerName}</div>}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ ...S.badge(priorityColor[lead.priority] || 'var(--warning)'), fontSize: '.7rem', padding: '2px 7px' }}>{lead.priority}</span>
-          {lead.county && <span style={{ fontSize: '.75rem', color: 'var(--text-light)' }}>{lead.county}</span>}
+          <span style={{ ...S.badge(priorityColor[lead.priority] || 'var(--color-gold)'), color: lead.priority === 'Medium' ? 'var(--color-navy)' : '#fff' }}>{lead.priority}</span>
+          {lead.county && <span style={{ fontSize: '0.72rem', color: 'var(--color-muted)' }}>{lead.county}</span>}
         </div>
         {lead.nextContactDate && (
-          <div style={{ fontSize: '.78rem', color: 'var(--text-light)', marginTop: 6 }}>Next: {fmt.date(lead.nextContactDate)}</div>
+          <div style={{ fontSize: '0.74rem', color: 'var(--color-muted)', marginTop: 8, paddingTop: 7, borderTop: '1px dashed var(--color-divider)', display: 'flex', justifyContent: 'space-between' }}>
+            <span>Next contact</span>
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--color-navy)' }}>{fmt.date(lead.nextContactDate)}</span>
+          </div>
         )}
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 6, gap: 4 }}>
           <button onClick={e => { e.stopPropagation(); remove(lead.id); }}
-            style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', fontSize: '.75rem', padding: '2px 4px', opacity: 0.6 }}
+            style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '0.7rem', padding: '2px 4px', opacity: 0.6, fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}
             onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.6'}>
             Del
           </button>
@@ -196,43 +227,47 @@ export function Leads() {
         onDragLeave={onDragLeave}
         onDrop={e => onDrop(e, stage)}
         style={{
-          flex: '1 1 0', minWidth: 200, maxWidth: 280, display: 'flex', flexDirection: 'column',
-          background: isOver ? 'var(--green-50)' : '#f5f5f5',
+          flex: '1 1 0', minWidth: 220, maxWidth: 300, display: 'flex', flexDirection: 'column',
+          background: isOver ? 'var(--color-callout-gold-bg)' : 'var(--color-light-gray)',
           borderRadius: 10, transition: 'background .2s, box-shadow .2s',
-          boxShadow: isOver ? 'inset 0 0 0 2px var(--green-400)' : 'none',
+          boxShadow: isOver ? 'inset 0 0 0 2px var(--color-gold)' : 'none',
+          border: '1px solid var(--color-divider)',
         }}
       >
         <div style={{
-          padding: '10px 14px', borderRadius: '10px 10px 0 0',
-          background: stageHeaderBg[stage] || '#f5f5f5',
+          padding: '11px 14px', borderRadius: '10px 10px 0 0',
+          background: stageHeaderBg[stage] || 'var(--color-light-gray)',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          borderBottom: `2px solid ${stageColor[stage] || 'var(--green-500)'}`,
+          borderBottom: `2px solid ${stageColor[stage] || 'var(--color-gold)'}`,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: stageColor[stage], display: 'inline-block' }} />
-            <span style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--green-900)' }}>{stage}</span>
+            <span style={{ width: 9, height: 9, borderRadius: '50%', background: stageColor[stage], display: 'inline-block' }} />
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-navy)' }}>{stage}</span>
           </div>
           <span style={{
-            background: stageColor[stage], color: '#fff', borderRadius: 10, padding: '1px 8px',
-            fontSize: '.78rem', fontWeight: 700, minWidth: 22, textAlign: 'center',
+            background: '#fff', color: 'var(--color-navy)', borderRadius: 999, padding: '2px 9px',
+            fontFamily: 'var(--font-heading)', fontSize: '0.7rem', fontWeight: 800, minWidth: 24, textAlign: 'center',
+            border: '1px solid var(--color-divider)',
           }}>{stageLead.length}</span>
         </div>
-        <div style={{ flex: 1, padding: 8, minHeight: 80, overflowY: 'auto' }}>
+        <div style={{ flex: 1, padding: 10, minHeight: 80, overflowY: 'auto' }}>
           {stageLead.map(l => <KanbanCard key={l.id} lead={l} />)}
           {stageLead.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '20px 8px', color: '#aaa', fontSize: '.82rem', fontStyle: 'italic' }}>
+            <div style={{ textAlign: 'center', padding: '20px 8px', color: 'var(--color-muted)', fontSize: '0.78rem', fontStyle: 'italic' }}>
               {isOver ? 'Drop here' : 'No leads'}
             </div>
           )}
         </div>
-        <div style={{ padding: '4px 8px 8px' }}>
+        <div style={{ padding: '0 10px 10px' }}>
           <button onClick={() => openAdd(stage)} style={{
-            width: '100%', padding: '6px', background: 'transparent', border: '1px dashed #ccc',
-            borderRadius: 6, cursor: 'pointer', color: 'var(--text-light)', fontSize: '.82rem',
+            width: '100%', padding: '8px', background: 'transparent', border: '1px dashed var(--color-divider)',
+            borderRadius: 6, cursor: 'pointer', color: 'var(--color-muted)',
+            fontFamily: 'var(--font-heading)', fontSize: '0.7rem', fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase',
             transition: 'border-color .15s, color .15s',
           }}
-            onMouseEnter={e => { e.target.style.borderColor = 'var(--green-400)'; e.target.style.color = 'var(--green-700)'; }}
-            onMouseLeave={e => { e.target.style.borderColor = '#ccc'; e.target.style.color = 'var(--text-light)'; }}>
+            onMouseEnter={e => { e.target.style.borderColor = 'var(--color-gold)'; e.target.style.color = 'var(--color-navy)'; }}
+            onMouseLeave={e => { e.target.style.borderColor = 'var(--color-divider)'; e.target.style.color = 'var(--color-muted)'; }}>
             + Add Lead
           </button>
         </div>
@@ -257,7 +292,7 @@ export function Leads() {
         <input style={{ ...S.input, maxWidth: 280 }} placeholder="Search leads..." value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
-      <div style={{ ...S.toolbar, background: 'var(--card)', padding: '10px 14px', borderRadius: 8, marginBottom: 16, boxShadow: '0 1px 3px rgba(0,0,0,.06)' }}>
+      <div style={{ ...S.toolbar, background: 'var(--card)', padding: '10px 14px', borderRadius: 8, marginBottom: 16, boxShadow: 'var(--shadow-sm)' }}>
         <select style={S.select} value={stageFilter} onChange={e => setStageFilter(e.target.value)}>
           <option value="">All Stages</option>
           <optgroup label="Active">
@@ -267,9 +302,9 @@ export function Leads() {
             {ARCHIVED_STAGES.map(s => <option key={s} value={s}>{s}</option>)}
           </optgroup>
         </select>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '.85rem', color: 'var(--text-light)', cursor: 'pointer' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '.85rem', color: 'var(--color-muted)', cursor: 'pointer' }}>
           <input type="checkbox" checked={showArchived} onChange={e => setShowArchived(e.target.checked)}
-            style={{ accentColor: 'var(--green-600)', cursor: 'pointer' }} />
+            style={{ accentColor: 'var(--color-gold)', cursor: 'pointer' }} />
           Show archived{archivedCount > 0 ? ` (${archivedCount})` : ''}
         </label>
         <select style={S.select} value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)}>
@@ -281,11 +316,11 @@ export function Leads() {
           {leadCounties.map(c => <option key={c}>{c}</option>)}
         </select>
         {activeLeadFilters > 0 && (
-          <button onClick={clearLeadFilters} style={{ ...S.btn('secondary'), padding: '6px 12px', fontSize: '.82rem' }}>
+          <button onClick={clearLeadFilters} style={{ ...S.btn('secondary'), padding: '6px 12px' }}>
             Clear Filters ({activeLeadFilters})
           </button>
         )}
-        <span style={{ color: 'var(--text-light)', fontSize: '.85rem', marginLeft: 'auto' }}>
+        <span style={{ color: 'var(--color-muted)', fontSize: '0.82rem', marginLeft: 'auto' }}>
           {leads.length}{leads.length !== allLeads.length ? ` of ${allLeads.length}` : ''} lead{leads.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -303,7 +338,7 @@ export function Leads() {
           {loading ? <div style={S.emptyState}>Loading...</div> : leads.length === 0 ? (
             <div style={S.emptyState}>
               {allLeads.length === 0 ? 'No leads found. Add your first lead to get started.' : 'No leads match your filters.'}
-              {activeLeadFilters > 0 && <div style={{ marginTop: 8 }}><button onClick={clearLeadFilters} style={{ ...S.btn('secondary'), padding: '6px 14px', fontSize: '.85rem' }}>Clear Filters</button></div>}
+              {activeLeadFilters > 0 && <div style={{ marginTop: 8 }}><button onClick={clearLeadFilters} style={{ ...S.btn('secondary'), padding: '6px 14px' }}>Clear Filters</button></div>}
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
@@ -321,12 +356,19 @@ export function Leads() {
                 <tbody>
                   {leads.map(l => (
                     <tr key={l.id}>
-                      <td style={{ ...S.td, fontWeight: 600 }}>{l.businessName}</td>
+                      <td style={{ ...S.td, fontWeight: 700, color: 'var(--color-navy)' }}>{l.businessName}</td>
                       <td style={S.td}>{l.ownerName || '—'}</td>
                       <td style={S.td}>{l.licenseNo || '—'}</td>
                       <td style={S.td}>{l.county || '—'}</td>
                       <td style={S.td}>
-                        <select value={l.stage} onChange={e => updateStage(l.id, e.target.value)} style={{ ...S.select, padding: '3px 8px', fontSize: '.82rem', background: stageColor[l.stage] || 'var(--green-500)', color: '#fff', border: 'none', borderRadius: 12, cursor: 'pointer' }}>
+                        <select value={l.stage} onChange={e => updateStage(l.id, e.target.value)} style={{
+                          ...S.select, padding: '4px 10px',
+                          fontFamily: 'var(--font-heading)', fontSize: '0.68rem', fontWeight: 800,
+                          letterSpacing: '0.08em', textTransform: 'uppercase',
+                          background: stageColor[l.stage] || 'var(--color-gold)',
+                          color: stageNeedsDarkText(l.stage) ? 'var(--color-navy)' : '#fff',
+                          border: 'none', borderRadius: 999, cursor: 'pointer',
+                        }}>
                           <optgroup label="Active" style={{ color: '#333', background: '#fff' }}>
                             {ACTIVE_STAGES.map(s => <option key={s} style={{ color: '#333', background: '#fff' }}>{s}</option>)}
                           </optgroup>
@@ -335,11 +377,11 @@ export function Leads() {
                           </optgroup>
                         </select>
                       </td>
-                      <td style={S.td}><span style={S.badge(priorityColor[l.priority] || 'var(--warning)')}>{l.priority}</span></td>
+                      <td style={S.td}><span style={{ ...S.badge(priorityColor[l.priority] || 'var(--color-gold)'), color: l.priority === 'Medium' ? 'var(--color-navy)' : '#fff' }}>{l.priority}</span></td>
                       <td style={S.td}>{fmt.date(l.nextContactDate)}</td>
                       <td style={{ ...S.td, whiteSpace: 'nowrap' }}>
-                        <button style={{ ...S.btn('primary'), padding: '4px 10px', fontSize: '.8rem', marginRight: 6 }} onClick={() => openEdit(l)}>Edit</button>
-                        <button style={{ ...S.btn('danger'), padding: '4px 10px', fontSize: '.8rem' }} onClick={() => remove(l.id)}>Del</button>
+                        <button style={{ ...S.btn('secondary'), padding: '4px 10px', marginRight: 6 }} onClick={() => openEdit(l)}>Edit</button>
+                        <button style={{ ...S.btn('danger'), padding: '4px 10px' }} onClick={() => remove(l.id)}>Del</button>
                       </td>
                     </tr>
                   ))}
@@ -356,7 +398,12 @@ export function Leads() {
             <Field label="Business Name *"><input style={S.input} value={form.businessName} onChange={e => set('businessName', e.target.value)} /></Field>
             <Field label="Owner Name"><input style={S.input} value={form.ownerName} onChange={e => set('ownerName', e.target.value)} /></Field>
             <Field label="License #"><input style={S.input} value={form.licenseNo} onChange={e => set('licenseNo', e.target.value)} /></Field>
-            <Field label="License Type"><input style={S.input} value={form.licenseType} onChange={e => set('licenseType', e.target.value)} /></Field>
+            <Field label="License Type">
+              <select style={{ ...S.select, width: '100%' }} value={form.licenseType} onChange={e => set('licenseType', e.target.value)}>
+                <option value="">Select...</option>
+                {licenseTypeOptions.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </Field>
             <Field label="County"><input style={S.input} value={form.county} onChange={e => set('county', e.target.value)} /></Field>
             <Field label="Phone"><input style={S.input} value={form.phone} onChange={e => set('phone', e.target.value)} /></Field>
             <Field label="Email"><input style={S.input} type="email" value={form.email} onChange={e => set('email', e.target.value)} /></Field>
