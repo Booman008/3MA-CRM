@@ -222,7 +222,7 @@ function headerIndexMap(headerRow) {
     facebook: ['facebook'],
     licenseType: ['business type', 'license type', 'type'],
     status: ['status'],
-    ownedBy: ['owned by'],
+    ownedBy: ['owned by', 'member name'],
     renewalDate: ['expiration', 'expiration date', 'renewal', 'renewal date', '3ma membership renewal date'],
     licenseExpiration: ['expiration', 'expiration date'],
     joinDate: ['license issue date', 'issue date', 'join date'],
