@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "entityType": "member",
+    "entityId": 1,
+    "filename": "3MA Board Membership Agreement 2026_Kudzu.docx.pdf",
+    "mimeType": "application/pdf",
+    "sizeBytes": "227830",
+    "r2Key": "member/1/1778620502137-2419d17c-3MA_Board_Membership_Agreement_2026_Kudzu.docx.pdf",
+    "uploadedAt": "2026-05-13T02:15:02.489Z"
+  },
+  {
+    "id": 2,
+    "entityType": "member",
+    "entityId": 195,
+    "filename": "BLOOM LOGO (1).png",
+    "mimeType": "image/png",
+    "sizeBytes": "304354",
+    "r2Key": "member/195/logo/1778704964503-acb5d63a-BLOOM_LOGO__1_.png",
+    "uploadedAt": "2026-05-14T01:42:44.927Z"
+  },
+  {
+    "id": 3,
+    "entityType": "member",
+    "entityId": 122,
+    "filename": "Cultivated Wellness Logo With Locations.png",
+    "mimeType": "image/png",
+    "sizeBytes": "30135",
+    "r2Key": "member/122/logo/1778706749408-63ff6622-Cultivated_Wellness_Logo_With_Locations.png",
+    "uploadedAt": "2026-05-14T02:12:29.744Z"
+  },
+  {
+    "id": 4,
+    "entityType": "member",
+    "entityId": 127,
+    "filename": "1722450424521 (1).png",
+    "mimeType": "image/png",
+    "sizeBytes": "1280155",
+    "r2Key": "member/127/logo/1778707102005-77c8563d-1722450424521__1_.png",
+    "uploadedAt": "2026-05-14T02:18:22.471Z"
+  },
+  {
+    "id": 5,
+    "entityType": "member",
+    "entityId": 133,
+    "filename": "Jkobs-Logo-CMYK-Transparent (2).png",
+    "mimeType": "image/png",
+    "sizeBytes": "103072",
+    "r2Key": "member/133/logo/1778707232157-af3923f2-Jkobs-Logo-CMYK-Transparent__2_.png",
+    "uploadedAt": "2026-05-14T02:20:32.388Z"
+  },
+  {
+    "id": 6,
+    "entityType": "member",
+    "entityId": 141,
+    "filename": "IMG_3565 (1).JPG",
+    "mimeType": "image/jpeg",
+    "sizeBytes": "85081",
+    "r2Key": "member/141/logo/1778707450190-a7d8063f-IMG_3565__1_.JPG",
+    "uploadedAt": "2026-05-14T02:24:10.420Z"
+  },
+  {
+    "id": 7,
+    "entityType": "member",
+    "entityId": 162,
+    "filename": "IMG_3661 (1).PNG",
+    "mimeType": "image/png",
+    "sizeBytes": "250410",
+    "r2Key": "member/162/logo/1778707706126-b6a37b8e-IMG_3661__1_.PNG",
+    "uploadedAt": "2026-05-14T02:28:26.351Z"
+  }
+]

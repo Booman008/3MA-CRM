@@ -1,0 +1,910 @@
+{
+  "generatedAt": "2026-05-14T13:52:36.517Z",
+  "mode": "apply",
+  "file": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\5.14.26 Members CLEAN - Sheet1.csv",
+  "groupStatus": "Member",
+  "summary": {
+    "csvMemberRows": 107,
+    "ownedByGroups": 31,
+    "matchedZero": 31,
+    "matchedOne": 0,
+    "matchedMany": 0,
+    "creates": 31,
+    "updates": 0,
+    "ambiguousGroups": 0,
+    "orphanedExistingMembers": 0,
+    "ambiguousExistingMembers": 0
+  },
+  "ambiguousExistingMembers": [],
+  "orphanedExistingMembers": [],
+  "groups": [
+    {
+      "groupKey": "aeroma",
+      "ownedByDisplay": "Aeroma",
+      "ownedByMissing": false,
+      "csvRowCount": 3,
+      "businessNames": [
+        "Aeroma Cannabis Company LLC",
+        "Aeroma Dispensary Company LLC",
+        "Aeroma Processing Company"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "CULV003937",
+        "DSPY014937",
+        "MPRC000437"
+      ]
+    },
+    {
+      "groupKey": "bee's buds",
+      "ownedByDisplay": "Bee's Buds",
+      "ownedByMissing": false,
+      "csvRowCount": 3,
+      "businessNames": [
+        "Bee's Buds",
+        "Bee's Buds Dispensary Wiggins",
+        "Bees Buds LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "DSPY013030",
+        "DSPY022566",
+        "DSPY026124"
+      ]
+    },
+    {
+      "groupKey": "high hopes",
+      "ownedByDisplay": "High Hopes",
+      "ownedByMissing": false,
+      "csvRowCount": 5,
+      "businessNames": [
+        "AllsWell Brands, LLC",
+        "High Hopes Cannabis LLC",
+        "BWD County Line LLC",
+        "BWD Meridian LLC",
+        "BWD Columbus LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 5,
+      "licenseNumbers": [
+        "DSPY015334",
+        "DSPY000941",
+        "DSPY005725",
+        "DSPY005438",
+        "DSPY014844"
+      ]
+    },
+    {
+      "groupKey": "collard greens",
+      "ownedByDisplay": "Collard Greens",
+      "ownedByMissing": false,
+      "csvRowCount": 3,
+      "businessNames": [
+        "Collard Greens LLC",
+        "The Feeling Station LLC",
+        "Lift Medical Cannabis Inc"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "TRAN002954",
+        "MPRC001772",
+        "DSPY000872"
+      ]
+    },
+    {
+      "groupKey": "cultivated wellness",
+      "ownedByDisplay": "Cultivated Wellness",
+      "ownedByMissing": false,
+      "csvRowCount": 4,
+      "businessNames": [
+        "Cultivated Wellness Dispensary NO.1",
+        "Yellow Dog Farms",
+        "Cultivated Wellness Dispensary NO.2",
+        "Cultivated Wellness Dispensary NO.3"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 4,
+      "licenseNumbers": [
+        "DSPY004241",
+        "MCUL007346",
+        "DSPY012337",
+        "DSPY010624"
+      ]
+    },
+    {
+      "groupKey": "gina pepe",
+      "ownedByDisplay": "Gina Pepe",
+      "ownedByMissing": false,
+      "csvRowCount": 7,
+      "businessNames": [
+        "Blessed Goat",
+        "Blessed Holdings LLC",
+        "Coast Cannabis Bay St Louis LLC",
+        "Diamond Leaf",
+        "Diamondleaf",
+        "Fabpharm"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 7,
+      "licenseNumbers": [
+        "DSPY023524",
+        "DSPY010525",
+        "DSPY001123",
+        "DSPY015123",
+        "DSPY023623",
+        "DSPY021823",
+        "DSPY024124"
+      ]
+    },
+    {
+      "groupKey": "kudzu",
+      "ownedByDisplay": "Kudzu",
+      "ownedByMissing": false,
+      "csvRowCount": 5,
+      "businessNames": [
+        "Kudzu Cannabis Company, LLC",
+        "Kudzu Transportation Company, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 5,
+      "licenseNumbers": [
+        "CULV000545",
+        "DSPY010425",
+        "DSPY021938",
+        "TRAN000345",
+        "PROC000545"
+      ]
+    },
+    {
+      "groupKey": "rootdown",
+      "ownedByDisplay": "Rootdown",
+      "ownedByMissing": false,
+      "csvRowCount": 23,
+      "businessNames": [
+        "Local Remedy, LLC",
+        "MS Moss, LLC",
+        "Rootdown 1, LLC",
+        "Rootdown 2, LLC",
+        "Rootdown 3, LLC",
+        "Rootdown 4, LLC",
+        "Rootdown Grow, LLC",
+        "MS MUDD 1, LLC",
+        "MS Mudd 2, LLC",
+        "MS Mudd 3, LLC",
+        "MS Mudd 4, LLC",
+        "Mississippi Provisions 1, LLC",
+        "Mississippi Provisions 4, LLC",
+        "Mississippi Provisions 5, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 23,
+      "licenseNumbers": [
+        "DSPY010024",
+        "DSPY012757",
+        "DSPY016725",
+        "DSPY003902",
+        "DSPY004141",
+        "DSPY007137",
+        "DSPY021424",
+        "DSPY013522",
+        "DSPY006853",
+        "DSPY025436",
+        "DSPY003825",
+        "CULV003866",
+        "DSPY009124",
+        "DSPY009534",
+        "DSPY008217",
+        "DSPY004630",
+        "DSPY003745",
+        "DSPY006961",
+        "DSPY016825",
+        "DSPY022769",
+        "DSPY005630",
+        "DSPY021730",
+        "DSPY006623"
+      ]
+    },
+    {
+      "groupKey": "new altitude farms",
+      "ownedByDisplay": "New Altitude Farms",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "City Dispensary LLC",
+        "New Altitude Farms, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY019070",
+        "CULV001081"
+      ]
+    },
+    {
+      "groupKey": "oddfellow wellness",
+      "ownedByDisplay": "Oddfellow Wellness",
+      "ownedByMissing": false,
+      "csvRowCount": 4,
+      "businessNames": [
+        "Green House Social",
+        "The Magnolia Healing, LLC",
+        "Oddfellow Dispensary",
+        "OddFellow Wellness, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 4,
+      "licenseNumbers": [
+        "MPRC000930",
+        "DSPY015230",
+        "DSPY019961",
+        "CULV002125"
+      ]
+    },
+    {
+      "groupKey": "the green standard",
+      "ownedByDisplay": "The Green Standard",
+      "ownedByMissing": false,
+      "csvRowCount": 4,
+      "businessNames": [
+        "The Green Standard LLC",
+        "The Green Standard Starkville LLC",
+        "The Green Standard Grenada LLC",
+        "The Green Standard Vicksburg LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 4,
+      "licenseNumbers": [
+        "DSPY005175",
+        "DSPY004753",
+        "DSPY005522",
+        "DSPY020075"
+      ]
+    },
+    {
+      "groupKey": "rolling pines",
+      "ownedByDisplay": "Rolling Pines",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "Rolling Pines",
+        "Rolling Pines Processing"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL002757",
+        "MPRC001303"
+      ]
+    },
+    {
+      "groupKey": "suite 1620",
+      "ownedByDisplay": "Suite 1620",
+      "ownedByMissing": false,
+      "csvRowCount": 3,
+      "businessNames": [
+        "Sawmill402, LLC",
+        "Thetransporter, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "MCUL005521",
+        "TRAN002421",
+        "MPRC000321"
+      ]
+    },
+    {
+      "groupKey": "star buds",
+      "ownedByDisplay": "Star Buds",
+      "ownedByMissing": false,
+      "csvRowCount": 11,
+      "businessNames": [
+        "SB Greenwood, LLC",
+        "SB MS MIP LLC",
+        "SB Natchez, LLC",
+        "Stop-Go Transport",
+        "Green Magnolia of Canton, LLC",
+        "Green Magnolia of Columbus LLC",
+        "Green Magnolia of Meridian LLC",
+        "SB O Springs, LLC",
+        "SB Oxford",
+        "SB Pearl, LLC",
+        "SB Tupelo, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 11,
+      "licenseNumbers": [
+        "DSPY019642",
+        "PROC002330",
+        "DSPY015501",
+        "TRAN002730",
+        "DSPY001345",
+        "DSPY000244",
+        "DSPY004338",
+        "DSPY018630",
+        "DSPY011836",
+        "DSPY004961",
+        "DSPY019741"
+      ]
+    },
+    {
+      "groupKey": "southern grown therapeutics",
+      "ownedByDisplay": "Southern Grown Therapeutics",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "Southern Grown Company LLC",
+        "Southern Grown Extracts LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL000230",
+        "MPRC001230"
+      ]
+    },
+    {
+      "groupKey": "river remedy",
+      "ownedByDisplay": "River Remedy",
+      "ownedByMissing": false,
+      "csvRowCount": 8,
+      "businessNames": [
+        "River Remedy Transportation",
+        "River Wellness Holdings, LLC",
+        "River Remedy Byram Dispensary, LLC",
+        "PINE BELT MEDICINAL",
+        "Bloom Medical Cannabis, LLC",
+        "Hernando Dispensary LLC",
+        "Lighthouse Gulfport LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 8,
+      "licenseNumbers": [
+        "TRAN001925",
+        "CULV000325",
+        "DSPY010125",
+        "PROC000825",
+        "DSPY003418",
+        "DSPY015982",
+        "DSPY015017",
+        "DSPY004524"
+      ]
+    },
+    {
+      "groupKey": "canna-u",
+      "ownedByDisplay": "Canna-U",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "Diamondhead Root LLC",
+        "Mississippi Green Spa LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY007723",
+        "DSPY022124"
+      ]
+    },
+    {
+      "groupKey": "sea of green",
+      "ownedByDisplay": "Sea of Green",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "SRCx LLC",
+        "Green Dayz LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV004443",
+        "DSPY023861"
+      ]
+    },
+    {
+      "groupKey": "puffin deliveries",
+      "ownedByDisplay": "Puffin Deliveries",
+      "ownedByMissing": false,
+      "csvRowCount": 2,
+      "businessNames": [
+        "Puffin Deliveries MS North",
+        "Puffin Deliveries MS South"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "TRAN002341",
+        "TRAN002618"
+      ]
+    },
+    {
+      "groupKey": "dragon fire farms",
+      "ownedByDisplay": "Dragon Fire Farms",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Dragon Fire Farms LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV003740"
+      ]
+    },
+    {
+      "groupKey": "falcann",
+      "ownedByDisplay": "Falcann",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Falcann LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "TRAN000645"
+      ]
+    },
+    {
+      "groupKey": "great river canopy",
+      "ownedByDisplay": "Great River Canopy",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Great River Canopy Company, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007541"
+      ]
+    },
+    {
+      "groupKey": "green solutions",
+      "ownedByDisplay": "Green Solutions",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Green Solutions, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002814"
+      ]
+    },
+    {
+      "groupKey": "borneo bud",
+      "ownedByDisplay": "Borneo Bud",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "HBZ Enterprises, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002661"
+      ]
+    },
+    {
+      "groupKey": "magnolia medical cannabis co.",
+      "ownedByDisplay": "Magnolia Medical Cannabis Co.",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Magnolia Medical Cannabis Company, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY007536"
+      ]
+    },
+    {
+      "groupKey": "midsouth extracts",
+      "ownedByDisplay": "MidSouth Extracts",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "MidSouth Extracts, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "PROC001441"
+      ]
+    },
+    {
+      "groupKey": "hava",
+      "ownedByDisplay": "HAVA",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "MRLD, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "PROC001845"
+      ]
+    },
+    {
+      "groupKey": "alchemy analytics",
+      "ownedByDisplay": "Alchemy Analytics",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Alchemy Analytics, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "TESL000435"
+      ]
+    },
+    {
+      "groupKey": "steep hill ms",
+      "ownedByDisplay": "Steep Hill MS",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "Chromatic LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "TESL000161"
+      ]
+    },
+    {
+      "groupKey": "the forest dispensary",
+      "ownedByDisplay": "The Forest Dispensary",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Forest Cannabis Dispensary"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY025362"
+      ]
+    },
+    {
+      "groupKey": "ms mary",
+      "ownedByDisplay": "MS Mary",
+      "ownedByMissing": false,
+      "csvRowCount": 1,
+      "businessNames": [
+        "MS Mary, LLC"
+      ],
+      "matchedMemberIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "ambiguousExistingMemberIds": [],
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007061"
+      ]
+    }
+  ],
+  "applied": {
+    "createdMembers": [
+      {
+        "groupKey": "aeroma",
+        "ownedByDisplay": "Aeroma",
+        "survivorId": 215,
+        "licenseCount": 3
+      },
+      {
+        "groupKey": "bee's buds",
+        "ownedByDisplay": "Bee's Buds",
+        "survivorId": 216,
+        "licenseCount": 3
+      },
+      {
+        "groupKey": "high hopes",
+        "ownedByDisplay": "High Hopes",
+        "survivorId": 217,
+        "licenseCount": 5
+      },
+      {
+        "groupKey": "collard greens",
+        "ownedByDisplay": "Collard Greens",
+        "survivorId": 218,
+        "licenseCount": 3
+      },
+      {
+        "groupKey": "cultivated wellness",
+        "ownedByDisplay": "Cultivated Wellness",
+        "survivorId": 219,
+        "licenseCount": 4
+      },
+      {
+        "groupKey": "gina pepe",
+        "ownedByDisplay": "Gina Pepe",
+        "survivorId": 220,
+        "licenseCount": 7
+      },
+      {
+        "groupKey": "kudzu",
+        "ownedByDisplay": "Kudzu",
+        "survivorId": 221,
+        "licenseCount": 5
+      },
+      {
+        "groupKey": "rootdown",
+        "ownedByDisplay": "Rootdown",
+        "survivorId": 222,
+        "licenseCount": 23
+      },
+      {
+        "groupKey": "new altitude farms",
+        "ownedByDisplay": "New Altitude Farms",
+        "survivorId": 223,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "oddfellow wellness",
+        "ownedByDisplay": "Oddfellow Wellness",
+        "survivorId": 224,
+        "licenseCount": 4
+      },
+      {
+        "groupKey": "the green standard",
+        "ownedByDisplay": "The Green Standard",
+        "survivorId": 225,
+        "licenseCount": 4
+      },
+      {
+        "groupKey": "rolling pines",
+        "ownedByDisplay": "Rolling Pines",
+        "survivorId": 226,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "suite 1620",
+        "ownedByDisplay": "Suite 1620",
+        "survivorId": 227,
+        "licenseCount": 3
+      },
+      {
+        "groupKey": "star buds",
+        "ownedByDisplay": "Star Buds",
+        "survivorId": 228,
+        "licenseCount": 11
+      },
+      {
+        "groupKey": "southern grown therapeutics",
+        "ownedByDisplay": "Southern Grown Therapeutics",
+        "survivorId": 229,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "river remedy",
+        "ownedByDisplay": "River Remedy",
+        "survivorId": 230,
+        "licenseCount": 8
+      },
+      {
+        "groupKey": "canna-u",
+        "ownedByDisplay": "Canna-U",
+        "survivorId": 231,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "sea of green",
+        "ownedByDisplay": "Sea of Green",
+        "survivorId": 232,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "puffin deliveries",
+        "ownedByDisplay": "Puffin Deliveries",
+        "survivorId": 233,
+        "licenseCount": 2
+      },
+      {
+        "groupKey": "dragon fire farms",
+        "ownedByDisplay": "Dragon Fire Farms",
+        "survivorId": 234,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "falcann",
+        "ownedByDisplay": "Falcann",
+        "survivorId": 235,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "great river canopy",
+        "ownedByDisplay": "Great River Canopy",
+        "survivorId": 236,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "green solutions",
+        "ownedByDisplay": "Green Solutions",
+        "survivorId": 237,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "borneo bud",
+        "ownedByDisplay": "Borneo Bud",
+        "survivorId": 238,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "magnolia medical cannabis co.",
+        "ownedByDisplay": "Magnolia Medical Cannabis Co.",
+        "survivorId": 239,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "midsouth extracts",
+        "ownedByDisplay": "MidSouth Extracts",
+        "survivorId": 240,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "hava",
+        "ownedByDisplay": "HAVA",
+        "survivorId": 241,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "alchemy analytics",
+        "ownedByDisplay": "Alchemy Analytics",
+        "survivorId": 242,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "steep hill ms",
+        "ownedByDisplay": "Steep Hill MS",
+        "survivorId": 243,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "the forest dispensary",
+        "ownedByDisplay": "The Forest Dispensary",
+        "survivorId": 244,
+        "licenseCount": 1
+      },
+      {
+        "groupKey": "ms mary",
+        "ownedByDisplay": "MS Mary",
+        "survivorId": 245,
+        "licenseCount": 1
+      }
+    ],
+    "updatedMembers": [],
+    "mergedDuplicates": []
+  },
+  "backupPath": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\backups\\member-reconcile-20260514-085236"
+}

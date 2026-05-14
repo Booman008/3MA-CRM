@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3MA CRM Upgrade Plan</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-navy: #071f40;
+      --color-gold: #ebab22;
+      --color-red: #c21f32;
+      --color-light-gray: #f4f5f7;
+      --color-white: #ffffff;
+      --heading-font: 'Montserrat', sans-serif;
+      --body-font: 'Raleway', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--body-font);
+      color: var(--color-navy);
+      background-color: var(--color-light-gray);
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--color-navy);
+      color: var(--color-gold);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .section {
+      background-color: var(--color-white);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 3px solid var(--color-gold);
+      font-family: var(--heading-font);
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .section p {
+      margin: 0 0 14px;
+      font-size: 0.95rem;
+    }
+    .section ul {
+      padding-left: 20px;
+      margin-top: 0;
+    }
+    .section li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    .section li strong {
+      font-weight: 600;
+    }
+    a {
+      color: var(--color-gold);
+      text-decoration: none;
+    }
+    .footnotes {
+      font-size: 0.8rem;
+      color: var(--color-navy);
+      margin-top: 30px;
+    }
+    .footnotes ol {
+      padding-left: 20px;
+    }
+    .footnotes li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>3MA CRM Upgrade Plan</h1>
+  </header>
+  <div class="container">
+    <div class="section">
+      <h2>Overview of Existing CRM</h2>
+      <p>The current 3MA CRM provides core capabilities for association staff.  Users can view a dashboard with statistics on total members, licenses, dues revenue, overdue renewals and tasks, and a marketplace coverage bar chart showing members versus active and archived leads【125037979197475†L80-L115】【125037979197475†L120-L187】.  The system includes:</p>
+      <ul>
+        <li><strong>Tasks &amp; Reminders:</strong> staff can create tasks with title, description, due date and priority, filter them by today, overdue, open, done and link a task to a member or lead.  Due dates are color‑coded to indicate overdue, due today or due soon【923628540587745†L107-L174】.</li>
+        <li><strong>Contact Log:</strong> a searchable log of interactions with members and leads.  Entries display contact type badges (phone, email, in‑person, text), subject, summary, direction (inbound/outbound) and next action dates【869232686549315†L61-L110】.</li>
+        <li><strong>Revenue &amp; Dues:</strong> reports showing total dues revenue, number of paying members, average dues and distributions by license type and membership tier.  The table lists each member’s business name, license type, tier, county, dues and renewal date【39001735364287†L60-L133】.</li>
+        <li><strong>Dashboard KPIs:</strong> cards summarising total members, total licenses, total dues collected, overdue members and tasks.  There are also charts for lead pipeline, renewal alerts and recent contacts【125037979197475†L80-L115】【125037979197475†L120-L187】.</li>
+      </ul>
+      <p>While functional, the current system is staff‑only and lacks self‑service capabilities for association members.  There is also room for additional features and user‑experience refinements.</p>
+    </div>
+    <div class="section">
+      <h2>New Feature Recommendations</h2>
+      <p>To expand the value of the CRM and support the mission of the Mississippi Medical Marijuana Association, the following enhancements are proposed:</p>
+      <ul>
+        <li><strong>Member Self‑Service Portal:</strong> build a secure portal where members can log in to view and update their profile, pay dues online, upload required documents and monitor license renewal dates.  This portal should integrate with the existing CRM database and honour the same color palette and fonts.</li>
+        <li><strong>Dues Payment &amp; Billing Integration:</strong> integrate with a payment gateway (e.g., Stripe) to collect membership dues and issue receipts.  Automate invoicing, recurring payments and reminders for overdue dues.</li>
+        <li><strong>Online Membership Applications &amp; Renewals:</strong> allow prospective members to apply online and existing members to renew their membership.  Collect business details, license numbers and necessary documents.  Provide an approval workflow for staff.</li>
+        <li><strong>Event Management:</strong> add a module to create events such as educational seminars, networking events or legislative briefings.  Members can register through the portal and receive reminders; staff can track attendance and export attendee lists.</li>
+        <li><strong>Legislative &amp; Regulatory Alerts:</strong> integrate a news feed to notify members of relevant state legislative updates, regulatory changes and compliance deadlines.  Allow staff to send targeted alerts based on license type or county.</li>
+        <li><strong>Enhanced Messaging:</strong> incorporate an in‑app messaging system or integrate email/text notifications so staff can send announcements, meeting requests or follow‑ups directly from the CRM, with messages logged in the Contact Log.</li>
+        <li><strong>Document Repository:</strong> provide secure storage for members to upload and access compliance documents (licenses, permits, tax certificates) and association resources (guides, policy briefs).</li>
+        <li><strong>Advanced Analytics:</strong> expand the dashboard with interactive charts showing trends over time (membership growth, revenue, event participation).  Allow filtering by county, license type or membership tier.</li>
+        <li><strong>API &amp; Third‑Party Integrations:</strong> expose selected endpoints for integrations with accounting software, state licensing databases or marketing tools.  Support single sign‑on (SSO) via common identity providers.</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>UI / UX Improvements</h2>
+      <p>Improving the user experience will help staff work more efficiently and ensure the CRM and future portal are intuitive for members.  Recommended changes include:</p>
+      <ul>
+        <li><strong>Responsive Design:</strong> adopt a mobile‑first approach so pages reflow gracefully on phones and tablets.  Use CSS grid/flexbox to adjust card layouts and tables for smaller screens.</li>
+        <li><strong>Enhanced Navigation:</strong> simplify the sidebar by grouping related functions (e.g., Members, Leads, Revenue, Events) and highlighting the active page.  Provide breadcrumbs and quick actions for common tasks.</li>
+        <li><strong>Universal Search &amp; Filters:</strong> implement a global search bar with auto‑complete that searches members, leads, tasks and contact logs.  Enhance filters with multi‑select dropdowns and saved views.</li>
+        <li><strong>Improved Forms:</strong> add inline validation, helper text and conditional fields to reduce data entry errors when adding leads, tasks or contact logs.  Support multi‑step forms for complex processes like applications.</li>
+        <li><strong>Interactive Charts:</strong> replace static bar charts with interactive components that allow drilling down into data points and toggling series.  Maintain the gold and navy colour palette for visual consistency.</li>
+        <li><strong>Accessibility Enhancements:</strong> ensure sufficient colour contrast, keyboard navigability and ARIA labels.  Increase base font sizes and use clear headings to assist users with visual impairments.</li>
+        <li><strong>Performance Optimisation:</strong> use pagination and lazy loading for large tables, implement client‑side caching and provide loading skeletons to improve perceived performance.</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>Member‑Facing Portal Integration</h2>
+      <p>Integrating a portal will extend CRM functionality to the association’s members while maintaining data integrity and security:</p>
+      <ul>
+        <li><strong>Role‑Based Access Control:</strong> define roles such as <em>Admin</em>, <em>Staff</em>, and <em>Member</em>.  Members should only access their own data, invoices, events and documents; staff retain full CRUD capabilities.</li>
+        <li><strong>Unified Authentication:</strong> implement single sign‑on or OAuth so members can log in with existing credentials (e.g., their state licensing account) while staff continue to use current login mechanisms.  Use secure token storage and enforce MFA.</li>
+        <li><strong>Self‑Service Dashboard:</strong> show members upcoming renewal dates, outstanding invoices, registered events and recent contact history.  Provide buttons to pay dues, renew membership or register for events.</li>
+        <li><strong>Two‑Way Communication:</strong> allow members to send messages or support requests to staff via the portal.  Messages should populate the CRM contact log and trigger notifications.</li>
+        <li><strong>Sync with CRM:</strong> design the portal as a client of the existing REST API (or GraphQL) so that updates made by members (profile changes, document uploads) are instantly reflected in the CRM.  Use webhooks or event triggers for real‑time updates.</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>Implementation Roadmap</h2>
+      <p>Adopt an iterative approach to deliver value quickly while maintaining quality:</p>
+      <ul>
+        <li><strong>Phase 1 – Requirements &amp; Architecture:</strong> gather detailed requirements from staff and board; design database changes, payment workflows and portal architecture; define API endpoints and access controls.</li>
+        <li><strong>Phase 2 – Core Enhancements:</strong> implement dues payment integration, membership application workflow and improved dashboards.  Refactor UI components to be fully responsive and accessible.</li>
+        <li><strong>Phase 3 – Portal MVP:</strong> build the member‑facing portal with login, profile management, dues payment and event registration.  Pilot with a small group of members and iterate based on feedback.</li>
+        <li><strong>Phase 4 – Advanced Features:</strong> roll out legislative alerts, document repository, messaging and analytics.  Integrate third‑party services and refine performance.</li>
+        <li><strong>Phase 5 – Launch &amp; Training:</strong> deploy the portal to all members, conduct training sessions for staff and members, and monitor adoption.  Establish ongoing maintenance and support processes.</li>
+      </ul>
+    </div>
+    <div class="footnotes">
+      <h2>References</h2>
+      <ol>
+        <li>Dashboard summary information on total members, licenses, dues and tasks【125037979197475†L80-L115】.</li>
+        <li>Marketplace coverage and lead pipeline charts using 3MA colours【125037979197475†L120-L187】.</li>
+        <li>Tasks component showing filters, due date colour coding and linking tasks to entities【923628540587745†L107-L174】.</li>
+        <li>Contact Log displaying contact type badges, subjects and summaries【869232686549315†L61-L110】.</li>
+        <li>Revenue page summarising dues revenue, paying members, averages and member table【39001735364287†L60-L133】.</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
