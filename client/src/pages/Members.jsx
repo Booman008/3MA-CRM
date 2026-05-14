@@ -17,7 +17,6 @@ import {
   dedupeLicenseRows,
   firstLicenseType,
   parseLicenseCounties,
-  parseLicenseNumbers,
   parseLicenseRows,
   parseLicenseTypes,
   serializeLicenseRows,
@@ -47,6 +46,29 @@ const RENEWAL_FILTERS = [
   { value: 'ok', label: 'Current (60+ Days)' },
   { value: 'none', label: 'No Renewal Date' },
 ];
+
+const MEMBER_TABLE_LICENSE_PREVIEW_LIMIT = 3;
+
+function summarizeValues(values, limit = 2) {
+  const unique = [...new Set((values || []).filter(Boolean))];
+  if (unique.length === 0) return '';
+  if (unique.length <= limit) return unique.join(', ');
+  return `${unique.slice(0, limit).join(', ')} +${unique.length - limit} more`;
+}
+
+function licensePreviewLabel(license) {
+  return license.number || license.name || license.type || 'License';
+}
+
+function licensePreviewTitle(license) {
+  return [
+    license.number || 'License',
+    license.type,
+    license.county,
+    license.name,
+    license.status === 'Inactive' ? 'Inactive' : '',
+  ].filter(Boolean).join(' • ');
+}
 
 export function Members() {
   const settings = useSettings();
@@ -222,6 +244,17 @@ export function Members() {
     load();
   };
 
+  const removeSelectedMembers = async () => {
+    if (selectedMemberIds.length === 0) return;
+    const count = selectedMemberIds.length;
+    if (!confirm(`Delete ${count} selected member row${count === 1 ? '' : 's'}? This cannot be undone.`)) return;
+    pendingScrollRestoreRef.current = window.scrollY;
+    await Promise.all(selectedMemberIds.map(id => api(`/members/${id}`, { method: 'DELETE' })));
+    setSelectedMemberIds([]);
+    setShowMergeModal(false);
+    load();
+  };
+
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
   const filterTypeOptions = [...new Set([...licenseTypeOptions, ...licenseTypesInUse])];
 
@@ -286,6 +319,7 @@ export function Members() {
           <div style={{ fontWeight: 700, color: 'var(--color-navy)' }}>{selectedMemberIds.length} member row{selectedMemberIds.length === 1 ? '' : 's'} selected</div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button style={S.btn('secondary')} onClick={() => setSelectedMemberIds([])}>Clear Selection</button>
+            <button style={S.btn('danger')} onClick={removeSelectedMembers}>Delete Selected</button>
             <button style={S.btn()} onClick={() => setShowMergeModal(true)} disabled={selectedMemberIds.length < 2}>Merge Selected</button>
           </div>
         </div>
@@ -316,9 +350,11 @@ export function Members() {
                 {members.map(m => {
                   const rs = renewalStatus(m.renewalDate);
                   const licenses = parseLicenseRows(m.licenseNo).filter(l => l.number || l.type || l.county || l.name);
-                  const nums = parseLicenseNumbers(m.licenseNo);
                   const types = parseLicenseTypes(m.licenseNo);
                   const memberCounties = allCountiesFor(m);
+                  const licensePreview = licenses.slice(0, MEMBER_TABLE_LICENSE_PREVIEW_LIMIT);
+                  const extraLicenseCount = Math.max(0, licenses.length - licensePreview.length);
+                  const uniqueTypes = [...new Set(types.filter(Boolean))];
                   return (
                     <tr key={m.id} style={{ background: rs.bgColor, transition: 'background .15s' }}>
                       <td style={S.td}>
@@ -340,20 +376,79 @@ export function Members() {
                       </td>
                       <td style={S.td}>{m.ownerName || '—'}</td>
                       <td style={S.td}>
-                        {licenses.length
-                          ? licenses.map((l, i) => (
-                            <div key={i} style={{ lineHeight: 1.35, fontSize: '.85rem', marginBottom: i === licenses.length - 1 ? 0 : 6, opacity: l.status === 'Inactive' ? 0.68 : 1 }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-                                <span>{l.number || '—'}</span>
-                                {l.county && <span style={{ color: 'var(--color-muted)', fontSize: '.78rem' }}>· {l.county}</span>}
-                                {l.status === 'Inactive' && <span style={{ ...S.badge('var(--color-muted)'), color: '#fff' }}>Inactive</span>}
-                              </div>
-                              {l.name && <div style={{ fontSize: '.77rem', color: 'var(--color-muted)' }}>{l.name}</div>}
+                        {licenses.length ? (
+                          <div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                              {licensePreview.map((license, index) => (
+                                <span
+                                  key={`${license.number}-${license.type}-${license.county}-${index}`}
+                                  title={licensePreviewTitle(license)}
+                                  style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 4,
+                                    maxWidth: 180,
+                                    padding: '4px 8px',
+                                    borderRadius: 999,
+                                    background: license.status === 'Inactive' ? 'rgba(90, 109, 143, 0.16)' : 'rgba(11, 43, 89, 0.08)',
+                                    color: 'var(--color-navy)',
+                                    fontSize: '.76rem',
+                                    fontWeight: 700,
+                                    lineHeight: 1.2,
+                                    opacity: license.status === 'Inactive' ? 0.78 : 1,
+                                  }}
+                                >
+                                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    {licensePreviewLabel(license)}
+                                  </span>
+                                  {license.status === 'Inactive' && (
+                                    <span style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--color-muted)' }}>
+                                      Inactive
+                                    </span>
+                                  )}
+                                </span>
+                              ))}
+                              {extraLicenseCount > 0 && (
+                                <span
+                                  title={`${extraLicenseCount} additional license${extraLicenseCount === 1 ? '' : 's'} on this member`}
+                                  style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    padding: '4px 8px',
+                                    borderRadius: 999,
+                                    background: 'rgba(201, 162, 39, 0.14)',
+                                    color: 'var(--color-navy)',
+                                    fontSize: '.76rem',
+                                    fontWeight: 800,
+                                    lineHeight: 1.2,
+                                  }}
+                                >
+                                  +{extraLicenseCount} more
+                                </span>
+                              )}
                             </div>
-                          ))
-                          : (nums.length ? nums.map((n, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{n}</div>) : '—')}
+                            {licenses.some(license => license.name) && (
+                              <div style={{ fontSize: '.74rem', color: 'var(--color-muted)', lineHeight: 1.35, marginTop: 6 }}>
+                                {summarizeValues(licenses.map(license => license.name), 2)}
+                              </div>
+                            )}
+                          </div>
+                        ) : '—'}
                       </td>
-                      <td style={S.td}>{types.length ? types.map((t, i) => <div key={i} style={{ lineHeight: 1.5, fontSize: '.85rem' }}>{t}</div>) : (m.licenseType || '—')}</td>
+                      <td style={S.td}>
+                        {uniqueTypes.length
+                          ? (
+                            <div style={{ lineHeight: 1.35 }}>
+                              <div>{summarizeValues(uniqueTypes, 2)}</div>
+                              {licenses.length > 1 && (
+                                <div style={{ fontSize: '.74rem', color: 'var(--color-muted)', marginTop: 4 }}>
+                                  {licenses.length} total license{licenses.length === 1 ? '' : 's'}
+                                </div>
+                              )}
+                            </div>
+                          )
+                          : (m.licenseType || '—')}
+                      </td>
                       <td style={S.td}>
                         {memberCounties.length === 0 ? '—'
                           : memberCounties.length === 1 ? memberCounties[0]
