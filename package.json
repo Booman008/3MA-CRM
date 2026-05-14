@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "build": "node scripts/build-client.js",
+    "members:reconcile": "node scripts/reconcile-members-from-csv.js",
     "start": "node server/index.js",
     "dev": "node scripts/build-client.js && node server/index.js",
     "dev:client": "node scripts/build-client.js --watch"
