@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-05-14T13:51:38.828Z",
+  "mode": "dry-run",
+  "countsBefore": {
+    "members": 135,
+    "leads": 0,
+    "memberContactLog": 1,
+    "leadContactLog": 0,
+    "memberTasks": 0,
+    "leadTasks": 0,
+    "memberAttachments": 7,
+    "leadAttachments": 0,
+    "memberLogos": 4,
+    "leadLogos": 0,
+    "linkedUsers": 0
+  },
+  "r2Configured": false
+}

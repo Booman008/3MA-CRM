@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "email": "admin@example.com",
+    "passwordHash": "$2a$10$1qdAqfBWUon/3ib6PLxS7.dmCqqR73OmvNpzfiJZGkq6E1mbhIAlm",
+    "role": "admin",
+    "memberId": null,
+    "createdAt": "2026-05-12T05:03:31.225Z"
+  },
+  {
+    "id": 6,
+    "email": "henry@medicalmarijuanams.com",
+    "passwordHash": "$2a$10$ZiOU3.7AnZHTz1rxpwsX3uWj8de39sJbte0Qql6ULc3BqGfpm3OiO",
+    "role": "admin",
+    "memberId": null,
+    "createdAt": "2026-05-12T08:27:48.511Z"
+  }
+]

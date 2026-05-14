@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "entityId": 1,
+    "entityType": "member",
+    "entityName": "Kudzu Cannabis",
+    "contactDate": "2026-05-12",
+    "contactType": "Phone",
+    "summary": "Call discussing ATF Background check form changes due to Schedule III",
+    "nextAction": "See Misti at Dispensary",
+    "nextActionDate": "2026-05-12",
+    "createdAt": "2026-05-12T21:59:17.348Z",
+    "subject": null,
+    "direction": null
+  }
+]

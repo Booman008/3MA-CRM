@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-05-14T13:52:01.136Z",
+  "mode": "apply",
+  "countsBefore": {
+    "members": 135,
+    "leads": 0,
+    "memberContactLog": 1,
+    "leadContactLog": 0,
+    "memberTasks": 0,
+    "leadTasks": 0,
+    "memberAttachments": 7,
+    "leadAttachments": 0,
+    "memberLogos": 4,
+    "leadLogos": 0,
+    "linkedUsers": 0
+  },
+  "r2Configured": false,
+  "backupPath": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\backups\\crm-reset-20260514-085200",
+  "r2": {
+    "attempted": 0,
+    "deleted": 0,
+    "skipped": 7,
+    "failures": []
+  },
+  "deleted": {
+    "usersCleared": 0,
+    "contactLog": 1,
+    "tasks": 0,
+    "attachments": 7,
+    "members": 135,
+    "leads": 0
+  }
+}
