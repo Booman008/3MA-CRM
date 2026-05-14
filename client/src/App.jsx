@@ -93,16 +93,8 @@ export function App() {
     <>
       <aside style={S.sidebar}>
         <div style={S.sidebarHeader}>
-          <img src="assets/logo-mark.png" alt="3MA"
-               style={{ width: 40, height: 'auto', display: 'block' }}
-               onError={(e) => { e.target.style.display = 'none'; }} />
-          <div style={{ lineHeight: 1.1 }}>
-            3MA CRM
-            <div style={{
-              fontSize: '0.55rem', fontWeight: 700, letterSpacing: '0.2em',
-              color: 'var(--color-gold)', marginTop: 3,
-            }}>VOICE OF MS CANNABIS</div>
-          </div>
+          <img src="assets/logo-lettering.png" alt="3MA CRM — Voice of MS Cannabis"
+               style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
 
         <SearchBar />
