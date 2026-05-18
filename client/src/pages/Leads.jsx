@@ -83,16 +83,19 @@ export function Leads() {
     const EDGE = 90;
     const MAX_SPEED = 22;
     let pointerY = 0;
+    let hasPointer = false;
     let frame = null;
     const tick = () => {
-      const h = scroller.clientHeight;
-      let dy = 0;
-      if (pointerY < EDGE) dy = -MAX_SPEED * (1 - pointerY / EDGE);
-      else if (pointerY > h - EDGE) dy = MAX_SPEED * (1 - (h - pointerY) / EDGE);
-      if (dy !== 0) scroller.scrollBy(0, dy);
+      if (hasPointer) {
+        const h = scroller.clientHeight;
+        let dy = 0;
+        if (pointerY < EDGE) dy = -MAX_SPEED * (1 - pointerY / EDGE);
+        else if (pointerY > h - EDGE) dy = MAX_SPEED * (1 - (h - pointerY) / EDGE);
+        if (dy !== 0) scroller.scrollBy(0, dy);
+      }
       frame = requestAnimationFrame(tick);
     };
-    const onDrag = (e) => { pointerY = e.clientY; };
+    const onDrag = (e) => { pointerY = e.clientY; hasPointer = true; };
     window.addEventListener('dragover', onDrag);
     frame = requestAnimationFrame(tick);
     return () => {
