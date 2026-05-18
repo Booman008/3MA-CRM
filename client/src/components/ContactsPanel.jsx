@@ -20,6 +20,16 @@ export function ContactsPanel({ entityType, entityId, entityName }) {
 
   useEffect(() => { if (entityId) load(); }, [entityType, entityId]);
 
+  const handleDelete = async (c) => {
+    if (!window.confirm('Delete this activity entry? Any linked follow-up task will also be removed.')) return;
+    try {
+      await api(`/contacts/${c.id}`, { method: 'DELETE' });
+      load();
+    } catch (err) {
+      alert('Failed to delete activity: ' + (err?.message || err));
+    }
+  };
+
   const openLog = (type) => {
     setLogging({
       entityType, entityId, entityName,
@@ -65,6 +75,16 @@ export function ContactsPanel({ entityType, entityId, entityName }) {
                     {typeIcon[c.contactType] || '•'} {c.contactType}{directionLabel ? ` · ${directionLabel}` : ''}
                   </span>
                   <span style={{ fontSize: '.78rem', color: 'var(--text-light)' }}>{fmt.date(c.contactDate)}</span>
+                  <button
+                    onClick={() => handleDelete(c)}
+                    title="Delete activity"
+                    style={{
+                      marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer',
+                      color: 'var(--text-light)', fontSize: '.85rem', padding: '0 4px',
+                    }}
+                  >
+                    ×
+                  </button>
                 </div>
                 {c.subject && <div style={{ fontWeight: 600, fontSize: '.88rem', marginTop: 4 }}>{c.subject}</div>}
                 {body && (
