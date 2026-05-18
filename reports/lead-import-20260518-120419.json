@@ -1,0 +1,4539 @@
+{
+  "generatedAt": "2026-05-18T17:04:20.962Z",
+  "mode": "apply",
+  "file": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\5.18.26 3MA CRM Leads - Sheet1.csv",
+  "mergeBy": "owned-by",
+  "summary": {
+    "csvRowCount": 229,
+    "groupCount": 156,
+    "creates": 156,
+    "updates": 0,
+    "ambiguous": 0,
+    "mixedStageGroups": 5,
+    "multiLicenseGroups": 34,
+    "ambiguousExistingLeads": 0,
+    "stageBreakdown": {
+      "Qualified": 10,
+      "New": 118,
+      "FireCraft": 7,
+      "Closed/NA": 8,
+      "Cannot Afford": 13
+    },
+    "mergeBy": "owned-by",
+    "unmappedStatuses": []
+  },
+  "ambiguousExistingLeads": [],
+  "groups": [
+    {
+      "groupKey": "email:vdbs.canton@gmail.com",
+      "displayName": "VooDoo Buds 2",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "VooDoo Buds 2"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY023445"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:voodoobudsllc@gmail.com",
+      "displayName": "VooDoo Buds LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "VooDoo Buds LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY015661"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:steve.jordan@turfmasterslc.com",
+      "displayName": "Kind Life Companies, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Kind Life Companies, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV003530"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:my.pilot.jesus@gmail.com",
+      "displayName": "Mississippi Ghost Labs, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mississippi Ghost Labs, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "PROC001217"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dayhillfarms@yahoo.com",
+      "displayName": "DayHill Farms, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "DayHill Farms, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL003071"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:garyandkam@gmail.com",
+      "displayName": "SARBJOT LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "SARBJOT LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY024441"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:farm421llc@gmail.com",
+      "displayName": "Farm 421, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Farm 421, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL003644"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:kathy@uptownfunkcc.com",
+      "displayName": "Uptown Funk LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Uptown Funk LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY009925"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:cream cannabis co.",
+      "displayName": "Cream Cannabis Co.",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Cream Cannabis Company",
+        "Superior Labs LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY017761",
+        "MPRC001861"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:tpcrockmiers@gmail.com",
+      "displayName": "Gautier Agricultural Company",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Gautier Agricultural Company"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Qualified",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV004130"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:pcannon524@gmail.com",
+      "displayName": "Cannon Cultivation LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Cannon Cultivation LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007576"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:cultivatingmedicalcannabisllc@outlook.com",
+      "displayName": "Cultivating Medical Cannabis LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Cultivating Medical Cannabis LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007644"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:leoliao10205@gmail.com",
+      "displayName": "Clean Grow LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Clean Grow LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007725"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:glc.llc3528@gmail.com",
+      "displayName": "GLC ONE LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "GLC ONE LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV006762"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:growritecannabis@gmail.com",
+      "displayName": "GrowRite LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "GrowRite LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV004747"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:happycampersfarms@gmail.com",
+      "displayName": "Happy Campers Farms",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Happy Campers Farms"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV004512"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mshomegrowncannabis@gmail.com",
+      "displayName": "Home grown cannabis Co.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Home grown cannabis Co."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002772"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:candykain@me.com",
+      "displayName": "Kainga Manufacturing",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Kainga Manufacturing"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV006425"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:pcussie15@gmail.com",
+      "displayName": "One Source Products, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "One Source Products, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV001654"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:jdb@bearden-is.com",
+      "displayName": "Pharm Grown",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Pharm Grown"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002054"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:spacemountaindeltagold@yahoo.com",
+      "displayName": "Space Mountain Delta Gold LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Space Mountain Delta Gold LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002276"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:terrpharmllc@yahoo.com",
+      "displayName": "Terrapharm LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Terrapharm LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007357"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:adamlancon@yahoo.com",
+      "displayName": "Signature Flower LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Signature Flower LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV006918"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:courtney@sweetlifecannaco.com",
+      "displayName": "Sweet Life Canna Company, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Sweet Life Canna Company, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV005524"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:jbensegarra@gmail.com",
+      "displayName": "The Hippocratic Growth, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Hippocratic Growth, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV006566"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:lindsyrenfrow@gmail.com",
+      "displayName": "Canna Green Gables",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Canna Green Gables"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MPRC001424"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:lionspawconcentratesllc@gmail.com",
+      "displayName": "Lion's Paw Concentrates LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Lion's Paw Concentrates LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MPRC000830"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:bestmood301@gmail.com",
+      "displayName": "Northwest, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Northwest, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MPRC001082"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:thcity.ms@gmail.com",
+      "displayName": "THCity",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "THCity"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MPRC002030"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:tandttransportmeridian@gmail.com",
+      "displayName": "T & T Transportation LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "T & T Transportation LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "TRAN002038"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:flower@btgrowers.net",
+      "displayName": "B & T Growers, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "B & T Growers, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL001568"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:begreenms@gmail.com",
+      "displayName": "BeGreen LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "BeGreen LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL004845"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mohammadibrahim73@yahoo.com",
+      "displayName": "AMA Medical Marijuana LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "AMA Medical Marijuana LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005143"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:darren@blackprairiecult.com",
+      "displayName": "Black Prairie Cultivation LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Black Prairie Cultivation LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL003113"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:bluebyrdfarms@gmail.com",
+      "displayName": "BLUEBYRD FARMS LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "BLUEBYRD FARMS LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL000834"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:herbertcmcdonald@gmail.com",
+      "displayName": "botane Group LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "botane Group LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006556"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:centralmississippicannabis@gmail.com",
+      "displayName": "Central Mississippi Cannabis LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Central Mississippi Cannabis LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL000933"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:ctayloracheat@yahoo.com",
+      "displayName": "CHRONIC CANNABIS CO, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "CHRONIC CANNABIS CO, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007674"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:burrowsbud1@gmail.com",
+      "displayName": "Burrow's Bud llc",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Burrow's Bud llc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007916"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:lupine04792162@gmail.com",
+      "displayName": "Wolfpack Therapeutic Flower",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Wolfpack Therapeutic Flower"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007738"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:gonefishinginbiloxi@yahoo.com",
+      "displayName": "Delta-9 Cultivation, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Delta-9 Cultivation, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL008066"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:jwill100@outlook.com",
+      "displayName": "Essential Canna Labs",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Essential Canna Labs"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006930"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:duesouthcannabis@gmail.com",
+      "displayName": "Due South Cannabis Company",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Due South Cannabis Company"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL001330"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mustardgreens26@gmail.com",
+      "displayName": "DTS Pharms, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "DTS Pharms, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL002481"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:gatlincreekfarms2184@gmail.com",
+      "displayName": "Gatlin Creek Farms LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Gatlin Creek Farms LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL003821"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:goodflowerfarms@gmail.com",
+      "displayName": "Good Flower Farms",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Good Flower Farms"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL000405"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:grindgamegrowza@gmail.com",
+      "displayName": "Grind Game Grow LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Grind Game Grow LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006725"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:gulfcoastalternativemedicine@gmail.com",
+      "displayName": "Gulf Coast Alternative Medicine",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Gulf Coast Alternative Medicine"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006430"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:info@hardygrowers.com",
+      "displayName": "Hardy Growers, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Hardy Growers, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007454"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:hempnoticcultivation@yahoo.com",
+      "displayName": "Hempnotic Cultivation LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Hempnotic Cultivation LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL001729"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:shooks@southhempcompany.com",
+      "displayName": "Hooks Industries",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Hooks Industries"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL002064"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:scarlet@mspropertypro.com",
+      "displayName": "Kush Farms",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Kush Farms"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL001021"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:livingsoilfarmsllc@gmail.com",
+      "displayName": "Living Soil Farms LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Living Soil Farms LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL002982"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:jfranklin.21@yahoo.com",
+      "displayName": "Mary Js Cannabis",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mary Js Cannabis"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005030"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:cfdobbinslaw@gmail.com",
+      "displayName": "Pharmhouse, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Pharmhouse, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL004621"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:plantwerksllc@gmail.com",
+      "displayName": "Plantwerks, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Plantwerks, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL003348"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mississippimayflowerfarms@gmail.com",
+      "displayName": "Mayflower Farms LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mayflower Farms LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005612"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:gabrielmckenney@protonmail.com",
+      "displayName": "Mississippi Wild Flower",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mississippi Wild Flower"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL008264"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:moosemeadows5@gmail.com",
+      "displayName": "Moose Meadows LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Moose Meadows LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL002524"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:nextlevelflower@yahoo.com",
+      "displayName": "Next Level Farms, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Next Level Farms, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005457"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:pghfarm@gmail.com",
+      "displayName": "Pure Green Hope Farm LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Pure Green Hope Farm LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL008159"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:southern.greenz23@gmail.com",
+      "displayName": "Southern Greenz, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Southern Greenz, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006102"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:matthew.harris@southernpharms.net",
+      "displayName": "Southern Pharms",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Southern Pharms"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL002812"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:careybquin@yahoo.com",
+      "displayName": "Southern Remedies Cultivation and Processing",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Southern Remedies Cultivation and Processing"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL008419"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:sugarleafgrowers23@gmail.com",
+      "displayName": "Sugarleaf Growers, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Sugarleaf Growers, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006312"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:terrywallace@comcast.net",
+      "displayName": "Sun King LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Sun King LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006041"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:rockriverranchllc@gmail.com",
+      "displayName": "Rock River Ranch LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Rock River Ranch LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL006668"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:terrystops1@gmail.com",
+      "displayName": "Terry's Tops, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Terry's Tops, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007838"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:thirddaycrop@gmail.com",
+      "displayName": "Third Day Crop, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Third Day Crop, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL007262"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:greenakersinc@yahoo.com",
+      "displayName": "Green Akers Cannabis Inc",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Green Akers Cannabis Inc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY020171"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:youngsfarmmeddis@gmail.com",
+      "displayName": "Youngs Farm Medical Dispensary",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Youngs Farm Medical Dispensary"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY017838"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:coastdispensary167@gmail.com",
+      "displayName": "Coast Dispensary Inc",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Coast Dispensary Inc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY009724"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:apollomd2023@gmail.com",
+      "displayName": "Apollo Medical Dispensary LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Apollo Medical Dispensary LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY025617"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:apothecariumgreen@gmail.com",
+      "displayName": "Apothecarium Green, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Apothecarium Green, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY018844"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:klsmith@arcanemd.com",
+      "displayName": "Arcane Enterprises",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Arcane Enterprises"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY010867"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:niceguylaf@yahoo.com",
+      "displayName": "BILOXI CANNABIS DISPENSARY",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "BILOXI CANNABIS DISPENSARY"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY025124"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:thegreenguysfulton@gmail.com",
+      "displayName": "Blaze Dispensary LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Blaze Dispensary LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY012229"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:slloyd55@gmail.com",
+      "displayName": "Bud Barn, LLC.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Bud Barn, LLC."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY014124"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dbrown.canablume@gmail.com",
+      "displayName": "Canablume, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Canablume, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY023717"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:cyrusn@gmail.com",
+      "displayName": "CannaMiss LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "CannaMiss LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY006336"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:tjanoush@wesjan.com",
+      "displayName": "Cleveland Cannabis Company LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Cleveland Cannabis Company LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY006406"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:matthew@corinthcannabis.com",
+      "displayName": "Corinth Cannabis LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Corinth Cannabis LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY012002"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mkb1990@yahoo.com",
+      "displayName": "Cox-Blythe Dispensary Inc",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Cox-Blythe Dispensary Inc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY000359"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:devon@culturecannabisclub.com",
+      "displayName": "Culture Biloxi Shop, Inc.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Culture Biloxi Shop, Inc."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY009224"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dixondispensaries@gmail.com",
+      "displayName": "Dixon Dispensary LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Dixon Dispensary LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY016324"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dryan4238@gmail.com",
+      "displayName": "Dolphin Dayz LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Dolphin Dayz LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY017030"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:evergreendispensary@outlook.com",
+      "displayName": "Evergreen Dispensary LLC.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Evergreen Dispensary LLC."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY015454"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:blueskyent@bellsouth.net",
+      "displayName": "Green Therapy LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Green Therapy LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY005037"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:rz@narcannabis.com",
+      "displayName": "HEMPNOTIZE MISSISSIPPI LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "HEMPNOTIZE MISSISSIPPI LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY021024"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:glenn@holistikallc.com",
+      "displayName": "Holistika LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Holistika LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY013744"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:houseofbudsss@gmail.com",
+      "displayName": "House of Buds",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "House of Buds"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY016464"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:srhdailey@gmail.com",
+      "displayName": "HT Moss Point LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "HT Moss Point LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY020730"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:cannabisheadquarter@gmail.com",
+      "displayName": "Jamal Saeed",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Jamal Saeed"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY011341"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dispensary@legallyrootedcannabis.com",
+      "displayName": "Legally Rooted Cannabis Dispensary, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Legally Rooted Cannabis Dispensary, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY000738"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:paul@jpaulbarberlaw.com",
+      "displayName": "Long Beach Dispensary LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Long Beach Dispensary LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY010924"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:densan2006@gmail.com",
+      "displayName": "Magnolia Greens LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Magnolia Greens LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY007643"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:reliefmedinc@gmail.com",
+      "displayName": "relief med inc",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "relief med inc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY020847"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:info@rivercitycannabis.net",
+      "displayName": "River City Cannabis",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "River City Cannabis"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY025230"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:info@coastalcapitaldispensary.com",
+      "displayName": "Sunflower Holdings LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Sunflower Holdings LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY002824"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:abreu.guidry@gmail.com",
+      "displayName": "SweetGrass MS, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "SweetGrass MS, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY010224"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:pamelachapman30@yahoo.com",
+      "displayName": "The Green Life Wellness, LLC.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Green Life Wellness, LLC."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY017512"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dustinstone1@hotmail.com",
+      "displayName": "The Herbalist",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Herbalist"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY018530"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:tabitha.wroten@gmail.com",
+      "displayName": "The Highest Care L.L.C",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Highest Care L.L.C"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY003501"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:clarence@tcp-agresearch.com",
+      "displayName": "Tru Source Medical Cannabis, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Tru Source Medical Cannabis, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY011017"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:islandsdispensary@gmail.com",
+      "displayName": "The Islands Dispensary, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Islands Dispensary, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY014730"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:delta bud co.",
+      "displayName": "Delta Bud Co.",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "DELTA BUD COMPANY LLC",
+        "DELTA DISPENSARY MAGNOLIA"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": true,
+      "stageOptions": [
+        "FireCraft",
+        "New"
+      ],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV001157",
+        "DSPY013957"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:wellcraft cannabis",
+      "displayName": "Wellcraft Cannabis",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "WellCraft Cultivation",
+        "WellCraft Processing"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL000134",
+        "MPRC001134"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:stash house",
+      "displayName": "Stash House",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Stash House Direct, LLC",
+        "Stash House MS, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "TRAN002161",
+        "PROC000961"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:max harvest",
+      "displayName": "Max Harvest",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Max Harvest LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV006344",
+        "PROC002444"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:kanwaljit8289@gmail.com",
+      "displayName": "Mageedp, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Mageedp, LLC",
+        "Yazoodp, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY018704",
+        "DSPY012682"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:blunt buds",
+      "displayName": "Blunt Buds",
+      "mergeReason": "owned-by",
+      "csvRowCount": 3,
+      "businessNames": [
+        "Blunt Buds Grow LLC",
+        "Blunt Buds Infused LLC",
+        "Blunt Buds LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "CULV007430",
+        "PROC002230",
+        "DSPY023230"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:cannacare llc",
+      "displayName": "CannaCare LLC",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Cannacare LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": true,
+      "stageOptions": [
+        "FireCraft",
+        "New"
+      ],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV001741",
+        "DSPY002141"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:coastal crop",
+      "displayName": "Coastal Crop",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Coastal Crop, LLC",
+        "Bragg Canna of Mississippi, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "PROC002037",
+        "CULV000945"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:country boy llc",
+      "displayName": "Country Boy LLC",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Country Boys Investments LLC",
+        "Hare Dispensary LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY022424",
+        "DSPY025518"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:delta fine llc",
+      "displayName": "Delta Fine LLC",
+      "mergeReason": "owned-by",
+      "csvRowCount": 3,
+      "businessNames": [
+        "Delta Fine Processing, LLC",
+        "Delta Fine Transportation, LLC",
+        "Delta Fine, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "PROC002135",
+        "TRAN003035",
+        "CULV007235"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:firefly cannabis",
+      "displayName": "FireFly Cannabis",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Firefly Cannabis No. 2, LLC",
+        "Firefly Cannabis, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY022220",
+        "DSPY017630"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:five points farms",
+      "displayName": "Five Points Farms",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Five Points Farms"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": true,
+      "stageOptions": [
+        "FireCraft",
+        "New"
+      ],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL003241",
+        "MPRC000241"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:five star medical",
+      "displayName": "Five Star Medical",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Five Star Medical",
+        "Five Star-2 LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY008669",
+        "DSPY025947"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:green spark",
+      "displayName": "Green Spark",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Green Spark, LLC",
+        "Greenspark Cultivation MS, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY018281",
+        "CULV005481"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:magnolia cannabis farms",
+      "displayName": "Magnolia Cannabis Farms",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Magnolia Cannabis Farms Llc",
+        "Magnolia Farmacy, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": true,
+      "stageOptions": [
+        "FireCraft",
+        "New"
+      ],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV002354",
+        "MPRC000754"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:mag high",
+      "displayName": "Mag High",
+      "mergeReason": "owned-by",
+      "csvRowCount": 3,
+      "businessNames": [
+        "Magnolia High Growers",
+        "Magnolia High Processing, LLC",
+        "Magnolia High Transport"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 3,
+      "licenseNumbers": [
+        "CULV001582",
+        "MPRC000682",
+        "TRAN002582"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:manna",
+      "displayName": "Manna",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Manna Holdings, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL003730",
+        "MPRC002130"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:mary jane & herbs",
+      "displayName": "Mary Jane & Herbs",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Mary Jane & Herb's LLC",
+        "Mary Jane & Herbs LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY001837",
+        "DSPY024530"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:ms magnolia canna",
+      "displayName": "MS Magnolia Canna",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Mississippi Magnolia Canna",
+        "Mississippi Magnolia Canna West Point"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY014644",
+        "DSPY022013"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:ms jane",
+      "displayName": "MS Jane",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "MS. Jane Company"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL002614",
+        "MPRC000114"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:southern herb co.",
+      "displayName": "Southern Herb Co.",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "SHC Holdings LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV002538",
+        "PROC001038"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:southern sky",
+      "displayName": "Southern Sky",
+      "mergeReason": "owned-by",
+      "csvRowCount": 5,
+      "businessNames": [
+        "Southern Sky Disposal",
+        "Southern Sky Extracts",
+        "Southern Sky Logistics",
+        "High Cotton Wellness, LLC",
+        "Southern Sky Supply"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 5,
+      "licenseNumbers": [
+        "CDIS000445",
+        "PROC001345",
+        "TRAN001045",
+        "DSPY003661",
+        "CULV000845"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:swamp grass llc",
+      "displayName": "Swamp Grass LLC",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Swamp Grass LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "MCUL002324",
+        "MPRC000524"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:the naturalist solution",
+      "displayName": "The Naturalist Solution",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "The Naturalist Processing LLC",
+        "The Naturalist Solution"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "FireCraft",
+      "stageMixed": true,
+      "stageOptions": [
+        "New",
+        "FireCraft"
+      ],
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "PROC002530",
+        "CULV003630"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:toke & tell",
+      "displayName": "Toke & Tell",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Toke and Tell Dispensary 2 LLC",
+        "Toke and Tell Dispensary, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY011534",
+        "DSPY013801"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:zack hemp",
+      "displayName": "Zack Hemp",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Zack Hemp LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY002054",
+        "DSPY015817"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:wyze",
+      "displayName": "Wyze",
+      "mergeReason": "owned-by",
+      "csvRowCount": 4,
+      "businessNames": [
+        "WYZE 1 llc",
+        "WYZE 1 LLC",
+        "WYZE 3 LLC",
+        "WYZE TUNICA LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 4,
+      "licenseNumbers": [
+        "DSPY008717",
+        "DSPY018117",
+        "DSPY020902",
+        "CULV004672"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:420 inc.",
+      "displayName": "420 Inc.",
+      "mergeReason": "owned-by",
+      "csvRowCount": 9,
+      "businessNames": [
+        "420 Bay St. Louis Dispensary, Inc.",
+        "420 Columbus LLC",
+        "420 Holiday #2, LLC",
+        "Backwood Express #2 Inc",
+        "Backwood Express, Inc.",
+        "RymedyRx, LLC",
+        "420 Holiday #3 LLC",
+        "420 Holiday #6, LLC",
+        "420 Holiday LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 9,
+      "licenseNumbers": [
+        "DSPY011223",
+        "DSPY024644",
+        "DSPY021124",
+        "DSPY024923",
+        "DSPY024723",
+        "DSPY019224",
+        "DSPY024824",
+        "DSPY019130",
+        "DSPY017130"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:421 inc.",
+      "displayName": "421 Inc.",
+      "mergeReason": "owned-by",
+      "csvRowCount": 1,
+      "businessNames": [
+        "420 Holiday #4, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY010318"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:dabbs",
+      "displayName": "Dabbs",
+      "mergeReason": "owned-by",
+      "csvRowCount": 26,
+      "businessNames": [
+        "DABBS 1",
+        "DABBS 1 LLC",
+        "Dabbs 1 LLC",
+        "Merit Creek",
+        "Simpson Legion",
+        "Simpson Legion LLC",
+        "Merit Creek LLC",
+        "DABBS 2 LLC",
+        "Strong River Disp LLC",
+        "Dabbs Cannabis Dispensary LLC",
+        "Happy Leaf LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "New",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 26,
+      "licenseNumbers": [
+        "DSPY007875",
+        "DSPY020315",
+        "DSPY001975",
+        "DSPY013261",
+        "DSPY002941",
+        "DSPY016137",
+        "DSPY019825",
+        "DSPY001441",
+        "DSPY004853",
+        "DSPY025045",
+        "DSPY007423",
+        "DSPY023324",
+        "DSPY023925",
+        "DSPY024218",
+        "DSPY023138",
+        "DSPY025817",
+        "DSPY011664",
+        "DSPY020525",
+        "DSPY020655",
+        "DSPY023017",
+        "DSPY024002",
+        "DSPY018462",
+        "DSPY018964",
+        "DSPY019450",
+        "DSPY002461",
+        "DSPY022924"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:danknolia",
+      "displayName": "Danknolia",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Danknolia cannabis llc"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "DSPY003025",
+        "DSPY009625"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:hemphealthms@gmail.com",
+      "displayName": "Hybrid LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Hybrid LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY007236"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:rlwelch1@olemiss.edu",
+      "displayName": "University of Mississippi",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "University of Mississippi"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "RESR000136"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:chad.kea@possumtownfarms.com",
+      "displayName": "Possum Town Farms, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Possum Town Farms, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002944"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:nikki@braggcanna.com",
+      "displayName": "Bragg Canna of Mississippi, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Bragg Canna of Mississippi, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY001741"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "owned-by:southern crop",
+      "displayName": "Southern Crop",
+      "mergeReason": "owned-by",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Southern Crop Processing, LLC",
+        "Southern Crop Disposal and Destruction, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "PROC000138",
+        "CDIS000238"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:chill@simplymarvelousms.com",
+      "displayName": "Mississippi Green Oil LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mississippi Green Oil LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV005133"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:dmitry@flayvur.com",
+      "displayName": "Cannacultivation LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Cannacultivation LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Closed/NA",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV007130"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:leannepenn3@gmail.com",
+      "displayName": "The Cannabis Company, Inc.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "The Cannabis Company, Inc."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY002343"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:medcanms@gmail.com",
+      "displayName": "Medical Cannabis of MS, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Medical Cannabis of MS, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY002206"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:keencannabisms@gmail.com",
+      "displayName": "Keen Cannabis LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Keen Cannabis LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005322"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:zach@puremsfarms.com",
+      "displayName": "Pure MS Farms, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Pure MS Farms, LLC",
+        "Pure Mississippi Extracts"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV003154",
+        "MPRC001954"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:robert@omegacannabis.com",
+      "displayName": "Omega Cannabis, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 2,
+      "businessNames": [
+        "Omega Cannabis, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 2,
+      "licenseNumbers": [
+        "CULV000625",
+        "PROC000325"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:bnicholson@kellysgreen.com",
+      "displayName": "Kelly's Green, Inc.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Kelly's Green, Inc."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY006018"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:sederia@livelunasol.com",
+      "displayName": "LunaSol LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "LunaSol LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY018017"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:c.burgess@wtdcannabis.com",
+      "displayName": "White-Tailed Deer Cannabis, LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "White-Tailed Deer Cannabis, LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV006054"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:bartabraham@gmail.com",
+      "displayName": "James B. Abraham LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "James B. Abraham LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "DSPY012806"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:mhardy@beattiesbluffholding.com",
+      "displayName": "Magnolia Cannabis LLC",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Magnolia Cannabis LLC"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CULV002445"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:ericmsorenson@hotmail.com",
+      "displayName": "Leaf River Farm",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Leaf River Farm"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL000531"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:ronboline@gmail.com",
+      "displayName": "Mainbrace, Inc.",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Mainbrace, Inc."
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "MCUL005766"
+      ],
+      "ambiguousExistingLeadIds": []
+    },
+    {
+      "groupKey": "email:sonnydaegdm@gmail.com",
+      "displayName": "Sonny Daeg Disposal Management",
+      "mergeReason": "email",
+      "csvRowCount": 1,
+      "businessNames": [
+        "Sonny Daeg Disposal Management"
+      ],
+      "matchedLeadIds": [],
+      "survivorId": null,
+      "duplicateIds": [],
+      "action": "create",
+      "stage": "Cannot Afford",
+      "stageMixed": false,
+      "stageOptions": null,
+      "licenseCount": 1,
+      "licenseNumbers": [
+        "CDIS000660"
+      ],
+      "ambiguousExistingLeadIds": []
+    }
+  ],
+  "applied": {
+    "created": [
+      {
+        "groupKey": "email:vdbs.canton@gmail.com",
+        "displayName": "VooDoo Buds 2",
+        "survivorId": 1,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:voodoobudsllc@gmail.com",
+        "displayName": "VooDoo Buds LLC",
+        "survivorId": 2,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:steve.jordan@turfmasterslc.com",
+        "displayName": "Kind Life Companies, LLC",
+        "survivorId": 3,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:my.pilot.jesus@gmail.com",
+        "displayName": "Mississippi Ghost Labs, LLC",
+        "survivorId": 4,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:dayhillfarms@yahoo.com",
+        "displayName": "DayHill Farms, LLC",
+        "survivorId": 5,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:garyandkam@gmail.com",
+        "displayName": "SARBJOT LLC",
+        "survivorId": 6,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:farm421llc@gmail.com",
+        "displayName": "Farm 421, LLC",
+        "survivorId": 7,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:kathy@uptownfunkcc.com",
+        "displayName": "Uptown Funk LLC",
+        "survivorId": 8,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "owned-by:cream cannabis co.",
+        "displayName": "Cream Cannabis Co.",
+        "survivorId": 9,
+        "licenseCount": 2,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:tpcrockmiers@gmail.com",
+        "displayName": "Gautier Agricultural Company",
+        "survivorId": 10,
+        "licenseCount": 1,
+        "stage": "Qualified"
+      },
+      {
+        "groupKey": "email:pcannon524@gmail.com",
+        "displayName": "Cannon Cultivation LLC",
+        "survivorId": 11,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:cultivatingmedicalcannabisllc@outlook.com",
+        "displayName": "Cultivating Medical Cannabis LLC",
+        "survivorId": 12,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:leoliao10205@gmail.com",
+        "displayName": "Clean Grow LLC",
+        "survivorId": 13,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:glc.llc3528@gmail.com",
+        "displayName": "GLC ONE LLC",
+        "survivorId": 14,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:growritecannabis@gmail.com",
+        "displayName": "GrowRite LLC",
+        "survivorId": 15,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:happycampersfarms@gmail.com",
+        "displayName": "Happy Campers Farms",
+        "survivorId": 16,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:mshomegrowncannabis@gmail.com",
+        "displayName": "Home grown cannabis Co.",
+        "survivorId": 17,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:candykain@me.com",
+        "displayName": "Kainga Manufacturing",
+        "survivorId": 18,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:pcussie15@gmail.com",
+        "displayName": "One Source Products, LLC",
+        "survivorId": 19,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:jdb@bearden-is.com",
+        "displayName": "Pharm Grown",
+        "survivorId": 20,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:spacemountaindeltagold@yahoo.com",
+        "displayName": "Space Mountain Delta Gold LLC",
+        "survivorId": 21,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:terrpharmllc@yahoo.com",
+        "displayName": "Terrapharm LLC",
+        "survivorId": 22,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:adamlancon@yahoo.com",
+        "displayName": "Signature Flower LLC",
+        "survivorId": 23,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:courtney@sweetlifecannaco.com",
+        "displayName": "Sweet Life Canna Company, LLC",
+        "survivorId": 24,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:jbensegarra@gmail.com",
+        "displayName": "The Hippocratic Growth, LLC",
+        "survivorId": 25,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:lindsyrenfrow@gmail.com",
+        "displayName": "Canna Green Gables",
+        "survivorId": 26,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:lionspawconcentratesllc@gmail.com",
+        "displayName": "Lion's Paw Concentrates LLC",
+        "survivorId": 27,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:bestmood301@gmail.com",
+        "displayName": "Northwest, LLC",
+        "survivorId": 28,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:thcity.ms@gmail.com",
+        "displayName": "THCity",
+        "survivorId": 29,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:tandttransportmeridian@gmail.com",
+        "displayName": "T & T Transportation LLC",
+        "survivorId": 30,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:flower@btgrowers.net",
+        "displayName": "B & T Growers, LLC",
+        "survivorId": 31,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:begreenms@gmail.com",
+        "displayName": "BeGreen LLC",
+        "survivorId": 32,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:mohammadibrahim73@yahoo.com",
+        "displayName": "AMA Medical Marijuana LLC",
+        "survivorId": 33,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:darren@blackprairiecult.com",
+        "displayName": "Black Prairie Cultivation LLC",
+        "survivorId": 34,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:bluebyrdfarms@gmail.com",
+        "displayName": "BLUEBYRD FARMS LLC",
+        "survivorId": 35,
+        "licenseCount": 1,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "email:herbertcmcdonald@gmail.com",
+        "displayName": "botane Group LLC",
+        "survivorId": 36,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:centralmississippicannabis@gmail.com",
+        "displayName": "Central Mississippi Cannabis LLC",
+        "survivorId": 37,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:ctayloracheat@yahoo.com",
+        "displayName": "CHRONIC CANNABIS CO, LLC",
+        "survivorId": 38,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:burrowsbud1@gmail.com",
+        "displayName": "Burrow's Bud llc",
+        "survivorId": 39,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:lupine04792162@gmail.com",
+        "displayName": "Wolfpack Therapeutic Flower",
+        "survivorId": 40,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:gonefishinginbiloxi@yahoo.com",
+        "displayName": "Delta-9 Cultivation, LLC",
+        "survivorId": 41,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:jwill100@outlook.com",
+        "displayName": "Essential Canna Labs",
+        "survivorId": 42,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:duesouthcannabis@gmail.com",
+        "displayName": "Due South Cannabis Company",
+        "survivorId": 43,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:mustardgreens26@gmail.com",
+        "displayName": "DTS Pharms, LLC",
+        "survivorId": 44,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:gatlincreekfarms2184@gmail.com",
+        "displayName": "Gatlin Creek Farms LLC",
+        "survivorId": 45,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:goodflowerfarms@gmail.com",
+        "displayName": "Good Flower Farms",
+        "survivorId": 46,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:grindgamegrowza@gmail.com",
+        "displayName": "Grind Game Grow LLC",
+        "survivorId": 47,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:gulfcoastalternativemedicine@gmail.com",
+        "displayName": "Gulf Coast Alternative Medicine",
+        "survivorId": 48,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:info@hardygrowers.com",
+        "displayName": "Hardy Growers, LLC",
+        "survivorId": 49,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:hempnoticcultivation@yahoo.com",
+        "displayName": "Hempnotic Cultivation LLC",
+        "survivorId": 50,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:shooks@southhempcompany.com",
+        "displayName": "Hooks Industries",
+        "survivorId": 51,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:scarlet@mspropertypro.com",
+        "displayName": "Kush Farms",
+        "survivorId": 52,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:livingsoilfarmsllc@gmail.com",
+        "displayName": "Living Soil Farms LLC",
+        "survivorId": 53,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:jfranklin.21@yahoo.com",
+        "displayName": "Mary Js Cannabis",
+        "survivorId": 54,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:cfdobbinslaw@gmail.com",
+        "displayName": "Pharmhouse, LLC",
+        "survivorId": 55,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:plantwerksllc@gmail.com",
+        "displayName": "Plantwerks, LLC",
+        "survivorId": 56,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:mississippimayflowerfarms@gmail.com",
+        "displayName": "Mayflower Farms LLC",
+        "survivorId": 57,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:gabrielmckenney@protonmail.com",
+        "displayName": "Mississippi Wild Flower",
+        "survivorId": 58,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:moosemeadows5@gmail.com",
+        "displayName": "Moose Meadows LLC",
+        "survivorId": 59,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:nextlevelflower@yahoo.com",
+        "displayName": "Next Level Farms, LLC",
+        "survivorId": 60,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:pghfarm@gmail.com",
+        "displayName": "Pure Green Hope Farm LLC",
+        "survivorId": 61,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:southern.greenz23@gmail.com",
+        "displayName": "Southern Greenz, LLC",
+        "survivorId": 62,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:matthew.harris@southernpharms.net",
+        "displayName": "Southern Pharms",
+        "survivorId": 63,
+        "licenseCount": 1,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "email:careybquin@yahoo.com",
+        "displayName": "Southern Remedies Cultivation and Processing",
+        "survivorId": 64,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:sugarleafgrowers23@gmail.com",
+        "displayName": "Sugarleaf Growers, LLC",
+        "survivorId": 65,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:terrywallace@comcast.net",
+        "displayName": "Sun King LLC",
+        "survivorId": 66,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:rockriverranchllc@gmail.com",
+        "displayName": "Rock River Ranch LLC",
+        "survivorId": 67,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:terrystops1@gmail.com",
+        "displayName": "Terry's Tops, LLC",
+        "survivorId": 68,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:thirddaycrop@gmail.com",
+        "displayName": "Third Day Crop, LLC",
+        "survivorId": 69,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:greenakersinc@yahoo.com",
+        "displayName": "Green Akers Cannabis Inc",
+        "survivorId": 70,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:youngsfarmmeddis@gmail.com",
+        "displayName": "Youngs Farm Medical Dispensary",
+        "survivorId": 71,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:coastdispensary167@gmail.com",
+        "displayName": "Coast Dispensary Inc",
+        "survivorId": 72,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:apollomd2023@gmail.com",
+        "displayName": "Apollo Medical Dispensary LLC",
+        "survivorId": 73,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:apothecariumgreen@gmail.com",
+        "displayName": "Apothecarium Green, LLC",
+        "survivorId": 74,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:klsmith@arcanemd.com",
+        "displayName": "Arcane Enterprises",
+        "survivorId": 75,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:niceguylaf@yahoo.com",
+        "displayName": "BILOXI CANNABIS DISPENSARY",
+        "survivorId": 76,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:thegreenguysfulton@gmail.com",
+        "displayName": "Blaze Dispensary LLC",
+        "survivorId": 77,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:slloyd55@gmail.com",
+        "displayName": "Bud Barn, LLC.",
+        "survivorId": 78,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:dbrown.canablume@gmail.com",
+        "displayName": "Canablume, LLC",
+        "survivorId": 79,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:cyrusn@gmail.com",
+        "displayName": "CannaMiss LLC",
+        "survivorId": 80,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:tjanoush@wesjan.com",
+        "displayName": "Cleveland Cannabis Company LLC",
+        "survivorId": 81,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:matthew@corinthcannabis.com",
+        "displayName": "Corinth Cannabis LLC",
+        "survivorId": 82,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:mkb1990@yahoo.com",
+        "displayName": "Cox-Blythe Dispensary Inc",
+        "survivorId": 83,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:devon@culturecannabisclub.com",
+        "displayName": "Culture Biloxi Shop, Inc.",
+        "survivorId": 84,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:dixondispensaries@gmail.com",
+        "displayName": "Dixon Dispensary LLC",
+        "survivorId": 85,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:dryan4238@gmail.com",
+        "displayName": "Dolphin Dayz LLC",
+        "survivorId": 86,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:evergreendispensary@outlook.com",
+        "displayName": "Evergreen Dispensary LLC.",
+        "survivorId": 87,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:blueskyent@bellsouth.net",
+        "displayName": "Green Therapy LLC",
+        "survivorId": 88,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:rz@narcannabis.com",
+        "displayName": "HEMPNOTIZE MISSISSIPPI LLC",
+        "survivorId": 89,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:glenn@holistikallc.com",
+        "displayName": "Holistika LLC",
+        "survivorId": 90,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:houseofbudsss@gmail.com",
+        "displayName": "House of Buds",
+        "survivorId": 91,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:srhdailey@gmail.com",
+        "displayName": "HT Moss Point LLC",
+        "survivorId": 92,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:cannabisheadquarter@gmail.com",
+        "displayName": "Jamal Saeed",
+        "survivorId": 93,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:dispensary@legallyrootedcannabis.com",
+        "displayName": "Legally Rooted Cannabis Dispensary, LLC",
+        "survivorId": 94,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:paul@jpaulbarberlaw.com",
+        "displayName": "Long Beach Dispensary LLC",
+        "survivorId": 95,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:densan2006@gmail.com",
+        "displayName": "Magnolia Greens LLC",
+        "survivorId": 96,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:reliefmedinc@gmail.com",
+        "displayName": "relief med inc",
+        "survivorId": 97,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:info@rivercitycannabis.net",
+        "displayName": "River City Cannabis",
+        "survivorId": 98,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:info@coastalcapitaldispensary.com",
+        "displayName": "Sunflower Holdings LLC",
+        "survivorId": 99,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:abreu.guidry@gmail.com",
+        "displayName": "SweetGrass MS, LLC",
+        "survivorId": 100,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:pamelachapman30@yahoo.com",
+        "displayName": "The Green Life Wellness, LLC.",
+        "survivorId": 101,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:dustinstone1@hotmail.com",
+        "displayName": "The Herbalist",
+        "survivorId": 102,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:tabitha.wroten@gmail.com",
+        "displayName": "The Highest Care L.L.C",
+        "survivorId": 103,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:clarence@tcp-agresearch.com",
+        "displayName": "Tru Source Medical Cannabis, LLC",
+        "survivorId": 104,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:islandsdispensary@gmail.com",
+        "displayName": "The Islands Dispensary, LLC",
+        "survivorId": 105,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:delta bud co.",
+        "displayName": "Delta Bud Co.",
+        "survivorId": 106,
+        "licenseCount": 2,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "owned-by:wellcraft cannabis",
+        "displayName": "Wellcraft Cannabis",
+        "survivorId": 107,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:stash house",
+        "displayName": "Stash House",
+        "survivorId": 108,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:max harvest",
+        "displayName": "Max Harvest",
+        "survivorId": 109,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "email:kanwaljit8289@gmail.com",
+        "displayName": "Mageedp, LLC",
+        "survivorId": 110,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:blunt buds",
+        "displayName": "Blunt Buds",
+        "survivorId": 111,
+        "licenseCount": 3,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:cannacare llc",
+        "displayName": "CannaCare LLC",
+        "survivorId": 112,
+        "licenseCount": 2,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "owned-by:coastal crop",
+        "displayName": "Coastal Crop",
+        "survivorId": 113,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:country boy llc",
+        "displayName": "Country Boy LLC",
+        "survivorId": 114,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:delta fine llc",
+        "displayName": "Delta Fine LLC",
+        "survivorId": 115,
+        "licenseCount": 3,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:firefly cannabis",
+        "displayName": "FireFly Cannabis",
+        "survivorId": 116,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:five points farms",
+        "displayName": "Five Points Farms",
+        "survivorId": 117,
+        "licenseCount": 2,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "owned-by:five star medical",
+        "displayName": "Five Star Medical",
+        "survivorId": 118,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:green spark",
+        "displayName": "Green Spark",
+        "survivorId": 119,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:magnolia cannabis farms",
+        "displayName": "Magnolia Cannabis Farms",
+        "survivorId": 120,
+        "licenseCount": 2,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "owned-by:mag high",
+        "displayName": "Mag High",
+        "survivorId": 121,
+        "licenseCount": 3,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:manna",
+        "displayName": "Manna",
+        "survivorId": 122,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:mary jane & herbs",
+        "displayName": "Mary Jane & Herbs",
+        "survivorId": 123,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:ms magnolia canna",
+        "displayName": "MS Magnolia Canna",
+        "survivorId": 124,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:ms jane",
+        "displayName": "MS Jane",
+        "survivorId": 125,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:southern herb co.",
+        "displayName": "Southern Herb Co.",
+        "survivorId": 126,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:southern sky",
+        "displayName": "Southern Sky",
+        "survivorId": 127,
+        "licenseCount": 5,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:swamp grass llc",
+        "displayName": "Swamp Grass LLC",
+        "survivorId": 128,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:the naturalist solution",
+        "displayName": "The Naturalist Solution",
+        "survivorId": 129,
+        "licenseCount": 2,
+        "stage": "FireCraft"
+      },
+      {
+        "groupKey": "owned-by:toke & tell",
+        "displayName": "Toke & Tell",
+        "survivorId": 130,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:zack hemp",
+        "displayName": "Zack Hemp",
+        "survivorId": 131,
+        "licenseCount": 2,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:wyze",
+        "displayName": "Wyze",
+        "survivorId": 132,
+        "licenseCount": 4,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:420 inc.",
+        "displayName": "420 Inc.",
+        "survivorId": 133,
+        "licenseCount": 9,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:421 inc.",
+        "displayName": "421 Inc.",
+        "survivorId": 134,
+        "licenseCount": 1,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:dabbs",
+        "displayName": "Dabbs",
+        "survivorId": 135,
+        "licenseCount": 26,
+        "stage": "New"
+      },
+      {
+        "groupKey": "owned-by:danknolia",
+        "displayName": "Danknolia",
+        "survivorId": 136,
+        "licenseCount": 2,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:hemphealthms@gmail.com",
+        "displayName": "Hybrid LLC",
+        "survivorId": 137,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:rlwelch1@olemiss.edu",
+        "displayName": "University of Mississippi",
+        "survivorId": 138,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:chad.kea@possumtownfarms.com",
+        "displayName": "Possum Town Farms, LLC",
+        "survivorId": 139,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:nikki@braggcanna.com",
+        "displayName": "Bragg Canna of Mississippi, LLC",
+        "survivorId": 140,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "owned-by:southern crop",
+        "displayName": "Southern Crop",
+        "survivorId": 141,
+        "licenseCount": 2,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:chill@simplymarvelousms.com",
+        "displayName": "Mississippi Green Oil LLC",
+        "survivorId": 142,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:dmitry@flayvur.com",
+        "displayName": "Cannacultivation LLC",
+        "survivorId": 143,
+        "licenseCount": 1,
+        "stage": "Closed/NA"
+      },
+      {
+        "groupKey": "email:leannepenn3@gmail.com",
+        "displayName": "The Cannabis Company, Inc.",
+        "survivorId": 144,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:medcanms@gmail.com",
+        "displayName": "Medical Cannabis of MS, LLC",
+        "survivorId": 145,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:keencannabisms@gmail.com",
+        "displayName": "Keen Cannabis LLC",
+        "survivorId": 146,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:zach@puremsfarms.com",
+        "displayName": "Pure MS Farms, LLC",
+        "survivorId": 147,
+        "licenseCount": 2,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:robert@omegacannabis.com",
+        "displayName": "Omega Cannabis, LLC",
+        "survivorId": 148,
+        "licenseCount": 2,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:bnicholson@kellysgreen.com",
+        "displayName": "Kelly's Green, Inc.",
+        "survivorId": 149,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:sederia@livelunasol.com",
+        "displayName": "LunaSol LLC",
+        "survivorId": 150,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:c.burgess@wtdcannabis.com",
+        "displayName": "White-Tailed Deer Cannabis, LLC",
+        "survivorId": 151,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:bartabraham@gmail.com",
+        "displayName": "James B. Abraham LLC",
+        "survivorId": 152,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:mhardy@beattiesbluffholding.com",
+        "displayName": "Magnolia Cannabis LLC",
+        "survivorId": 153,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:ericmsorenson@hotmail.com",
+        "displayName": "Leaf River Farm",
+        "survivorId": 154,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:ronboline@gmail.com",
+        "displayName": "Mainbrace, Inc.",
+        "survivorId": 155,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      },
+      {
+        "groupKey": "email:sonnydaegdm@gmail.com",
+        "displayName": "Sonny Daeg Disposal Management",
+        "survivorId": 156,
+        "licenseCount": 1,
+        "stage": "Cannot Afford"
+      }
+    ],
+    "updated": [],
+    "mergedDuplicates": []
+  },
+  "backupPath": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\backups\\lead-import-20260518-120419"
+}

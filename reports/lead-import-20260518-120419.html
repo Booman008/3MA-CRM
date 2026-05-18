@@ -1,0 +1,2044 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lead Import Report — 2026-05-18T17:04:20.962Z</title>
+<style>
+  :root {
+    --navy:#1a2a47; --gold:#c9a227; --bg:#f7f7f8; --card:#fff;
+    --border:#e3e5ea; --muted:#6b7280; --text:#1f2937;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+  header{background:var(--navy);color:#fff;padding:24px 32px;border-bottom:4px solid var(--gold)}
+  header h1{margin:0;font-size:22px;font-weight:600}
+  header .sub{margin-top:6px;font-size:13px;opacity:.8}
+  main{max-width:1200px;margin:0 auto;padding:24px 32px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+  .stat .label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+  .stat .value{font-size:24px;font-weight:600;margin-top:4px;color:var(--navy)}
+  .stat.warn .value{color:#b3261e}
+  .stat.ok .value{color:#2e8b57}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:24px}
+  .card h2{margin:0 0 16px;font-size:16px;color:var(--navy);border-bottom:1px solid var(--border);padding-bottom:10px}
+  .stage-row{display:grid;grid-template-columns:140px 1fr 100px;gap:12px;align-items:center;margin-bottom:8px}
+  .stage-bar{background:#eef0f4;border-radius:4px;height:10px;overflow:hidden}
+  .stage-fill{height:100%}
+  .stage-count{font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:10px 12px;background:#f3f4f6;border-bottom:1px solid var(--border);color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}
+  td{padding:10px 12px;border-bottom:1px solid #eef0f4;vertical-align:top}
+  tr.odd td{background:#fafbfc}
+  td.center{text-align:center;font-variant-numeric:tabular-nums}
+  code{background:#eef0f4;padding:1px 6px;border-radius:3px;font-size:11px;font-family:ui-monospace,Menlo,Consolas,monospace;margin:1px 2px;display:inline-block}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em}
+  .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-left:6px}
+  .badge.merged{background:#fff4d6;color:#7a5a00;border:1px solid #ead9a0}
+  .badge.warn{background:#fde2e1;color:#8a1f1c;border:1px solid #f2b8b6}
+  .action{font-size:11px;font-weight:600;text-transform:uppercase;padding:2px 8px;border-radius:4px}
+  .action.create{background:#e6f3ec;color:#2e8b57}
+  .action.update{background:#fff4d6;color:#7a5a00}
+  .action.ambiguous{background:#fde2e1;color:#8a1f1c}
+  .muted{color:var(--muted)}
+  .small{font-size:11px}
+  .group-name{font-weight:600;color:var(--navy)}
+  .filter-bar{display:flex;gap:10px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+  .filter-bar input{padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;min-width:240px}
+  .filter-bar button{padding:6px 12px;border:1px solid var(--border);background:#fff;border-radius:6px;cursor:pointer;font-size:12px}
+  .filter-bar button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lead Import Report</h1>
+  <div class="sub">
+    Mode: <strong>apply</strong> &middot;
+    Source: <code>5.18.26 3MA CRM Leads - Sheet1.csv</code> &middot;
+    Merge strategy: <strong>owned-by</strong> &middot;
+    Generated: 2026-05-18T17:04:20.962Z
+  </div>
+</header>
+<main>
+
+<div class="grid">
+  <div class="stat"><div class="label">CSV Rows</div><div class="value">229</div></div>
+  <div class="stat"><div class="label">Lead Groups</div><div class="value">156</div></div>
+  <div class="stat ok"><div class="label">Creates</div><div class="value">156</div></div>
+  <div class="stat"><div class="label">Updates</div><div class="value">0</div></div>
+  <div class="stat "><div class="label">Ambiguous</div><div class="value">0</div></div>
+  <div class="stat"><div class="label">Multi-license</div><div class="value">34</div></div>
+  <div class="stat warn"><div class="label">Mixed Stage</div><div class="value">5</div></div>
+</div>
+
+<div class="card">
+  <h2>Stage Breakdown</h2>
+  
+        <div class="stage-row">
+          <div class="stage-label"><span class="pill" style="background:#1a2a47;color:#fff">New</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:75.6%;background:#1a2a47"></div></div>
+          <div class="stage-count">118 <span class="muted">(75.6%)</span></div>
+        </div>
+      
+        <div class="stage-row">
+          <div class="stage-label"><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:8.3%;background:#795548"></div></div>
+          <div class="stage-count">13 <span class="muted">(8.3%)</span></div>
+        </div>
+      
+        <div class="stage-row">
+          <div class="stage-label"><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:6.4%;background:#c9a227"></div></div>
+          <div class="stage-count">10 <span class="muted">(6.4%)</span></div>
+        </div>
+      
+        <div class="stage-row">
+          <div class="stage-label"><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:5.1%;background:#616161"></div></div>
+          <div class="stage-count">8 <span class="muted">(5.1%)</span></div>
+        </div>
+      
+        <div class="stage-row">
+          <div class="stage-label"><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></div>
+          <div class="stage-bar"><div class="stage-fill" style="width:4.5%;background:#ff7043"></div></div>
+          <div class="stage-count">7 <span class="muted">(4.5%)</span></div>
+        </div>
+      
+</div>
+
+
+
+<div class="card">
+  <h2>Groups (156) — sorted by license count</h2>
+  <div class="filter-bar">
+    <input id="search" placeholder="Filter by name, license, county…" />
+    <button data-stage="" class="active">All stages</button>
+    <button data-stage="Qualified">Qualified</button><button data-stage="New">New</button><button data-stage="FireCraft">FireCraft</button><button data-stage="Closed/NA">Closed/NA</button><button data-stage="Cannot Afford">Cannot Afford</button>
+    <button id="only-merged">Multi-license only</button>
+    <button id="only-mixed">Mixed-stage only</button>
+  </div>
+  <table id="groups">
+    <thead>
+      <tr><th>Group</th><th>Stage</th><th class="center">Licenses</th><th>License Numbers</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      
+    <tr class="">
+      <td>
+        <div class="group-name">Dabbs <span class="badge merged">26× merged</span> </div>
+        <div class="muted small">DABBS 1, DABBS 1 LLC, Dabbs 1 LLC, Merit Creek <span class="muted">+7 more</span></div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">26</td>
+      <td><code>DSPY007875</code> <code>DSPY020315</code> <code>DSPY001975</code> <code>DSPY013261</code> <code>DSPY002941</code> <code>DSPY016137</code> <code>DSPY019825</code> <code>DSPY001441</code> <code>DSPY004853</code> <code>DSPY025045</code> <code>DSPY007423</code> <code>DSPY023324</code> <code>DSPY023925</code> <code>DSPY024218</code> <code>DSPY023138</code> <code>DSPY025817</code> <code>DSPY011664</code> <code>DSPY020525</code> <code>DSPY020655</code> <code>DSPY023017</code> <code>DSPY024002</code> <code>DSPY018462</code> <code>DSPY018964</code> <code>DSPY019450</code> <code>DSPY002461</code> <code>DSPY022924</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">420 Inc. <span class="badge merged">9× merged</span> </div>
+        <div class="muted small">420 Bay St. Louis Dispensary, Inc., 420 Columbus LLC, 420 Holiday #2, LLC, Backwood Express #2 Inc <span class="muted">+5 more</span></div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">9</td>
+      <td><code>DSPY011223</code> <code>DSPY024644</code> <code>DSPY021124</code> <code>DSPY024923</code> <code>DSPY024723</code> <code>DSPY019224</code> <code>DSPY024824</code> <code>DSPY019130</code> <code>DSPY017130</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Southern Sky <span class="badge merged">5× merged</span> </div>
+        <div class="muted small">Southern Sky Disposal, Southern Sky Extracts, Southern Sky Logistics, High Cotton Wellness, LLC <span class="muted">+1 more</span></div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">5</td>
+      <td><code>CDIS000445</code> <code>PROC001345</code> <code>TRAN001045</code> <code>DSPY003661</code> <code>CULV000845</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Wyze <span class="badge merged">4× merged</span> </div>
+        <div class="muted small">WYZE 1 llc, WYZE 1 LLC, WYZE 3 LLC, WYZE TUNICA LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">4</td>
+      <td><code>DSPY008717</code> <code>DSPY018117</code> <code>DSPY020902</code> <code>CULV004672</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Blunt Buds <span class="badge merged">3× merged</span> </div>
+        <div class="muted small">Blunt Buds Grow LLC, Blunt Buds Infused LLC, Blunt Buds LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">3</td>
+      <td><code>CULV007430</code> <code>PROC002230</code> <code>DSPY023230</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Delta Fine LLC <span class="badge merged">3× merged</span> </div>
+        <div class="muted small">Delta Fine Processing, LLC, Delta Fine Transportation, LLC, Delta Fine, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">3</td>
+      <td><code>PROC002135</code> <code>TRAN003035</code> <code>CULV007235</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mag High <span class="badge merged">3× merged</span> </div>
+        <div class="muted small">Magnolia High Growers, Magnolia High Processing, LLC, Magnolia High Transport</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">3</td>
+      <td><code>CULV001582</code> <code>MPRC000682</code> <code>TRAN002582</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">CannaCare LLC <span class="badge merged">2× merged</span> <span class="badge warn" title="CSV had mixed statuses: FireCraft / New">mixed</span></div>
+        <div class="muted small">Cannacare LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">2</td>
+      <td><code>CULV001741</code> <code>DSPY002141</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Coastal Crop <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Coastal Crop, LLC, Bragg Canna of Mississippi, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>PROC002037</code> <code>CULV000945</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Country Boy LLC <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Country Boys Investments LLC, Hare Dispensary LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY022424</code> <code>DSPY025518</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Cream Cannabis Co. <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Cream Cannabis Company, Superior Labs LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY017761</code> <code>MPRC001861</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Danknolia <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Danknolia cannabis llc</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY003025</code> <code>DSPY009625</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Delta Bud Co. <span class="badge merged">2× merged</span> <span class="badge warn" title="CSV had mixed statuses: FireCraft / New">mixed</span></div>
+        <div class="muted small">DELTA BUD COMPANY LLC, DELTA DISPENSARY MAGNOLIA</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">2</td>
+      <td><code>CULV001157</code> <code>DSPY013957</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">FireFly Cannabis <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Firefly Cannabis No. 2, LLC, Firefly Cannabis, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY022220</code> <code>DSPY017630</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Five Points Farms <span class="badge merged">2× merged</span> <span class="badge warn" title="CSV had mixed statuses: FireCraft / New">mixed</span></div>
+        <div class="muted small">Five Points Farms</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">2</td>
+      <td><code>MCUL003241</code> <code>MPRC000241</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Five Star Medical <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Five Star Medical, Five Star-2 LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY008669</code> <code>DSPY025947</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Green Spark <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Green Spark, LLC, Greenspark Cultivation MS, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY018281</code> <code>CULV005481</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Mageedp, LLC <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Mageedp, LLC, Yazoodp, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY018704</code> <code>DSPY012682</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Magnolia Cannabis Farms <span class="badge merged">2× merged</span> <span class="badge warn" title="CSV had mixed statuses: FireCraft / New">mixed</span></div>
+        <div class="muted small">Magnolia Cannabis Farms Llc, Magnolia Farmacy, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">2</td>
+      <td><code>CULV002354</code> <code>MPRC000754</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Manna <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Manna Holdings, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>MCUL003730</code> <code>MPRC002130</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mary Jane &amp; Herbs <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Mary Jane &amp; Herb's LLC, Mary Jane &amp; Herbs LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY001837</code> <code>DSPY024530</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Max Harvest <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Max Harvest LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>CULV006344</code> <code>PROC002444</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">MS Jane <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">MS. Jane Company</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>MCUL002614</code> <code>MPRC000114</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">MS Magnolia Canna <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Mississippi Magnolia Canna, Mississippi Magnolia Canna West Point</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY014644</code> <code>DSPY022013</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Omega Cannabis, LLC <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Omega Cannabis, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">2</td>
+      <td><code>CULV000625</code> <code>PROC000325</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Pure MS Farms, LLC <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Pure MS Farms, LLC, Pure Mississippi Extracts</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">2</td>
+      <td><code>CULV003154</code> <code>MPRC001954</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Southern Crop <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Southern Crop Processing, LLC, Southern Crop Disposal and Destruction, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">2</td>
+      <td><code>PROC000138</code> <code>CDIS000238</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Southern Herb Co. <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">SHC Holdings LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>CULV002538</code> <code>PROC001038</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Stash House <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Stash House Direct, LLC, Stash House MS, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>TRAN002161</code> <code>PROC000961</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Swamp Grass LLC <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Swamp Grass LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>MCUL002324</code> <code>MPRC000524</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">The Naturalist Solution <span class="badge merged">2× merged</span> <span class="badge warn" title="CSV had mixed statuses: New / FireCraft">mixed</span></div>
+        <div class="muted small">The Naturalist Processing LLC, The Naturalist Solution</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">2</td>
+      <td><code>PROC002530</code> <code>CULV003630</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Toke &amp; Tell <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Toke and Tell Dispensary 2 LLC, Toke and Tell Dispensary, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY011534</code> <code>DSPY013801</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Wellcraft Cannabis <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">WellCraft Cultivation, WellCraft Processing</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>MCUL000134</code> <code>MPRC001134</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Zack Hemp <span class="badge merged">2× merged</span> </div>
+        <div class="muted small">Zack Hemp LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">2</td>
+      <td><code>DSPY002054</code> <code>DSPY015817</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">421 Inc.  </div>
+        <div class="muted small">420 Holiday #4, LLC</div>
+        <span class="muted small">via owned-by</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY010318</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">AMA Medical Marijuana LLC  </div>
+        <div class="muted small">AMA Medical Marijuana LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005143</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Apollo Medical Dispensary LLC  </div>
+        <div class="muted small">Apollo Medical Dispensary LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY025617</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Apothecarium Green, LLC  </div>
+        <div class="muted small">Apothecarium Green, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY018844</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Arcane Enterprises  </div>
+        <div class="muted small">Arcane Enterprises</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY010867</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">B &amp; T Growers, LLC  </div>
+        <div class="muted small">B &amp; T Growers, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL001568</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">BeGreen LLC  </div>
+        <div class="muted small">BeGreen LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL004845</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">BILOXI CANNABIS DISPENSARY  </div>
+        <div class="muted small">BILOXI CANNABIS DISPENSARY</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY025124</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Black Prairie Cultivation LLC  </div>
+        <div class="muted small">Black Prairie Cultivation LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL003113</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Blaze Dispensary LLC  </div>
+        <div class="muted small">Blaze Dispensary LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY012229</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">BLUEBYRD FARMS LLC  </div>
+        <div class="muted small">BLUEBYRD FARMS LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL000834</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">botane Group LLC  </div>
+        <div class="muted small">botane Group LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006556</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Bragg Canna of Mississippi, LLC  </div>
+        <div class="muted small">Bragg Canna of Mississippi, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY001741</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Bud Barn, LLC.  </div>
+        <div class="muted small">Bud Barn, LLC.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY014124</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Burrow's Bud llc  </div>
+        <div class="muted small">Burrow's Bud llc</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007916</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Canablume, LLC  </div>
+        <div class="muted small">Canablume, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY023717</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Canna Green Gables  </div>
+        <div class="muted small">Canna Green Gables</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MPRC001424</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Cannacultivation LLC  </div>
+        <div class="muted small">Cannacultivation LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>CULV007130</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">CannaMiss LLC  </div>
+        <div class="muted small">CannaMiss LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY006336</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Cannon Cultivation LLC  </div>
+        <div class="muted small">Cannon Cultivation LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV007576</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Central Mississippi Cannabis LLC  </div>
+        <div class="muted small">Central Mississippi Cannabis LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL000933</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">CHRONIC CANNABIS CO, LLC  </div>
+        <div class="muted small">CHRONIC CANNABIS CO, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007674</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Clean Grow LLC  </div>
+        <div class="muted small">Clean Grow LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV007725</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Cleveland Cannabis Company LLC  </div>
+        <div class="muted small">Cleveland Cannabis Company LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY006406</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Coast Dispensary Inc  </div>
+        <div class="muted small">Coast Dispensary Inc</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY009724</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Corinth Cannabis LLC  </div>
+        <div class="muted small">Corinth Cannabis LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY012002</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Cox-Blythe Dispensary Inc  </div>
+        <div class="muted small">Cox-Blythe Dispensary Inc</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY000359</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Cultivating Medical Cannabis LLC  </div>
+        <div class="muted small">Cultivating Medical Cannabis LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV007644</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Culture Biloxi Shop, Inc.  </div>
+        <div class="muted small">Culture Biloxi Shop, Inc.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY009224</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">DayHill Farms, LLC  </div>
+        <div class="muted small">DayHill Farms, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL003071</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Delta-9 Cultivation, LLC  </div>
+        <div class="muted small">Delta-9 Cultivation, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL008066</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Dixon Dispensary LLC  </div>
+        <div class="muted small">Dixon Dispensary LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY016324</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Dolphin Dayz LLC  </div>
+        <div class="muted small">Dolphin Dayz LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY017030</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">DTS Pharms, LLC  </div>
+        <div class="muted small">DTS Pharms, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL002481</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Due South Cannabis Company  </div>
+        <div class="muted small">Due South Cannabis Company</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL001330</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Essential Canna Labs  </div>
+        <div class="muted small">Essential Canna Labs</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006930</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Evergreen Dispensary LLC.  </div>
+        <div class="muted small">Evergreen Dispensary LLC.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY015454</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Farm 421, LLC  </div>
+        <div class="muted small">Farm 421, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL003644</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Gatlin Creek Farms LLC  </div>
+        <div class="muted small">Gatlin Creek Farms LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL003821</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Gautier Agricultural Company  </div>
+        <div class="muted small">Gautier Agricultural Company</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>CULV004130</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">GLC ONE LLC  </div>
+        <div class="muted small">GLC ONE LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV006762</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Good Flower Farms  </div>
+        <div class="muted small">Good Flower Farms</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL000405</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Green Akers Cannabis Inc  </div>
+        <div class="muted small">Green Akers Cannabis Inc</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY020171</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Green Therapy LLC  </div>
+        <div class="muted small">Green Therapy LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY005037</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Grind Game Grow LLC  </div>
+        <div class="muted small">Grind Game Grow LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006725</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">GrowRite LLC  </div>
+        <div class="muted small">GrowRite LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV004747</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Gulf Coast Alternative Medicine  </div>
+        <div class="muted small">Gulf Coast Alternative Medicine</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006430</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Happy Campers Farms  </div>
+        <div class="muted small">Happy Campers Farms</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV004512</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Hardy Growers, LLC  </div>
+        <div class="muted small">Hardy Growers, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007454</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Hempnotic Cultivation LLC  </div>
+        <div class="muted small">Hempnotic Cultivation LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL001729</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">HEMPNOTIZE MISSISSIPPI LLC  </div>
+        <div class="muted small">HEMPNOTIZE MISSISSIPPI LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY021024</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Holistika LLC  </div>
+        <div class="muted small">Holistika LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY013744</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Home grown cannabis Co.  </div>
+        <div class="muted small">Home grown cannabis Co.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV002772</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Hooks Industries  </div>
+        <div class="muted small">Hooks Industries</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL002064</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">House of Buds  </div>
+        <div class="muted small">House of Buds</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY016464</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">HT Moss Point LLC  </div>
+        <div class="muted small">HT Moss Point LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY020730</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Hybrid LLC  </div>
+        <div class="muted small">Hybrid LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY007236</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Jamal Saeed  </div>
+        <div class="muted small">Jamal Saeed</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY011341</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">James B. Abraham LLC  </div>
+        <div class="muted small">James B. Abraham LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY012806</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Kainga Manufacturing  </div>
+        <div class="muted small">Kainga Manufacturing</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV006425</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Keen Cannabis LLC  </div>
+        <div class="muted small">Keen Cannabis LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005322</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Kelly's Green, Inc.  </div>
+        <div class="muted small">Kelly's Green, Inc.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY006018</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Kind Life Companies, LLC  </div>
+        <div class="muted small">Kind Life Companies, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>CULV003530</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Kush Farms  </div>
+        <div class="muted small">Kush Farms</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL001021</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Leaf River Farm  </div>
+        <div class="muted small">Leaf River Farm</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL000531</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Legally Rooted Cannabis Dispensary, LLC  </div>
+        <div class="muted small">Legally Rooted Cannabis Dispensary, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY000738</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Lion's Paw Concentrates LLC  </div>
+        <div class="muted small">Lion's Paw Concentrates LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MPRC000830</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Living Soil Farms LLC  </div>
+        <div class="muted small">Living Soil Farms LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL002982</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Long Beach Dispensary LLC  </div>
+        <div class="muted small">Long Beach Dispensary LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY010924</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">LunaSol LLC  </div>
+        <div class="muted small">LunaSol LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY018017</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Magnolia Cannabis LLC  </div>
+        <div class="muted small">Magnolia Cannabis LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>CULV002445</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Magnolia Greens LLC  </div>
+        <div class="muted small">Magnolia Greens LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY007643</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mainbrace, Inc.  </div>
+        <div class="muted small">Mainbrace, Inc.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005766</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Mary Js Cannabis  </div>
+        <div class="muted small">Mary Js Cannabis</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005030</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mayflower Farms LLC  </div>
+        <div class="muted small">Mayflower Farms LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005612</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Medical Cannabis of MS, LLC  </div>
+        <div class="muted small">Medical Cannabis of MS, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY002206</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mississippi Ghost Labs, LLC  </div>
+        <div class="muted small">Mississippi Ghost Labs, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>PROC001217</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Mississippi Green Oil LLC  </div>
+        <div class="muted small">Mississippi Green Oil LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>CULV005133</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Mississippi Wild Flower  </div>
+        <div class="muted small">Mississippi Wild Flower</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL008264</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Moose Meadows LLC  </div>
+        <div class="muted small">Moose Meadows LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL002524</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Next Level Farms, LLC  </div>
+        <div class="muted small">Next Level Farms, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL005457</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Northwest, LLC  </div>
+        <div class="muted small">Northwest, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MPRC001082</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">One Source Products, LLC  </div>
+        <div class="muted small">One Source Products, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV001654</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Pharm Grown  </div>
+        <div class="muted small">Pharm Grown</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV002054</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Pharmhouse, LLC  </div>
+        <div class="muted small">Pharmhouse, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL004621</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Plantwerks, LLC  </div>
+        <div class="muted small">Plantwerks, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL003348</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Possum Town Farms, LLC  </div>
+        <div class="muted small">Possum Town Farms, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>CULV002944</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Pure Green Hope Farm LLC  </div>
+        <div class="muted small">Pure Green Hope Farm LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL008159</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">relief med inc  </div>
+        <div class="muted small">relief med inc</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY020847</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">River City Cannabis  </div>
+        <div class="muted small">River City Cannabis</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY025230</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Rock River Ranch LLC  </div>
+        <div class="muted small">Rock River Ranch LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006668</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">SARBJOT LLC  </div>
+        <div class="muted small">SARBJOT LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY024441</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Signature Flower LLC  </div>
+        <div class="muted small">Signature Flower LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV006918</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Sonny Daeg Disposal Management  </div>
+        <div class="muted small">Sonny Daeg Disposal Management</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>CDIS000660</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Southern Greenz, LLC  </div>
+        <div class="muted small">Southern Greenz, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006102</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Southern Pharms  </div>
+        <div class="muted small">Southern Pharms</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#ff7043;color:#1a2a47">FireCraft</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL002812</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Southern Remedies Cultivation and Processing  </div>
+        <div class="muted small">Southern Remedies Cultivation and Processing</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL008419</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Space Mountain Delta Gold LLC  </div>
+        <div class="muted small">Space Mountain Delta Gold LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV002276</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Sugarleaf Growers, LLC  </div>
+        <div class="muted small">Sugarleaf Growers, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006312</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Sun King LLC  </div>
+        <div class="muted small">Sun King LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL006041</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Sunflower Holdings LLC  </div>
+        <div class="muted small">Sunflower Holdings LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY002824</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Sweet Life Canna Company, LLC  </div>
+        <div class="muted small">Sweet Life Canna Company, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV005524</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">SweetGrass MS, LLC  </div>
+        <div class="muted small">SweetGrass MS, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY010224</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">T &amp; T Transportation LLC  </div>
+        <div class="muted small">T &amp; T Transportation LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>TRAN002038</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Terrapharm LLC  </div>
+        <div class="muted small">Terrapharm LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV007357</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Terry's Tops, LLC  </div>
+        <div class="muted small">Terry's Tops, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007838</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">THCity  </div>
+        <div class="muted small">THCity</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MPRC002030</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">The Cannabis Company, Inc.  </div>
+        <div class="muted small">The Cannabis Company, Inc.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY002343</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">The Green Life Wellness, LLC.  </div>
+        <div class="muted small">The Green Life Wellness, LLC.</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY017512</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">The Herbalist  </div>
+        <div class="muted small">The Herbalist</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY018530</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">The Highest Care L.L.C  </div>
+        <div class="muted small">The Highest Care L.L.C</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY003501</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">The Hippocratic Growth, LLC  </div>
+        <div class="muted small">The Hippocratic Growth, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>CULV006566</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">The Islands Dispensary, LLC  </div>
+        <div class="muted small">The Islands Dispensary, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY014730</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Third Day Crop, LLC  </div>
+        <div class="muted small">Third Day Crop, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007262</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Tru Source Medical Cannabis, LLC  </div>
+        <div class="muted small">Tru Source Medical Cannabis, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY011017</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">University of Mississippi  </div>
+        <div class="muted small">University of Mississippi</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#616161;color:#fff">Closed/NA</span></td>
+      <td class="center">1</td>
+      <td><code>RESR000136</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Uptown Funk LLC  </div>
+        <div class="muted small">Uptown Funk LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY009925</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">VooDoo Buds 2  </div>
+        <div class="muted small">VooDoo Buds 2</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY023445</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">VooDoo Buds LLC  </div>
+        <div class="muted small">VooDoo Buds LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#c9a227;color:#1a2a47">Qualified</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY015661</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">White-Tailed Deer Cannabis, LLC  </div>
+        <div class="muted small">White-Tailed Deer Cannabis, LLC</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#795548;color:#fff">Cannot Afford</span></td>
+      <td class="center">1</td>
+      <td><code>CULV006054</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="">
+      <td>
+        <div class="group-name">Wolfpack Therapeutic Flower  </div>
+        <div class="muted small">Wolfpack Therapeutic Flower</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>MCUL007738</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    <tr class="odd">
+      <td>
+        <div class="group-name">Youngs Farm Medical Dispensary  </div>
+        <div class="muted small">Youngs Farm Medical Dispensary</div>
+        <span class="muted small">via email</span>
+      </td>
+      <td><span class="pill" style="background:#1a2a47;color:#fff">New</span></td>
+      <td class="center">1</td>
+      <td><code>DSPY017838</code></td>
+      <td><span class="action create">create</span></td>
+    </tr>
+  
+    </tbody>
+  </table>
+</div>
+
+</main>
+<footer>3MA CRM &middot; lead import report</footer>
+
+<script>
+(function(){
+  const tbody = document.querySelector('#groups tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const search = document.getElementById('search');
+  const stageButtons = document.querySelectorAll('button[data-stage]');
+  const mergedBtn = document.getElementById('only-merged');
+  const mixedBtn = document.getElementById('only-mixed');
+  let stage = '';
+  let mergedOnly = false;
+  let mixedOnly = false;
+
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    for (const row of rows) {
+      const text = row.textContent.toLowerCase();
+      const rowStage = row.querySelector('.pill')?.textContent || '';
+      const isMerged = !!row.querySelector('.badge.merged');
+      const isMixed = !!row.querySelector('.badge.warn');
+      const match = (!q || text.includes(q))
+        && (!stage || rowStage === stage)
+        && (!mergedOnly || isMerged)
+        && (!mixedOnly || isMixed);
+      row.style.display = match ? '' : 'none';
+    }
+  }
+
+  search.addEventListener('input', apply);
+  stageButtons.forEach((b) => b.addEventListener('click', () => {
+    stage = b.dataset.stage;
+    stageButtons.forEach((x) => x.classList.toggle('active', x === b));
+    apply();
+  }));
+  mergedBtn.addEventListener('click', () => { mergedOnly = !mergedOnly; mergedBtn.classList.toggle('active', mergedOnly); apply(); });
+  mixedBtn.addEventListener('click', () => { mixedOnly = !mixedOnly; mixedBtn.classList.toggle('active', mixedOnly); apply(); });
+})();
+</script>
+</body>
+</html>
