@@ -78,16 +78,18 @@ export function Leads() {
 
   useEffect(() => {
     if (dragId == null) return;
+    const scroller = document.querySelector('main');
+    if (!scroller) return;
     const EDGE = 90;
     const MAX_SPEED = 22;
     let pointerY = 0;
     let frame = null;
     const tick = () => {
-      const h = window.innerHeight;
+      const h = scroller.clientHeight;
       let dy = 0;
       if (pointerY < EDGE) dy = -MAX_SPEED * (1 - pointerY / EDGE);
       else if (pointerY > h - EDGE) dy = MAX_SPEED * (1 - (h - pointerY) / EDGE);
-      if (dy !== 0) window.scrollBy(0, dy);
+      if (dy !== 0) scroller.scrollBy(0, dy);
       frame = requestAnimationFrame(tick);
     };
     const onDrag = (e) => { pointerY = e.clientY; };
