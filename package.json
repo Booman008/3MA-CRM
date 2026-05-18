@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build-client.js",
     "crm:reset-data": "node scripts/reset-crm-entity-data.js",
+    "leads:reconcile": "node scripts/reconcile-leads-from-csv.js",
     "members:reconcile": "node scripts/reconcile-members-from-csv.js",
     "start": "node server/index.js",
     "dev": "node scripts/build-client.js && node server/index.js",
