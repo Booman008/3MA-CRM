@@ -77,6 +77,29 @@ export function Leads() {
   useEffect(() => { const t = setTimeout(load, 300); return () => clearTimeout(t); }, [load]);
 
   useEffect(() => {
+    if (dragId == null) return;
+    const EDGE = 90;
+    const MAX_SPEED = 22;
+    let pointerY = 0;
+    let frame = null;
+    const tick = () => {
+      const h = window.innerHeight;
+      let dy = 0;
+      if (pointerY < EDGE) dy = -MAX_SPEED * (1 - pointerY / EDGE);
+      else if (pointerY > h - EDGE) dy = MAX_SPEED * (1 - (h - pointerY) / EDGE);
+      if (dy !== 0) window.scrollBy(0, dy);
+      frame = requestAnimationFrame(tick);
+    };
+    const onDrag = (e) => { pointerY = e.clientY; };
+    window.addEventListener('dragover', onDrag);
+    frame = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener('dragover', onDrag);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [dragId]);
+
+  useEffect(() => {
     const checkOpen = async () => {
       const raw = sessionStorage.getItem('crm:openRecord');
       if (!raw) return;
