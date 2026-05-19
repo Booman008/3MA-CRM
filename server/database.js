@@ -175,6 +175,20 @@ async function ready() {
           "memberId" INTEGER REFERENCES members(id) ON DELETE SET NULL,
           "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+
+        CREATE TABLE IF NOT EXISTS goals (
+          id SERIAL PRIMARY KEY,
+          category TEXT NOT NULL CHECK (category IN ('fundraising', 'membership', 'conversions', 'custom')),
+          title TEXT NOT NULL,
+          description TEXT,
+          "targetValue" NUMERIC(14, 2) NOT NULL,
+          "manualValue" NUMERIC(14, 2) DEFAULT 0,
+          "startDate" DATE NOT NULL,
+          "endDate" DATE NOT NULL,
+          status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'archived')),
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
       `);
 
       await seedDefaultSettings(client);

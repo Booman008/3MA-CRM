@@ -40,6 +40,7 @@ app.use('/api/settings', require('./routes/settings'));
 app.use('/api/search', require('./routes/search'));
 app.use('/api/tasks', require('./routes/tasks'));
 app.use('/api/attachments', require('./routes/attachments'));
+app.use('/api/goals', require('./routes/goals'));
 
 // Fallback to index.html for client-side routing
 app.get('*', (req, res) => {
