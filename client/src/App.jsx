@@ -9,6 +9,7 @@ import { Leads } from './pages/Leads.jsx';
 import { Tasks } from './pages/Tasks.jsx';
 import { ContactLog } from './pages/ContactLog.jsx';
 import { Revenue } from './pages/Revenue.jsx';
+import { Goals } from './pages/Goals.jsx';
 import { Settings } from './pages/Settings.jsx';
 
 /* ──────────────────────────────────────────────────────────────
@@ -27,6 +28,7 @@ const Ic = {
   Tasks:     (p) => <Svg {...p}><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></Svg>,
   Contacts:  (p) => <Svg {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></Svg>,
   Revenue:   (p) => <Svg {...p}><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></Svg>,
+  Goals:     (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></Svg>,
   Settings:  (p) => <Svg {...p}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></Svg>,
   Logout:    (p) => <Svg {...p}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></Svg>,
 };
@@ -38,6 +40,7 @@ const PAGES = [
   { key: 'tasks',     label: 'Tasks',       icon: Ic.Tasks     },
   { key: 'contacts',  label: 'Contact Log', icon: Ic.Contacts  },
   { key: 'revenue',   label: 'Revenue',     icon: Ic.Revenue   },
+  { key: 'goals',     label: 'Goals',       icon: Ic.Goals     },
   { key: 'settings',  label: 'Settings',    icon: Ic.Settings  },
 ];
 
@@ -79,6 +82,7 @@ export function App() {
       case 'tasks':    return <Tasks />;
       case 'contacts': return <ContactLog />;
       case 'revenue':  return <Revenue />;
+      case 'goals':    return <Goals />;
       case 'settings': return <Settings />;
       default:         return <Dashboard />;
     }
@@ -106,7 +110,7 @@ export function App() {
         }}>Main</div>
 
         <nav style={{ flex: 1, paddingBottom: 12 }}>
-          {PAGES.slice(0, 6).map(p => {
+          {PAGES.slice(0, 7).map(p => {
             const active = page === p.key;
             const Icon = p.icon;
             return (
@@ -124,7 +128,7 @@ export function App() {
             color: 'rgba(255,255,255,0.42)', padding: '18px 22px 8px',
           }}>Admin</div>
 
-          {PAGES.slice(6).map(p => {
+          {PAGES.slice(7).map(p => {
             const active = page === p.key;
             const Icon = p.icon;
             return (
