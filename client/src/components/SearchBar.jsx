@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { api } from '../api.js';
 import { fmt } from '../format.js';
 
-const EMPTY = { members: [], leads: [], contacts: [] };
+const EMPTY = { members: [], leads: [], legislators: [], contacts: [] };
 
 export function SearchBar() {
   const [q, setQ] = useState('');
@@ -35,6 +35,7 @@ export function SearchBar() {
   const flat = [
     ...results.members.map(m => ({ kind: 'member', id: m.id, label: m.businessName, sub: [m.ownerName, m.county, m.email].filter(Boolean).join(' · ') })),
     ...results.leads.map(l => ({ kind: 'lead', id: l.id, label: l.businessName, sub: [l.ownerName, l.stage, l.county].filter(Boolean).join(' · ') })),
+    ...results.legislators.map(l => ({ kind: 'legislator', id: l.id, label: l.name, sub: [l.chamber, l.district ? `District ${l.district}` : '', l.party, l.classification, l.grade].filter(Boolean).join(' · ') })),
     ...results.contacts.map(c => ({ kind: 'contact', id: c.id, entityType: c.entityType, entityId: c.entityId, label: c.entityName || 'Contact', sub: `${fmt.date(c.contactDate)} · ${c.contactType || ''} · ${(c.summary || '').slice(0, 50)}` })),
   ];
 
@@ -44,7 +45,7 @@ export function SearchBar() {
     if (item.kind === 'contact') {
       location.hash = 'contacts';
     } else {
-      const page = item.kind === 'member' ? 'members' : 'leads';
+      const page = item.kind === 'member' ? 'members' : item.kind === 'legislator' ? 'legislators' : 'leads';
       sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: item.kind, id: item.id }));
       location.hash = page;
       window.dispatchEvent(new Event('crm:openRecord'));
@@ -87,13 +88,15 @@ export function SearchBar() {
             ? [item.ownerName, item.county, item.email].filter(Boolean).join(' · ')
             : kind === 'lead'
               ? [item.ownerName, item.stage, item.county].filter(Boolean).join(' · ')
-              : `${fmt.date(item.contactDate)} · ${item.contactType || ''} · ${(item.summary || '').slice(0, 50)}`;
+              : kind === 'legislator'
+                ? [item.chamber, item.district ? `District ${item.district}` : '', item.party, item.classification, item.grade].filter(Boolean).join(' · ')
+                : `${fmt.date(item.contactDate)} · ${item.contactType || ''} · ${(item.summary || '').slice(0, 50)}`;
           return (
             <div key={`${kind}-${item.id}`} style={itemStyle(activeIdx === idx)}
               onMouseEnter={() => setActiveIdx(idx)}
               onMouseDown={(e) => { e.preventDefault(); pick(flat[idx]); }}>
               <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--color-navy)' }}>
-                {kind === 'contact' ? (item.entityName || 'Contact') : item.businessName}
+                {kind === 'contact' ? (item.entityName || 'Contact') : kind === 'legislator' ? item.name : item.businessName}
               </div>
               {sub && <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: 1 }}>{sub}</div>}
             </div>
@@ -113,7 +116,7 @@ export function SearchBar() {
         onChange={e => { setQ(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         onKeyDown={onKeyDown}
-        placeholder="Search members, leads, contacts…"
+        placeholder="Search members, leads, legislators..."
         style={{
           width: '100%', padding: '9px 12px', borderRadius: 6, border: 'none',
           background: 'rgba(255,255,255,0.12)', color: '#fff',
@@ -137,6 +140,7 @@ export function SearchBar() {
             <>
               {renderSection('Members', results.members, 'member')}
               {renderSection('Leads', results.leads, 'lead')}
+              {renderSection('Legislators', results.legislators, 'legislator')}
               {renderSection('Contact Log', results.contacts, 'contact')}
             </>
           )}

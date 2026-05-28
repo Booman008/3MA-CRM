@@ -43,7 +43,7 @@ export function ContactLog() {
   const jumpToEntity = (c) => {
     if (!c.entityType || !c.entityId) return;
     sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: c.entityType, id: c.entityId }));
-    location.hash = c.entityType === 'member' ? 'members' : 'leads';
+    location.hash = c.entityType === 'member' ? 'members' : c.entityType === 'legislator' ? 'legislators' : 'leads';
     window.dispatchEvent(new Event('crm:openRecord'));
   };
 
@@ -72,8 +72,8 @@ export function ContactLog() {
               <div key={c.id} style={{ ...S.card, display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                 <div style={{
                   width: 42, height: 42, borderRadius: '50%',
-                  background: c.entityType === 'member' ? 'var(--color-callout-gold-bg)' : 'var(--color-callout-navy-bg)',
-                  color: c.entityType === 'member' ? 'var(--color-gold)' : 'var(--color-navy)',
+                  background: c.entityType === 'member' ? 'var(--color-callout-gold-bg)' : c.entityType === 'legislator' ? 'var(--color-callout-red-bg)' : 'var(--color-callout-navy-bg)',
+                  color: c.entityType === 'member' ? 'var(--color-gold)' : c.entityType === 'legislator' ? 'var(--color-red)' : 'var(--color-navy)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '1.2rem', flexShrink: 0,
                 }}>{typeIcon[c.contactType] || '•'}</div>
@@ -82,7 +82,10 @@ export function ContactLog() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       <strong style={{ cursor: c.entityId ? 'pointer' : 'default', color: 'var(--color-navy)', fontSize: '0.95rem' }}
                         onClick={() => jumpToEntity(c)}>{c.entityName || 'Unknown'}</strong>
-                      <span style={{ ...S.badge(c.entityType === 'member' ? 'var(--color-gold)' : 'var(--color-navy)'), color: c.entityType === 'member' ? 'var(--color-navy)' : '#fff' }}>{c.entityType}</span>
+                      <span style={{
+                        ...S.badge(c.entityType === 'member' ? 'var(--color-gold)' : c.entityType === 'legislator' ? 'var(--color-red)' : 'var(--color-navy)'),
+                        color: c.entityType === 'member' ? 'var(--color-navy)' : '#fff',
+                      }}>{c.entityType}</span>
                       <span style={{ ...S.badge(badgeBg), color: badgeText }}>{c.contactType}</span>
                       {directionLabel && <span style={S.badge('var(--color-muted)')}>{directionLabel}</span>}
                     </div>

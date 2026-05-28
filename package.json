@@ -6,6 +6,8 @@
   "scripts": {
     "build": "node scripts/build-client.js",
     "crm:reset-data": "node scripts/reset-crm-entity-data.js",
+    "legislators:import": "node scripts/import-legislators-from-csv.js --file \"3MA Mississippi Legislature Tracksheet - Scorecard_Public (1).csv\" --dry-run",
+    "legislators:import:apply": "node scripts/import-legislators-from-csv.js --file \"3MA Mississippi Legislature Tracksheet - Scorecard_Public (1).csv\" --apply",
     "leads:reconcile": "node scripts/reconcile-leads-from-csv.js",
     "members:reconcile": "node scripts/reconcile-members-from-csv.js",
     "start": "node server/index.js",

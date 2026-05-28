@@ -34,6 +34,7 @@ app.get('/api/health', (req, res) => {
 });
 app.use('/api/members', require('./routes/members'));
 app.use('/api/leads', require('./routes/leads'));
+app.use('/api/legislators', require('./routes/legislators'));
 app.use('/api/contacts', require('./routes/contacts'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/settings', require('./routes/settings'));
