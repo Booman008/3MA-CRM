@@ -23,10 +23,11 @@ export function ContactFormModal({ onClose, onSaved, initial = {}, lockEntity = 
 
   useEffect(() => {
     if (lockEntity) return;
-    Promise.all([api('/members'), api('/leads')]).then(([m, l]) => {
+    Promise.all([api('/members'), api('/leads'), api('/legislators')]).then(([m, l, legislators]) => {
       setEntities([
         ...m.map(x => ({ id: x.id, type: 'member', name: x.businessName })),
         ...l.map(x => ({ id: x.id, type: 'lead', name: x.businessName })),
+        ...legislators.map(x => ({ id: x.id, type: 'legislator', name: x.name })),
       ]);
     });
   }, [lockEntity]);
@@ -68,6 +69,9 @@ export function ContactFormModal({ onClose, onSaved, initial = {}, lockEntity = 
             </optgroup>}
             {entities.filter(e => e.type === 'lead').length > 0 && <optgroup label="Leads">
               {entities.filter(e => e.type === 'lead').map(e => <option key={`l${e.id}`} value={`lead:${e.id}`}>{e.name}</option>)}
+            </optgroup>}
+            {entities.filter(e => e.type === 'legislator').length > 0 && <optgroup label="Legislators">
+              {entities.filter(e => e.type === 'legislator').map(e => <option key={`leg${e.id}`} value={`legislator:${e.id}`}>{e.name}</option>)}
             </optgroup>}
           </select>
         </Field>

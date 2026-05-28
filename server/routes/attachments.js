@@ -36,7 +36,7 @@ router.post('/', upload.single('file'), async (req, res) => {
 
   const { entityType, entityId } = req.body;
   if (!entityType || !entityId) return res.status(400).json({ error: 'entityType and entityId are required' });
-  if (!['member', 'lead'].includes(entityType)) return res.status(400).json({ error: 'Invalid entityType' });
+  if (!['member', 'lead', 'legislator'].includes(entityType)) return res.status(400).json({ error: 'Invalid entityType' });
 
   const safeName = req.file.originalname.replace(/[^\w.\-]/g, '_');
   const key = `${entityType}/${entityId}/${Date.now()}-${crypto.randomBytes(4).toString('hex')}-${safeName}`;

@@ -53,10 +53,11 @@ export function Tasks() {
   useEffect(() => { load(); }, [load]);
 
   const loadEntities = () => {
-    Promise.all([api('/members'), api('/leads')]).then(([m, l]) => {
+    Promise.all([api('/members'), api('/leads'), api('/legislators')]).then(([m, l, legislators]) => {
       setEntities([
         ...m.map(x => ({ id: x.id, type: 'member', name: x.businessName })),
         ...l.map(x => ({ id: x.id, type: 'lead', name: x.businessName })),
+        ...legislators.map(x => ({ id: x.id, type: 'legislator', name: x.name })),
       ]);
     });
   };
@@ -101,7 +102,7 @@ export function Tasks() {
   const jumpToEntity = (task) => {
     if (!task.entityType || !task.entityId) return;
     sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: task.entityType, id: task.entityId }));
-    location.hash = task.entityType === 'member' ? 'members' : 'leads';
+    location.hash = task.entityType === 'member' ? 'members' : task.entityType === 'legislator' ? 'legislators' : 'leads';
     window.dispatchEvent(new Event('crm:openRecord'));
   };
 
@@ -212,6 +213,9 @@ export function Tasks() {
               </optgroup>}
               {entities.filter(e => e.type === 'lead').length > 0 && <optgroup label="Leads">
                 {entities.filter(e => e.type === 'lead').map(e => <option key={`l${e.id}`} value={`lead:${e.id}`}>{e.name}</option>)}
+              </optgroup>}
+              {entities.filter(e => e.type === 'legislator').length > 0 && <optgroup label="Legislators">
+                {entities.filter(e => e.type === 'legislator').map(e => <option key={`leg${e.id}`} value={`legislator:${e.id}`}>{e.name}</option>)}
               </optgroup>}
             </select>
           </Field>

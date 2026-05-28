@@ -121,7 +121,7 @@ async function ready() {
         CREATE TABLE IF NOT EXISTS contact_log (
           id SERIAL PRIMARY KEY,
           "entityId" INTEGER NOT NULL,
-          "entityType" TEXT NOT NULL CHECK ("entityType" IN ('member', 'lead')),
+          "entityType" TEXT NOT NULL CHECK ("entityType" IN ('member', 'lead', 'legislator')),
           "entityName" TEXT,
           "contactDate" TEXT NOT NULL,
           "contactType" TEXT,
@@ -133,7 +133,7 @@ async function ready() {
 
         CREATE TABLE IF NOT EXISTS attachments (
           id SERIAL PRIMARY KEY,
-          "entityType" TEXT NOT NULL CHECK ("entityType" IN ('member', 'lead')),
+          "entityType" TEXT NOT NULL CHECK ("entityType" IN ('member', 'lead', 'legislator')),
           "entityId" INTEGER NOT NULL,
           filename TEXT NOT NULL,
           "mimeType" TEXT,
@@ -152,7 +152,7 @@ async function ready() {
           completed BOOLEAN NOT NULL DEFAULT FALSE,
           "completedAt" TIMESTAMP,
           priority TEXT DEFAULT 'Medium',
-          "entityType" TEXT CHECK ("entityType" IN ('member', 'lead')),
+          "entityType" TEXT CHECK ("entityType" IN ('member', 'lead', 'legislator')),
           "entityId" INTEGER,
           "entityName" TEXT,
           "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -160,6 +160,51 @@ async function ready() {
 
         CREATE INDEX IF NOT EXISTS idx_tasks_due ON tasks ("dueDate") WHERE completed = FALSE;
         CREATE INDEX IF NOT EXISTS idx_tasks_entity ON tasks ("entityType", "entityId");
+
+        CREATE TABLE IF NOT EXISTS legislators (
+          id SERIAL PRIMARY KEY,
+          name TEXT NOT NULL,
+          slug TEXT UNIQUE,
+          chamber TEXT CHECK (chamber IN ('House', 'Senate')),
+          district TEXT,
+          party TEXT,
+          score NUMERIC(6, 2),
+          grade TEXT,
+          classification TEXT,
+          "historicalVoteScore" NUMERIC(8, 2),
+          summary TEXT,
+          "contactLink" TEXT,
+          "eligibleWeight" NUMERIC(8, 2),
+          publish BOOLEAN DEFAULT TRUE,
+          featured BOOLEAN DEFAULT FALSE,
+          "voteRecord" JSONB DEFAULT '{}'::jsonb,
+          notes TEXT,
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_legislators_name ON legislators (name);
+        CREATE INDEX IF NOT EXISTS idx_legislators_chamber ON legislators (chamber);
+        CREATE INDEX IF NOT EXISTS idx_legislators_classification ON legislators (classification);
+        CREATE INDEX IF NOT EXISTS idx_legislators_vote_record ON legislators USING GIN ("voteRecord");
+
+        CREATE TABLE IF NOT EXISTS legislator_events (
+          id SERIAL PRIMARY KEY,
+          "legislatorId" INTEGER NOT NULL REFERENCES legislators(id) ON DELETE CASCADE,
+          title TEXT NOT NULL,
+          "eventDate" DATE NOT NULL,
+          "startTime" TEXT,
+          location TEXT,
+          topic TEXT,
+          organizer TEXT,
+          status TEXT NOT NULL DEFAULT 'planned' CHECK (status IN ('planned', 'confirmed', 'completed', 'canceled')),
+          notes TEXT,
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_legislator_events_legislator ON legislator_events ("legislatorId");
+        CREATE INDEX IF NOT EXISTS idx_legislator_events_date ON legislator_events ("eventDate");
 
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS subject TEXT;
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS direction TEXT CHECK (direction IN ('inbound', 'outbound'));
@@ -189,6 +234,52 @@ async function ready() {
           "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+      `);
+
+      await client.query(`
+        DO $$
+        DECLARE
+          constraint_name text;
+        BEGIN
+          FOR constraint_name IN
+            SELECT conname
+            FROM pg_constraint
+            WHERE conrelid = 'contact_log'::regclass
+              AND contype = 'c'
+              AND pg_get_constraintdef(oid) LIKE '%entityType%'
+          LOOP
+            EXECUTE format('ALTER TABLE contact_log DROP CONSTRAINT IF EXISTS %I', constraint_name);
+          END LOOP;
+          ALTER TABLE contact_log
+            ADD CONSTRAINT contact_log_entity_type_check
+            CHECK ("entityType" IN ('member', 'lead', 'legislator'));
+
+          FOR constraint_name IN
+            SELECT conname
+            FROM pg_constraint
+            WHERE conrelid = 'attachments'::regclass
+              AND contype = 'c'
+              AND pg_get_constraintdef(oid) LIKE '%entityType%'
+          LOOP
+            EXECUTE format('ALTER TABLE attachments DROP CONSTRAINT IF EXISTS %I', constraint_name);
+          END LOOP;
+          ALTER TABLE attachments
+            ADD CONSTRAINT attachments_entity_type_check
+            CHECK ("entityType" IN ('member', 'lead', 'legislator'));
+
+          FOR constraint_name IN
+            SELECT conname
+            FROM pg_constraint
+            WHERE conrelid = 'tasks'::regclass
+              AND contype = 'c'
+              AND pg_get_constraintdef(oid) LIKE '%entityType%'
+          LOOP
+            EXECUTE format('ALTER TABLE tasks DROP CONSTRAINT IF EXISTS %I', constraint_name);
+          END LOOP;
+          ALTER TABLE tasks
+            ADD CONSTRAINT tasks_entity_type_check
+            CHECK ("entityType" IN ('member', 'lead', 'legislator'));
+        END $$;
       `);
 
       await seedDefaultSettings(client);

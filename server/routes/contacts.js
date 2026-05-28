@@ -64,8 +64,8 @@ router.post('/', async (req, res) => {
   if (!entityId || !entityType || !contactDate) {
     return res.status(400).json({ error: 'entityId, entityType, and contactDate are required' });
   }
-  if (entityType !== 'member' && entityType !== 'lead') {
-    return res.status(400).json({ error: 'entityType must be "member" or "lead"' });
+  if (!['member', 'lead', 'legislator'].includes(entityType)) {
+    return res.status(400).json({ error: 'entityType must be "member", "lead", or "legislator"' });
   }
   if (direction && direction !== 'inbound' && direction !== 'outbound') {
     return res.status(400).json({ error: 'direction must be "inbound" or "outbound"' });

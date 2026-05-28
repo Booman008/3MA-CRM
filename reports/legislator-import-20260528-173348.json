@@ -1,0 +1,1755 @@
+{
+  "generatedAt": "2026-05-28T22:33:48.221Z",
+  "mode": "dry-run",
+  "file": "C:\\Users\\Henry\\Desktop\\AI Coding Projects\\3MA-CRM\\3MA Mississippi Legislature Tracksheet - Scorecard_Public (1).csv",
+  "summary": {
+    "csvRows": 174,
+    "existingLegislators": 174,
+    "creates": 0,
+    "updates": 174,
+    "unchangedExisting": 0
+  },
+  "plans": [
+    {
+      "action": "update",
+      "existingId": 1,
+      "csvRowNumber": 2,
+      "name": "Dan Eubanks",
+      "chamber": "House",
+      "district": "25",
+      "slug": "dan-eubanks",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 2,
+      "csvRowNumber": 3,
+      "name": "Lester Carpenter",
+      "chamber": "House",
+      "district": "1",
+      "slug": "lester-carpenter",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 3,
+      "csvRowNumber": 4,
+      "name": "Brad Mattox",
+      "chamber": "House",
+      "district": "2",
+      "slug": "brad-mattox",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 4,
+      "csvRowNumber": 5,
+      "name": "William Tracy Arnold",
+      "chamber": "House",
+      "district": "3",
+      "slug": "william-tracy-arnold",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 5,
+      "csvRowNumber": 6,
+      "name": "Jody Steverson",
+      "chamber": "House",
+      "district": "4",
+      "slug": "jody-steverson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 6,
+      "csvRowNumber": 7,
+      "name": "John Faulkner",
+      "chamber": "House",
+      "district": "5",
+      "slug": "john-faulkner",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 7,
+      "csvRowNumber": 8,
+      "name": "Justin Keen",
+      "chamber": "House",
+      "district": "6",
+      "slug": "justin-keen",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 8,
+      "csvRowNumber": 9,
+      "name": "Kimberly Remak",
+      "chamber": "House",
+      "district": "7",
+      "slug": "kimberly-remak",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 9,
+      "csvRowNumber": 10,
+      "name": "Trey Lamar, III",
+      "chamber": "House",
+      "district": "8",
+      "slug": "trey-lamar-iii",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 10,
+      "csvRowNumber": 11,
+      "name": "Cedric Burnett",
+      "chamber": "House",
+      "district": "9",
+      "slug": "cedric-burnett",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 11,
+      "csvRowNumber": 12,
+      "name": "Josh Hawkins",
+      "chamber": "House",
+      "district": "10",
+      "slug": "josh-hawkins",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 12,
+      "csvRowNumber": 13,
+      "name": "Lataisha Jackson",
+      "chamber": "House",
+      "district": "11",
+      "slug": "lataisha-jackson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 13,
+      "csvRowNumber": 14,
+      "name": "Clay Deweese",
+      "chamber": "House",
+      "district": "12",
+      "slug": "clay-deweese",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 14,
+      "csvRowNumber": 15,
+      "name": "Steve Massengill",
+      "chamber": "House",
+      "district": "13",
+      "slug": "steve-massengill",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 15,
+      "csvRowNumber": 16,
+      "name": "Sam Creekmore IV",
+      "chamber": "House",
+      "district": "14",
+      "slug": "sam-creekmore-iv",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 16,
+      "csvRowNumber": 17,
+      "name": "Beth Luther Waldo",
+      "chamber": "House",
+      "district": "15",
+      "slug": "beth-luther-waldo",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 17,
+      "csvRowNumber": 18,
+      "name": "Rickey Thompson",
+      "chamber": "House",
+      "district": "16",
+      "slug": "rickey-thompson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 18,
+      "csvRowNumber": 19,
+      "name": "Shane Aguirre",
+      "chamber": "House",
+      "district": "17",
+      "slug": "shane-aguirre",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 19,
+      "csvRowNumber": 20,
+      "name": "Jerry Turner",
+      "chamber": "House",
+      "district": "18",
+      "slug": "jerry-turner",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 20,
+      "csvRowNumber": 21,
+      "name": "Randy Boyd",
+      "chamber": "House",
+      "district": "19",
+      "slug": "randy-boyd",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 21,
+      "csvRowNumber": 22,
+      "name": "Rodney Hall",
+      "chamber": "House",
+      "district": "20",
+      "slug": "rodney-hall",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 22,
+      "csvRowNumber": 23,
+      "name": "Donnie Bell",
+      "chamber": "House",
+      "district": "21",
+      "slug": "donnie-bell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 23,
+      "csvRowNumber": 24,
+      "name": "Justin Crosby",
+      "chamber": "House",
+      "district": "22",
+      "slug": "justin-crosby",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 24,
+      "csvRowNumber": 25,
+      "name": "Perry Bailey",
+      "chamber": "House",
+      "district": "23",
+      "slug": "perry-bailey",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 25,
+      "csvRowNumber": 26,
+      "name": "Jeff Hale",
+      "chamber": "House",
+      "district": "24",
+      "slug": "jeff-hale",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 26,
+      "csvRowNumber": 27,
+      "name": "Otha Williams",
+      "chamber": "House",
+      "district": "26",
+      "slug": "otha-williams",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 27,
+      "csvRowNumber": 28,
+      "name": "Kenji Holloway",
+      "chamber": "House",
+      "district": "27",
+      "slug": "kenji-holloway",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 28,
+      "csvRowNumber": 29,
+      "name": "W.I. Harris",
+      "chamber": "House",
+      "district": "28",
+      "slug": "wi-harris",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 29,
+      "csvRowNumber": 30,
+      "name": "Robert Sanders",
+      "chamber": "House",
+      "district": "29",
+      "slug": "robert-sanders",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 30,
+      "csvRowNumber": 31,
+      "name": "Tracey Rosebud",
+      "chamber": "House",
+      "district": "30",
+      "slug": "tracey-rosebud",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 31,
+      "csvRowNumber": 32,
+      "name": "Otis Anthony",
+      "chamber": "House",
+      "district": "31",
+      "slug": "otis-anthony",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 32,
+      "csvRowNumber": 33,
+      "name": "Solomon Osborne",
+      "chamber": "House",
+      "district": "32",
+      "slug": "solomon-osborne",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 33,
+      "csvRowNumber": 34,
+      "name": "Jim Estrada",
+      "chamber": "House",
+      "district": "33",
+      "slug": "jim-estrada",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 34,
+      "csvRowNumber": 35,
+      "name": "Kevin Horan",
+      "chamber": "House",
+      "district": "34",
+      "slug": "kevin-horan",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 35,
+      "csvRowNumber": 36,
+      "name": "Joey Hood",
+      "chamber": "House",
+      "district": "35",
+      "slug": "joey-hood",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 36,
+      "csvRowNumber": 37,
+      "name": "Karl Gibbs",
+      "chamber": "House",
+      "district": "36",
+      "slug": "karl-gibbs",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 37,
+      "csvRowNumber": 38,
+      "name": "Andy Boyd",
+      "chamber": "House",
+      "district": "37",
+      "slug": "andy-boyd",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 38,
+      "csvRowNumber": 39,
+      "name": "Cheikh Taylor",
+      "chamber": "House",
+      "district": "38",
+      "slug": "cheikh-taylor",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 39,
+      "csvRowNumber": 40,
+      "name": "Dana McLean",
+      "chamber": "House",
+      "district": "39",
+      "slug": "dana-mclean",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 40,
+      "csvRowNumber": 41,
+      "name": "Hester Jackson McCray",
+      "chamber": "House",
+      "district": "40",
+      "slug": "hester-jackson-mccray",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 41,
+      "csvRowNumber": 42,
+      "name": "Kabir Karriem",
+      "chamber": "House",
+      "district": "41",
+      "slug": "kabir-karriem",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 42,
+      "csvRowNumber": 43,
+      "name": "Carl Mickens",
+      "chamber": "House",
+      "district": "42",
+      "slug": "carl-mickens",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 43,
+      "csvRowNumber": 44,
+      "name": "Rob Roberson",
+      "chamber": "House",
+      "district": "43",
+      "slug": "rob-roberson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 44,
+      "csvRowNumber": 45,
+      "name": "Scott Bounds",
+      "chamber": "House",
+      "district": "44",
+      "slug": "scott-bounds",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 45,
+      "csvRowNumber": 46,
+      "name": "Keith Jackson",
+      "chamber": "House",
+      "district": "45",
+      "slug": "keith-jackson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 46,
+      "csvRowNumber": 47,
+      "name": "Karl Oliver",
+      "chamber": "House",
+      "district": "46",
+      "slug": "karl-oliver",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 47,
+      "csvRowNumber": 48,
+      "name": "Bryant Clark",
+      "chamber": "House",
+      "district": "47",
+      "slug": "bryant-clark",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 48,
+      "csvRowNumber": 49,
+      "name": "Jason White",
+      "chamber": "House",
+      "district": "48",
+      "slug": "jason-white",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 49,
+      "csvRowNumber": 50,
+      "name": "Willie Bailey",
+      "chamber": "House",
+      "district": "49",
+      "slug": "willie-bailey",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 50,
+      "csvRowNumber": 51,
+      "name": "John W. Hines, Sr.",
+      "chamber": "House",
+      "district": "50",
+      "slug": "john-w-hines-sr",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 51,
+      "csvRowNumber": 52,
+      "name": "Timaka James-Jones",
+      "chamber": "House",
+      "district": "51",
+      "slug": "timaka-jamesjones",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 52,
+      "csvRowNumber": 53,
+      "name": "Bill Kinkade",
+      "chamber": "House",
+      "district": "52",
+      "slug": "bill-kinkade",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 53,
+      "csvRowNumber": 54,
+      "name": "Vince Mangold",
+      "chamber": "House",
+      "district": "53",
+      "slug": "vince-mangold",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 54,
+      "csvRowNumber": 55,
+      "name": "Kevin Ford",
+      "chamber": "House",
+      "district": "54",
+      "slug": "kevin-ford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 55,
+      "csvRowNumber": 56,
+      "name": "Oscar Denton",
+      "chamber": "House",
+      "district": "55",
+      "slug": "oscar-denton",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 56,
+      "csvRowNumber": 57,
+      "name": "Clay Mansell",
+      "chamber": "House",
+      "district": "56",
+      "slug": "clay-mansell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 57,
+      "csvRowNumber": 58,
+      "name": "Lawrence Blackmon",
+      "chamber": "House",
+      "district": "57",
+      "slug": "lawrence-blackmon",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 58,
+      "csvRowNumber": 59,
+      "name": "Jonathan McMillan",
+      "chamber": "House",
+      "district": "58",
+      "slug": "jonathan-mcmillan",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 59,
+      "csvRowNumber": 60,
+      "name": "Brent Powell",
+      "chamber": "House",
+      "district": "59",
+      "slug": "brent-powell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 60,
+      "csvRowNumber": 61,
+      "name": "Fred Shanks",
+      "chamber": "House",
+      "district": "60",
+      "slug": "fred-shanks",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 61,
+      "csvRowNumber": 62,
+      "name": "Gene Newman",
+      "chamber": "House",
+      "district": "61",
+      "slug": "gene-newman",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 62,
+      "csvRowNumber": 63,
+      "name": "Lance Varner",
+      "chamber": "House",
+      "district": "62",
+      "slug": "lance-varner",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 63,
+      "csvRowNumber": 64,
+      "name": "Stephanie Foster",
+      "chamber": "House",
+      "district": "63",
+      "slug": "stephanie-foster",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 64,
+      "csvRowNumber": 65,
+      "name": "Shanda Yates",
+      "chamber": "House",
+      "district": "64",
+      "slug": "shanda-yates",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 65,
+      "csvRowNumber": 66,
+      "name": "Christopher Bell",
+      "chamber": "House",
+      "district": "65",
+      "slug": "christopher-bell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 66,
+      "csvRowNumber": 67,
+      "name": "Fabian Nelson",
+      "chamber": "House",
+      "district": "66",
+      "slug": "fabian-nelson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 67,
+      "csvRowNumber": 68,
+      "name": "Earle Banks",
+      "chamber": "House",
+      "district": "67",
+      "slug": "earle-banks",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 68,
+      "csvRowNumber": 69,
+      "name": "Zakiya Summers",
+      "chamber": "House",
+      "district": "68",
+      "slug": "zakiya-summers",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 69,
+      "csvRowNumber": 70,
+      "name": "Tamarra Butler-Washington",
+      "chamber": "House",
+      "district": "69",
+      "slug": "tamarra-butlerwashington",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 70,
+      "csvRowNumber": 71,
+      "name": "Bo Brown",
+      "chamber": "House",
+      "district": "70",
+      "slug": "bo-brown",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 71,
+      "csvRowNumber": 72,
+      "name": "Ronnie Crudup",
+      "chamber": "House",
+      "district": "71",
+      "slug": "ronnie-crudup",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 72,
+      "csvRowNumber": 73,
+      "name": "Justis Gibbs",
+      "chamber": "House",
+      "district": "72",
+      "slug": "justis-gibbs",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 73,
+      "csvRowNumber": 74,
+      "name": "Jill Ford",
+      "chamber": "House",
+      "district": "73",
+      "slug": "jill-ford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 74,
+      "csvRowNumber": 75,
+      "name": "Lee Yancey",
+      "chamber": "House",
+      "district": "74",
+      "slug": "lee-yancey",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 75,
+      "csvRowNumber": 76,
+      "name": "Celeste Hurst",
+      "chamber": "House",
+      "district": "75",
+      "slug": "celeste-hurst",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 76,
+      "csvRowNumber": 77,
+      "name": "Gregory Holloway, Sr.",
+      "chamber": "House",
+      "district": "76",
+      "slug": "gregory-holloway-sr",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 77,
+      "csvRowNumber": 78,
+      "name": "Price Wallace",
+      "chamber": "House",
+      "district": "77",
+      "slug": "price-wallace",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 78,
+      "csvRowNumber": 79,
+      "name": "Randy Rushing",
+      "chamber": "House",
+      "district": "78",
+      "slug": "randy-rushing",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 79,
+      "csvRowNumber": 80,
+      "name": "Mark Tullos",
+      "chamber": "House",
+      "district": "79",
+      "slug": "mark-tullos",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 80,
+      "csvRowNumber": 81,
+      "name": "Omeria Scott",
+      "chamber": "House",
+      "district": "80",
+      "slug": "omeria-scott",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 81,
+      "csvRowNumber": 82,
+      "name": "Stephen A. Horne",
+      "chamber": "House",
+      "district": "81",
+      "slug": "stephen-a-horne",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 82,
+      "csvRowNumber": 83,
+      "name": "Gregory Elliot",
+      "chamber": "House",
+      "district": "82",
+      "slug": "gregory-elliot",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 83,
+      "csvRowNumber": 84,
+      "name": "Billy Adam Calvert",
+      "chamber": "House",
+      "district": "83",
+      "slug": "billy-adam-calvert",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 84,
+      "csvRowNumber": 85,
+      "name": "Troy Smith",
+      "chamber": "House",
+      "district": "84",
+      "slug": "troy-smith",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 85,
+      "csvRowNumber": 86,
+      "name": "Jeffery Harness",
+      "chamber": "House",
+      "district": "85",
+      "slug": "jeffery-harness",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 86,
+      "csvRowNumber": 87,
+      "name": "Shane Barnett",
+      "chamber": "House",
+      "district": "86",
+      "slug": "shane-barnett",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 87,
+      "csvRowNumber": 88,
+      "name": "Joseph Tubb",
+      "chamber": "House",
+      "district": "87",
+      "slug": "joseph-tubb",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 88,
+      "csvRowNumber": 89,
+      "name": "Charles Blackwell",
+      "chamber": "House",
+      "district": "88",
+      "slug": "charles-blackwell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 89,
+      "csvRowNumber": 90,
+      "name": "Donnie Scoggin",
+      "chamber": "House",
+      "district": "89",
+      "slug": "donnie-scoggin",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 90,
+      "csvRowNumber": 91,
+      "name": "Noah Sanford",
+      "chamber": "House",
+      "district": "90",
+      "slug": "noah-sanford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 91,
+      "csvRowNumber": 92,
+      "name": "Bob Evans",
+      "chamber": "House",
+      "district": "91",
+      "slug": "bob-evans",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 92,
+      "csvRowNumber": 93,
+      "name": "Becky Currie",
+      "chamber": "House",
+      "district": "92",
+      "slug": "becky-currie",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 93,
+      "csvRowNumber": 94,
+      "name": "Timmy Ladner",
+      "chamber": "House",
+      "district": "93",
+      "slug": "timmy-ladner",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 94,
+      "csvRowNumber": 95,
+      "name": "Robert Johnson III",
+      "chamber": "House",
+      "district": "94",
+      "slug": "robert-johnson-iii",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 95,
+      "csvRowNumber": 96,
+      "name": "Jay McKnight",
+      "chamber": "House",
+      "district": "95",
+      "slug": "jay-mcknight",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 96,
+      "csvRowNumber": 97,
+      "name": "Angela Cockerham",
+      "chamber": "House",
+      "district": "96",
+      "slug": "angela-cockerham",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 97,
+      "csvRowNumber": 98,
+      "name": "Sam Mims, V",
+      "chamber": "House",
+      "district": "97",
+      "slug": "sam-mims-v",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 98,
+      "csvRowNumber": 99,
+      "name": "Daryl Porter",
+      "chamber": "House",
+      "district": "98",
+      "slug": "daryl-porter",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 99,
+      "csvRowNumber": 100,
+      "name": "Bill Pigott",
+      "chamber": "House",
+      "district": "99",
+      "slug": "bill-pigott",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 100,
+      "csvRowNumber": 101,
+      "name": "Ken Morgan",
+      "chamber": "House",
+      "district": "100",
+      "slug": "ken-morgan",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 101,
+      "csvRowNumber": 102,
+      "name": "Kent McCarty",
+      "chamber": "House",
+      "district": "101",
+      "slug": "kent-mccarty",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 102,
+      "csvRowNumber": 103,
+      "name": "Missy McGee",
+      "chamber": "House",
+      "district": "102",
+      "slug": "missy-mcgee",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 103,
+      "csvRowNumber": 104,
+      "name": "Percy Watson",
+      "chamber": "House",
+      "district": "103",
+      "slug": "percy-watson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 104,
+      "csvRowNumber": 105,
+      "name": "Larry Byrd",
+      "chamber": "House",
+      "district": "104",
+      "slug": "larry-byrd",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 105,
+      "csvRowNumber": 106,
+      "name": "Elliot Burch",
+      "chamber": "House",
+      "district": "105",
+      "slug": "elliot-burch",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 106,
+      "csvRowNumber": 107,
+      "name": "Jansen Owen",
+      "chamber": "House",
+      "district": "106",
+      "slug": "jansen-owen",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 107,
+      "csvRowNumber": 108,
+      "name": "Steve Lott",
+      "chamber": "House",
+      "district": "107",
+      "slug": "steve-lott",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 108,
+      "csvRowNumber": 109,
+      "name": "Stacey Hobgood-Wilkes",
+      "chamber": "House",
+      "district": "108",
+      "slug": "stacey-hobgoodwilkes",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 109,
+      "csvRowNumber": 110,
+      "name": "Manly Barton",
+      "chamber": "House",
+      "district": "109",
+      "slug": "manly-barton",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 110,
+      "csvRowNumber": 111,
+      "name": "Jeramey Anderson",
+      "chamber": "House",
+      "district": "110",
+      "slug": "jeramey-anderson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 111,
+      "csvRowNumber": 112,
+      "name": "Jimmy Fondren",
+      "chamber": "House",
+      "district": "111",
+      "slug": "jimmy-fondren",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 112,
+      "csvRowNumber": 113,
+      "name": "John Read",
+      "chamber": "House",
+      "district": "112",
+      "slug": "john-read",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 113,
+      "csvRowNumber": 114,
+      "name": "Henry Zuber III",
+      "chamber": "House",
+      "district": "113",
+      "slug": "henry-zuber-iii",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 114,
+      "csvRowNumber": 115,
+      "name": "Jeffrey Guice",
+      "chamber": "House",
+      "district": "114",
+      "slug": "jeffrey-guice",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 115,
+      "csvRowNumber": 116,
+      "name": "Zachary Grady",
+      "chamber": "House",
+      "district": "115",
+      "slug": "zachary-grady",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 116,
+      "csvRowNumber": 117,
+      "name": "Casey Eure",
+      "chamber": "House",
+      "district": "116",
+      "slug": "casey-eure",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 117,
+      "csvRowNumber": 118,
+      "name": "Kevin Felsher",
+      "chamber": "House",
+      "district": "117",
+      "slug": "kevin-felsher",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 118,
+      "csvRowNumber": 119,
+      "name": "Greg Haney",
+      "chamber": "House",
+      "district": "118",
+      "slug": "greg-haney",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 119,
+      "csvRowNumber": 120,
+      "name": "Jeffrey Hulum III",
+      "chamber": "House",
+      "district": "119",
+      "slug": "jeffrey-hulum-iii",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 120,
+      "csvRowNumber": 121,
+      "name": "Richard Bennett",
+      "chamber": "House",
+      "district": "120",
+      "slug": "richard-bennett",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 121,
+      "csvRowNumber": 122,
+      "name": "Carolyn Crawford",
+      "chamber": "House",
+      "district": "121",
+      "slug": "carolyn-crawford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 122,
+      "csvRowNumber": 123,
+      "name": "Brent Anderson",
+      "chamber": "House",
+      "district": "122",
+      "slug": "brent-anderson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 123,
+      "csvRowNumber": 124,
+      "name": "Michael McLendon",
+      "chamber": "Senate",
+      "district": "1",
+      "slug": "michael-mclendon",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 124,
+      "csvRowNumber": 125,
+      "name": "Theresa Gillespie Isom",
+      "chamber": "Senate",
+      "district": "2",
+      "slug": "theresa-gillespie-isom",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 125,
+      "csvRowNumber": 126,
+      "name": "Kathy L. Chism",
+      "chamber": "Senate",
+      "district": "3",
+      "slug": "kathy-l-chism",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 126,
+      "csvRowNumber": 127,
+      "name": "Rita Potts Parks",
+      "chamber": "Senate",
+      "district": "4",
+      "slug": "rita-potts-parks",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 127,
+      "csvRowNumber": 128,
+      "name": "Daniel H. Sparks",
+      "chamber": "Senate",
+      "district": "5",
+      "slug": "daniel-h-sparks",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 128,
+      "csvRowNumber": 129,
+      "name": "Chad McMahan",
+      "chamber": "Senate",
+      "district": "6",
+      "slug": "chad-mcmahan",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 129,
+      "csvRowNumber": 130,
+      "name": "Hob Bryan",
+      "chamber": "Senate",
+      "district": "7",
+      "slug": "hob-bryan",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 130,
+      "csvRowNumber": 131,
+      "name": "Benjamin Suber",
+      "chamber": "Senate",
+      "district": "8",
+      "slug": "benjamin-suber",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 131,
+      "csvRowNumber": 132,
+      "name": "Nicole Boyd",
+      "chamber": "Senate",
+      "district": "9",
+      "slug": "nicole-boyd",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 132,
+      "csvRowNumber": 133,
+      "name": "Neil S. Whaley",
+      "chamber": "Senate",
+      "district": "10",
+      "slug": "neil-s-whaley",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 133,
+      "csvRowNumber": 134,
+      "name": "Reginald Jackson",
+      "chamber": "Senate",
+      "district": "11",
+      "slug": "reginald-jackson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 134,
+      "csvRowNumber": 135,
+      "name": "Derrick T. Simmons",
+      "chamber": "Senate",
+      "district": "12",
+      "slug": "derrick-t-simmons",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 135,
+      "csvRowNumber": 136,
+      "name": "Sarita Simmons",
+      "chamber": "Senate",
+      "district": "13",
+      "slug": "sarita-simmons",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 136,
+      "csvRowNumber": 137,
+      "name": "Lydia Graves Chassaniol",
+      "chamber": "Senate",
+      "district": "14",
+      "slug": "lydia-graves-chassaniol",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 137,
+      "csvRowNumber": 138,
+      "name": "Bart Williams",
+      "chamber": "Senate",
+      "district": "15",
+      "slug": "bart-williams",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 138,
+      "csvRowNumber": 139,
+      "name": "Angela Turner-Ford",
+      "chamber": "Senate",
+      "district": "16",
+      "slug": "angela-turnerford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 139,
+      "csvRowNumber": 140,
+      "name": "Chuck Younger",
+      "chamber": "Senate",
+      "district": "17",
+      "slug": "chuck-younger",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 140,
+      "csvRowNumber": 141,
+      "name": "Lane Taylor",
+      "chamber": "Senate",
+      "district": "18",
+      "slug": "lane-taylor",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 141,
+      "csvRowNumber": 142,
+      "name": "Kevin Blackwell",
+      "chamber": "Senate",
+      "district": "19",
+      "slug": "kevin-blackwell",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 142,
+      "csvRowNumber": 143,
+      "name": "Josh Harkins",
+      "chamber": "Senate",
+      "district": "20",
+      "slug": "josh-harkins",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 143,
+      "csvRowNumber": 144,
+      "name": "Bradford Blackmon",
+      "chamber": "Senate",
+      "district": "21",
+      "slug": "bradford-blackmon",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 144,
+      "csvRowNumber": 145,
+      "name": "Joseph Thomas",
+      "chamber": "Senate",
+      "district": "22",
+      "slug": "joseph-thomas",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 145,
+      "csvRowNumber": 146,
+      "name": "Briggs Hopson",
+      "chamber": "Senate",
+      "district": "23",
+      "slug": "briggs-hopson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 146,
+      "csvRowNumber": 147,
+      "name": "Justin Pope",
+      "chamber": "Senate",
+      "district": "24",
+      "slug": "justin-pope",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 147,
+      "csvRowNumber": 148,
+      "name": "J. Walter Michel",
+      "chamber": "Senate",
+      "district": "25",
+      "slug": "j-walter-michel",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 148,
+      "csvRowNumber": 149,
+      "name": "Kameisha Mumford",
+      "chamber": "Senate",
+      "district": "26",
+      "slug": "kameisha-mumford",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 149,
+      "csvRowNumber": 150,
+      "name": "Hillman Terome Frazier",
+      "chamber": "Senate",
+      "district": "27",
+      "slug": "hillman-terome-frazier",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 150,
+      "csvRowNumber": 151,
+      "name": "Sollie B. Norwood",
+      "chamber": "Senate",
+      "district": "28",
+      "slug": "sollie-b-norwood",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 151,
+      "csvRowNumber": 152,
+      "name": "David Blount",
+      "chamber": "Senate",
+      "district": "29",
+      "slug": "david-blount",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 152,
+      "csvRowNumber": 153,
+      "name": "Dean Kirby",
+      "chamber": "Senate",
+      "district": "30",
+      "slug": "dean-kirby",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 153,
+      "csvRowNumber": 154,
+      "name": "Tyler McCaughn",
+      "chamber": "Senate",
+      "district": "31",
+      "slug": "tyler-mccaughn",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 154,
+      "csvRowNumber": 155,
+      "name": "Rod Hickman",
+      "chamber": "Senate",
+      "district": "32",
+      "slug": "rod-hickman",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 155,
+      "csvRowNumber": 156,
+      "name": "Jeff Tate",
+      "chamber": "Senate",
+      "district": "33",
+      "slug": "jeff-tate",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 156,
+      "csvRowNumber": 157,
+      "name": "Juan Barnett",
+      "chamber": "Senate",
+      "district": "34",
+      "slug": "juan-barnett",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 157,
+      "csvRowNumber": 158,
+      "name": "Andy Berry",
+      "chamber": "Senate",
+      "district": "35",
+      "slug": "andy-berry",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 158,
+      "csvRowNumber": 159,
+      "name": "Brian Rhodes",
+      "chamber": "Senate",
+      "district": "36",
+      "slug": "brian-rhodes",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 159,
+      "csvRowNumber": 160,
+      "name": "Albert Butler",
+      "chamber": "Senate",
+      "district": "37",
+      "slug": "albert-butler",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 160,
+      "csvRowNumber": 161,
+      "name": "Gary Brumfield",
+      "chamber": "Senate",
+      "district": "38",
+      "slug": "gary-brumfield",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 161,
+      "csvRowNumber": 162,
+      "name": "Jason Barrett",
+      "chamber": "Senate",
+      "district": "39",
+      "slug": "jason-barrett",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 162,
+      "csvRowNumber": 163,
+      "name": "Angela Burks Hill",
+      "chamber": "Senate",
+      "district": "40",
+      "slug": "angela-burks-hill",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 163,
+      "csvRowNumber": 164,
+      "name": "Joey Fillingane",
+      "chamber": "Senate",
+      "district": "41",
+      "slug": "joey-fillingane",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 164,
+      "csvRowNumber": 165,
+      "name": "Don Hartness",
+      "chamber": "Senate",
+      "district": "42",
+      "slug": "don-hartness",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 165,
+      "csvRowNumber": 166,
+      "name": "Dennis DeBar, Jr.",
+      "chamber": "Senate",
+      "district": "43",
+      "slug": "dennis-debar-jr",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 166,
+      "csvRowNumber": 167,
+      "name": "Chris Johnson",
+      "chamber": "Senate",
+      "district": "44",
+      "slug": "chris-johnson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 167,
+      "csvRowNumber": 168,
+      "name": "Jonny Dupree",
+      "chamber": "Senate",
+      "district": "45",
+      "slug": "jonny-dupree",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 168,
+      "csvRowNumber": 169,
+      "name": "Philman Ladner",
+      "chamber": "Senate",
+      "district": "46",
+      "slug": "philman-ladner",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 169,
+      "csvRowNumber": 170,
+      "name": "Joseph M. Seymour",
+      "chamber": "Senate",
+      "district": "47",
+      "slug": "joseph-m-seymour",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 170,
+      "csvRowNumber": 171,
+      "name": "Mike Thompson",
+      "chamber": "Senate",
+      "district": "48",
+      "slug": "mike-thompson",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 171,
+      "csvRowNumber": 172,
+      "name": "Joel R. Carter, Jr.",
+      "chamber": "Senate",
+      "district": "49",
+      "slug": "joel-r-carter-jr",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 172,
+      "csvRowNumber": 173,
+      "name": "Scott DeLano",
+      "chamber": "Senate",
+      "district": "50",
+      "slug": "scott-delano",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 173,
+      "csvRowNumber": 174,
+      "name": "Jeremy England",
+      "chamber": "Senate",
+      "district": "51",
+      "slug": "jeremy-england",
+      "voteCount": 9
+    },
+    {
+      "action": "update",
+      "existingId": 174,
+      "csvRowNumber": 175,
+      "name": "Brice Wiggins",
+      "chamber": "Senate",
+      "district": "52",
+      "slug": "brice-wiggins",
+      "voteCount": 9
+    }
+  ],
+  "unchangedExisting": []
+}
