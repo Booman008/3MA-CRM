@@ -43,6 +43,7 @@ export function Tasks() {
   const [editId, setEditId] = useState(null);
   const [entities, setEntities] = useState([]);
   const [selectedTaskIds, setSelectedTaskIds] = useState([]);
+  const [exportMode, setExportMode] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [exportResult, setExportResult] = useState(null);
 
@@ -121,6 +122,17 @@ export function Tasks() {
     setSelectedTaskIds(prev => prev.includes(id) ? prev.filter(current => current !== id) : [...prev, id]);
   };
 
+  const startExportMode = () => {
+    setExportResult(null);
+    setExportMode(true);
+  };
+
+  const cancelExportMode = () => {
+    setExportMode(false);
+    setSelectedTaskIds([]);
+    setExportResult(null);
+  };
+
   const exportSelected = async () => {
     if (selectedTaskIds.length === 0) return;
     setExporting(true);
@@ -151,9 +163,18 @@ export function Tasks() {
       <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={S.pageTitle}>Tasks &amp; Reminders</div>
         <div className="page-actions" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button style={S.btn('secondary')} onClick={() => { setExportResult(null); setModal('export'); }} disabled={selectedTaskIds.length === 0}>
-            Export to Calendar ({selectedTaskIds.length})
-          </button>
+          {exportMode ? (
+            <>
+              <button style={S.btn('secondary')} onClick={cancelExportMode}>Cancel Export</button>
+              <button style={S.btn()} onClick={() => { setExportResult(null); setModal('export'); }} disabled={selectedTaskIds.length === 0}>
+                Export Selected ({selectedTaskIds.length})
+              </button>
+            </>
+          ) : (
+            <button style={S.btn('secondary')} onClick={startExportMode} disabled={tasks.length === 0}>
+              Export to Calendar
+            </button>
+          )}
           <button style={S.btn()} onClick={openAdd}>+ Add Task</button>
         </div>
       </div>
@@ -176,7 +197,7 @@ export function Tasks() {
         </span>
       </div>
 
-      {tasks.length > 0 && (
+      {exportMode && tasks.length > 0 && (
         <div style={{ ...S.toolbar, marginBottom: 10 }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-muted)', fontSize: '.85rem', cursor: 'pointer' }}>
             <input type="checkbox" checked={allVisibleSelected} onChange={toggleAllVisible} style={{ accentColor: 'var(--color-gold)' }} />
@@ -198,11 +219,14 @@ export function Tasks() {
                   padding: '12px 4px', borderBottom: '1px solid var(--color-divider)',
                   opacity: t.completed ? 0.55 : 1,
                 }}>
-                  <input type="checkbox" checked={selectedTaskIds.includes(t.id)} onChange={() => toggleTaskSelection(t.id)}
-                    title="Select for calendar export"
-                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-navy)' }} />
-                  <input type="checkbox" checked={t.completed} onChange={() => toggleDone(t)}
-                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-gold)' }} />
+                  {exportMode ? (
+                    <input type="checkbox" checked={selectedTaskIds.includes(t.id)} onChange={() => toggleTaskSelection(t.id)}
+                      title="Select for calendar export"
+                      style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-navy)' }} />
+                  ) : (
+                    <input type="checkbox" checked={t.completed} onChange={() => toggleDone(t)}
+                      style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-gold)' }} />
+                  )}
                   <div style={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={() => openEdit(t)}>
                     <div style={{
                       fontSize: '0.92rem', fontWeight: 600, color: 'var(--color-navy)',
