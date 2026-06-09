@@ -5,7 +5,8 @@ const db = require('../database');
 const router = express.Router();
 
 const COLUMNS = `id, "entityId", "entityType", "entityName", "contactDate", "contactType",
-                 subject, direction, summary, "nextAction", "nextActionDate", "createdAt"`;
+                 subject, direction, summary, "nextAction", "nextActionDate", "createdAt",
+                 "gmailThreadId", "gmailMessageIds", "gmailImportedAt"`;
 
 router.get('/', async (req, res) => {
   const { entityId, entityType, search } = req.query;

@@ -4,7 +4,8 @@ const db = require('../database');
 const router = express.Router();
 
 const COLUMNS = `id, title, description, "dueDate", completed, "completedAt", priority,
-                 "entityType", "entityId", "entityName", "createdAt"`;
+                 "entityType", "entityId", "entityName", "createdAt",
+                 "googleCalendarEventId", "googleCalendarId", "exportedToGoogleAt"`;
 
 router.get('/', async (req, res) => {
   const { status, entityType, entityId } = req.query;

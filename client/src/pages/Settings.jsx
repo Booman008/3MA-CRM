@@ -22,6 +22,9 @@ export function Settings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [googleStatus, setGoogleStatus] = useState(null);
+  const [googleLoading, setGoogleLoading] = useState(true);
+  const [googleMessage, setGoogleMessage] = useState('');
 
   const [userName, setUserName] = useState('');
   const [userTitle, setUserTitle] = useState('');
@@ -42,6 +45,21 @@ export function Settings() {
       // Seed the cross-page settings cache so Members / Leads see the same data.
       setCachedSettings(s);
     }).finally(() => setLoading(false));
+  }, []);
+
+  const loadGoogleStatus = () => {
+    setGoogleLoading(true);
+    api('/google/status')
+      .then(setGoogleStatus)
+      .catch(error => setGoogleStatus({ configured: false, connected: false, error: error?.message || String(error) }))
+      .finally(() => setGoogleLoading(false));
+  };
+
+  useEffect(() => {
+    loadGoogleStatus();
+    const hash = location.hash || '';
+    if (hash.includes('google=connected')) setGoogleMessage('Google connected successfully.');
+    if (hash.includes('google=error')) setGoogleMessage('Google connection failed. Please try again.');
   }, []);
 
   const allLicenseTypes = [...DEFAULT_LICENSE_TYPES, ...customLicenseTypes.filter(t => !DEFAULT_LICENSE_TYPES.includes(t))];
@@ -94,6 +112,28 @@ export function Settings() {
     }
   };
 
+  const connectGoogle = async () => {
+    setGoogleMessage('');
+    try {
+      const result = await api('/google/oauth/start', { method: 'POST', body: {} });
+      location.href = result.url;
+    } catch (error) {
+      setGoogleMessage(error?.message || String(error));
+    }
+  };
+
+  const disconnectGoogle = async () => {
+    if (!confirm('Disconnect this Google account?')) return;
+    setGoogleMessage('');
+    try {
+      await api('/google/connection', { method: 'DELETE' });
+      loadGoogleStatus();
+      setGoogleMessage('Google disconnected.');
+    } catch (error) {
+      setGoogleMessage(error?.message || String(error));
+    }
+  };
+
   if (loading) return <div style={S.emptyState}>Loading settings...</div>;
 
   const sectionStyle = { ...S.card, marginBottom: 24 };
@@ -135,6 +175,39 @@ export function Settings() {
             <input style={S.input} value={organizationName} onChange={e => setOrganizationName(e.target.value)} placeholder="e.g. 3MA" />
           </Field>
         </div>
+      </div>
+
+      <div style={sectionStyle}>
+        <div style={sectionTitle}>Google Integration</div>
+        {googleMessage && (
+          <div style={{ marginBottom: 12, padding: '10px 12px', borderRadius: 8, background: 'var(--color-callout-gold-bg)', color: 'var(--color-navy)' }}>
+            {googleMessage}
+          </div>
+        )}
+        {googleLoading ? (
+          <div style={{ color: 'var(--color-muted)' }}>Checking Google connection...</div>
+        ) : !googleStatus?.configured ? (
+          <div style={{ color: 'var(--color-muted)' }}>
+            Google integration is not configured on the server.
+            {googleStatus?.error && <div style={{ marginTop: 6, fontSize: '.82rem' }}>{googleStatus.error}</div>}
+          </div>
+        ) : googleStatus.connected ? (
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div>
+              <div style={{ fontWeight: 700, color: 'var(--color-navy)' }}>{googleStatus.googleEmail || 'Google account connected'}</div>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
+                <span style={{ ...S.badge('var(--color-navy)'), color: '#fff' }}>Calendar export</span>
+                <span style={{ ...S.badge('var(--color-gold)'), color: 'var(--color-navy)' }}>Gmail import</span>
+              </div>
+            </div>
+            <button style={S.btn('secondary')} onClick={disconnectGoogle}>Disconnect</button>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ color: 'var(--color-muted)' }}>Connect Google to export tasks to Calendar and import Gmail conversations.</div>
+            <button style={S.btn()} onClick={connectGoogle}>Connect Google</button>
+          </div>
+        )}
       </div>
 
       <div style={sectionStyle}>

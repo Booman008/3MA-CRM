@@ -6,10 +6,17 @@ const path = require('path');
 
 const db = require('./database');
 const { requireAuth } = require('./middleware/auth');
+const googleRoutes = require('./routes/google');
+const { configurationMessage } = require('./google/client');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const clientDir = path.join(__dirname, '..', 'client', 'build');
+const googleConfigMessage = configurationMessage();
+
+if (googleConfigMessage) {
+  console.warn(`Google integration disabled: ${googleConfigMessage}`);
+}
 
 const allowedOrigins = (process.env.CORS_ORIGIN || '')
   .split(',')
@@ -28,10 +35,12 @@ app.use(express.static(clientDir));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
+app.get('/api/google/oauth/callback', googleRoutes.oauthCallback);
 app.use('/api', requireAuth);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), user: req.user.email });
 });
+app.use('/api/google', googleRoutes.router);
 app.use('/api/members', require('./routes/members'));
 app.use('/api/leads', require('./routes/leads'));
 app.use('/api/legislators', require('./routes/legislators'));

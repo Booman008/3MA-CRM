@@ -47,15 +47,23 @@ const PAGES = [
   { key: 'settings',  label: 'Settings',    icon: Ic.Settings  },
 ];
 
+function pageFromHash() {
+  return (location.hash.slice(1).split('?')[0]) || 'dashboard';
+}
+
 export function App() {
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem(TOKEN_KEY);
     return token ? { token } : null;
   });
-  const [page, setPage] = useState(() => location.hash.slice(1) || 'dashboard');
+  const [page, setPage] = useState(() => pageFromHash());
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setPage(location.hash.slice(1) || 'dashboard');
+    const handler = () => {
+      setPage(pageFromHash());
+      setMobileNavOpen(false);
+    };
     window.addEventListener('hashchange', handler);
     return () => window.removeEventListener('hashchange', handler);
   }, []);
@@ -99,7 +107,20 @@ export function App() {
 
   return (
     <>
-      <aside style={S.sidebar}>
+      <div className="mobile-topbar">
+        <button
+          className="mobile-menu-button"
+          onClick={() => setMobileNavOpen(open => !open)}
+          aria-label="Toggle navigation"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <img src="assets/logo-lettering.png" alt="3MA CRM" />
+      </div>
+
+      <aside className={`crm-sidebar ${mobileNavOpen ? 'is-open' : ''}`} style={S.sidebar}>
         <div style={S.sidebarHeader}>
           <img src="assets/logo-lettering.png" alt="3MA CRM — Voice of MS Cannabis"
                style={{ width: '100%', height: 'auto', display: 'block' }} />
@@ -179,7 +200,7 @@ export function App() {
         </div>
       </aside>
 
-      <main style={S.main}>{renderPage()}</main>
+      <main className="crm-main" style={S.main}>{renderPage()}</main>
     </>
   );
 }

@@ -110,6 +110,199 @@
     ::-webkit-scrollbar-thumb:hover { background: rgba(7,31,64,0.32); }
 
     #root { display: flex; min-height: 100vh; }
+
+    .mobile-topbar {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      #root {
+        display: block;
+        min-height: 100vh;
+      }
+
+      .mobile-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 900;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 58px;
+        padding: 10px 14px;
+        background: var(--color-navy);
+        border-bottom: 2px solid var(--color-gold);
+      }
+
+      .mobile-topbar img {
+        display: block;
+        width: min(190px, calc(100vw - 80px));
+        height: auto;
+      }
+
+      .mobile-menu-button {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(255,255,255,0.24);
+        border-radius: 6px;
+        background: transparent;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .mobile-menu-button span {
+        width: 19px;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+      }
+
+      .crm-sidebar {
+        display: none !important;
+        width: 100% !important;
+        min-height: auto !important;
+        max-height: calc(100dvh - 58px);
+        overflow-y: auto;
+        border-right: none !important;
+        border-bottom: 1px solid var(--color-navy-deep);
+      }
+
+      .crm-sidebar.is-open {
+        display: flex !important;
+      }
+
+      .crm-sidebar > div:first-child {
+        display: none !important;
+      }
+
+      .crm-main {
+        padding: 14px 12px !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+      }
+
+      .page-header,
+      .crm-main > div > div:first-child {
+        align-items: flex-start !important;
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+      }
+
+      .page-actions {
+        width: 100%;
+      }
+
+      input, select, textarea, button {
+        min-height: 44px;
+      }
+
+      .crm-modal-overlay {
+        align-items: flex-start !important;
+        padding: 12px !important;
+        overflow-y: auto;
+      }
+
+      .crm-modal {
+        max-width: none !important;
+        max-height: calc(100dvh - 24px) !important;
+        padding: 20px 16px !important;
+        border-radius: 8px !important;
+      }
+
+      .crm-modal [style*="grid-template-columns"],
+      .crm-main [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      .modal-actions,
+      .crm-modal [style*="justify-content: flex-end"] {
+        flex-wrap: wrap !important;
+      }
+
+      .contacts-panel [style*="align-items: baseline"] {
+        align-items: flex-start !important;
+        flex-wrap: wrap !important;
+      }
+
+      .task-row {
+        align-items: flex-start !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        padding: 14px 0 !important;
+      }
+
+      .task-row > div {
+        flex-basis: calc(100% - 64px) !important;
+      }
+
+      table {
+        min-width: 680px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .crm-main table {
+        min-width: 0;
+      }
+
+      .crm-main thead {
+        display: none;
+      }
+
+      .crm-main table,
+      .crm-main tbody,
+      .crm-main tr,
+      .crm-main td {
+        display: block;
+        width: 100%;
+      }
+
+      .crm-main tr {
+        border: 1px solid var(--color-divider);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        background: #fff;
+      }
+
+      .crm-main td {
+        border-bottom: none !important;
+        padding: 6px 0 !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .crm-main {
+        padding: 12px 10px !important;
+      }
+
+      .page-header,
+      .crm-main > div > div:first-child {
+        display: block !important;
+      }
+
+      .page-actions,
+      .page-actions > button,
+      .crm-main > div > div:first-child button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .page-actions {
+        display: grid !important;
+        gap: 8px !important;
+      }
+
+      .crm-modal {
+        padding: 16px 12px !important;
+      }
+    }
   </style>
 </head>
 <body>

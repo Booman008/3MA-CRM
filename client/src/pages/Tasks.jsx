@@ -42,6 +42,9 @@ export function Tasks() {
   const [form, setForm] = useState(TASK_DEFAULTS);
   const [editId, setEditId] = useState(null);
   const [entities, setEntities] = useState([]);
+  const [selectedTaskIds, setSelectedTaskIds] = useState([]);
+  const [exporting, setExporting] = useState(false);
+  const [exportResult, setExportResult] = useState(null);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -51,6 +54,9 @@ export function Tasks() {
   }, [filter]);
 
   useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    setSelectedTaskIds(prev => prev.filter(id => tasks.some(task => task.id === id)));
+  }, [tasks]);
 
   const loadEntities = () => {
     Promise.all([api('/members'), api('/leads'), api('/legislators')]).then(([m, l, legislators]) => {
@@ -99,6 +105,40 @@ export function Tasks() {
     load();
   };
 
+  const allVisibleSelected = tasks.length > 0 && tasks.every(task => selectedTaskIds.includes(task.id));
+  const selectedTasks = tasks.filter(task => selectedTaskIds.includes(task.id));
+  const selectedWithoutDueDate = selectedTasks.filter(task => !task.dueDate).length;
+
+  const toggleAllVisible = () => {
+    if (allVisibleSelected) {
+      setSelectedTaskIds(prev => prev.filter(id => !tasks.some(task => task.id === id)));
+      return;
+    }
+    setSelectedTaskIds(prev => [...new Set([...prev, ...tasks.map(task => task.id)])]);
+  };
+
+  const toggleTaskSelection = (id) => {
+    setSelectedTaskIds(prev => prev.includes(id) ? prev.filter(current => current !== id) : [...prev, id]);
+  };
+
+  const exportSelected = async () => {
+    if (selectedTaskIds.length === 0) return;
+    setExporting(true);
+    setExportResult(null);
+    try {
+      const result = await api('/google/calendar/export-tasks', {
+        method: 'POST',
+        body: { taskIds: selectedTaskIds, calendarId: 'primary' },
+      });
+      setExportResult(result);
+      load();
+    } catch (error) {
+      setExportResult({ error: error?.message || String(error), exported: 0, skipped: 0, failed: selectedTaskIds.length, results: [] });
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const jumpToEntity = (task) => {
     if (!task.entityType || !task.entityId) return;
     sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: task.entityType, id: task.entityId }));
@@ -108,9 +148,14 @@ export function Tasks() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={S.pageTitle}>Tasks &amp; Reminders</div>
-        <button style={S.btn()} onClick={openAdd}>+ Add Task</button>
+        <div className="page-actions" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button style={S.btn('secondary')} onClick={() => { setExportResult(null); setModal('export'); }} disabled={selectedTaskIds.length === 0}>
+            Export to Calendar ({selectedTaskIds.length})
+          </button>
+          <button style={S.btn()} onClick={openAdd}>+ Add Task</button>
+        </div>
       </div>
 
       {/* Tab-style filter row (brand: navy text, gold underline on active) */}
@@ -131,6 +176,15 @@ export function Tasks() {
         </span>
       </div>
 
+      {tasks.length > 0 && (
+        <div style={{ ...S.toolbar, marginBottom: 10 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-muted)', fontSize: '.85rem', cursor: 'pointer' }}>
+            <input type="checkbox" checked={allVisibleSelected} onChange={toggleAllVisible} style={{ accentColor: 'var(--color-gold)' }} />
+            Select visible tasks
+          </label>
+        </div>
+      )}
+
       <div style={S.card}>
         {loading ? <div style={S.emptyState}>Loading...</div> : tasks.length === 0 ? (
           <div style={S.emptyState}>No tasks. Click "+ Add Task" to create one.</div>
@@ -139,11 +193,14 @@ export function Tasks() {
             {tasks.map(t => {
               const ds = dueStatus(t.dueDate, t.completed);
               return (
-                <div key={t.id} style={{
+                <div key={t.id} className="task-row" style={{
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '12px 4px', borderBottom: '1px solid var(--color-divider)',
                   opacity: t.completed ? 0.55 : 1,
                 }}>
+                  <input type="checkbox" checked={selectedTaskIds.includes(t.id)} onChange={() => toggleTaskSelection(t.id)}
+                    title="Select for calendar export"
+                    style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-navy)' }} />
                   <input type="checkbox" checked={t.completed} onChange={() => toggleDone(t)}
                     style={{ width: 18, height: 18, cursor: 'pointer', accentColor: 'var(--color-gold)' }} />
                   <div style={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={() => openEdit(t)}>
@@ -162,6 +219,9 @@ export function Tasks() {
                         )}
                         {t.description && <span>{t.description.slice(0, 80)}{t.description.length > 80 ? '…' : ''}</span>}
                       </div>
+                    )}
+                    {t.googleCalendarEventId && (
+                      <span style={{ ...S.badge('var(--color-navy)'), marginTop: 6, color: '#fff' }}>Calendar exported</span>
                     )}
                   </div>
                   <span style={{ ...S.badge(priorityColor[t.priority] || 'var(--color-gold)'), color: t.priority === 'Medium' ? 'var(--color-navy)' : '#fff' }}>{t.priority}</span>
@@ -185,7 +245,7 @@ export function Tasks() {
         )}
       </div>
 
-      {modal && (
+      {(modal === 'add' || modal === 'edit') && (
         <Modal title={modal === 'add' ? 'Add Task' : 'Edit Task'} onClose={close}>
           <Field label="Title *">
             <input style={S.input} value={form.title} onChange={e => set('title', e.target.value)} autoFocus />
@@ -222,6 +282,44 @@ export function Tasks() {
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
             <button style={S.btn('secondary')} onClick={close}>Cancel</button>
             <button style={S.btn()} onClick={save} disabled={!form.title?.trim()}>Save</button>
+          </div>
+        </Modal>
+      )}
+      {modal === 'export' && (
+        <Modal title="Export Tasks to Google Calendar" onClose={close}>
+          <div style={{ color: 'var(--color-muted)', marginBottom: 12 }}>
+            Export {selectedTaskIds.length} selected task{selectedTaskIds.length === 1 ? '' : 's'} to your primary Google Calendar.
+            {selectedWithoutDueDate > 0 && (
+              <div style={{ marginTop: 8, color: 'var(--color-red)', fontWeight: 700 }}>
+                {selectedWithoutDueDate} selected task{selectedWithoutDueDate === 1 ? '' : 's'} do not have due dates and will fail.
+              </div>
+            )}
+          </div>
+          {exportResult && (
+            <div style={{ ...S.card, padding: 12, background: 'var(--color-light-gray)' }}>
+              {exportResult.error ? (
+                <div style={{ color: 'var(--color-red)' }}>{exportResult.error}</div>
+              ) : (
+                <>
+                  <div style={{ fontWeight: 800, color: 'var(--color-navy)', marginBottom: 8 }}>
+                    Exported {exportResult.exported}, skipped {exportResult.skipped}, failed {exportResult.failed}
+                  </div>
+                  <div style={{ display: 'grid', gap: 4, fontSize: '.82rem' }}>
+                    {exportResult.results?.map(result => (
+                      <div key={result.taskId}>
+                        Task #{result.taskId}: {result.status}{result.reason ? ` (${result.reason})` : ''}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+          <div className="modal-actions" style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
+            <button style={S.btn('secondary')} onClick={close}>Close</button>
+            <button style={S.btn()} onClick={exportSelected} disabled={exporting || selectedTaskIds.length === 0}>
+              {exporting ? 'Exporting...' : 'Export'}
+            </button>
           </div>
         </Modal>
       )}

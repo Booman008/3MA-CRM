@@ -208,9 +208,20 @@ async function ready() {
 
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS subject TEXT;
         ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS direction TEXT CHECK (direction IN ('inbound', 'outbound'));
+        ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS "gmailThreadId" TEXT;
+        ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS "gmailMessageIds" JSONB DEFAULT '[]'::jsonb;
+        ALTER TABLE contact_log ADD COLUMN IF NOT EXISTS "gmailImportedAt" TIMESTAMP;
         ALTER TABLE members ADD COLUMN IF NOT EXISTS "logoAttachmentId" INTEGER REFERENCES attachments(id) ON DELETE SET NULL;
         ALTER TABLE leads ADD COLUMN IF NOT EXISTS "logoAttachmentId" INTEGER REFERENCES attachments(id) ON DELETE SET NULL;
         ALTER TABLE tasks ADD COLUMN IF NOT EXISTS "sourceContactLogId" INTEGER UNIQUE REFERENCES contact_log(id) ON DELETE CASCADE;
+        ALTER TABLE tasks ADD COLUMN IF NOT EXISTS "googleCalendarEventId" TEXT;
+        ALTER TABLE tasks ADD COLUMN IF NOT EXISTS "googleCalendarId" TEXT;
+        ALTER TABLE tasks ADD COLUMN IF NOT EXISTS "exportedToGoogleAt" TIMESTAMP;
+
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_contact_log_gmail_thread_entity
+          ON contact_log ("entityType", "entityId", "gmailThreadId")
+          WHERE "gmailThreadId" IS NOT NULL;
+        CREATE INDEX IF NOT EXISTS idx_tasks_google_event ON tasks ("googleCalendarEventId");
 
         CREATE TABLE IF NOT EXISTS users (
           id SERIAL PRIMARY KEY,
@@ -218,6 +229,25 @@ async function ready() {
           "passwordHash" TEXT NOT NULL,
           role TEXT NOT NULL CHECK (role IN ('admin', 'member')),
           "memberId" INTEGER REFERENCES members(id) ON DELETE SET NULL,
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS google_connections (
+          id SERIAL PRIMARY KEY,
+          "userId" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+          "googleEmail" TEXT,
+          "accessTokenEncrypted" TEXT,
+          "refreshTokenEncrypted" TEXT,
+          scope TEXT,
+          "tokenExpiry" TIMESTAMP,
+          "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          UNIQUE ("userId")
+        );
+
+        CREATE TABLE IF NOT EXISTS google_oauth_states (
+          state TEXT PRIMARY KEY,
+          "userId" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
           "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
 
