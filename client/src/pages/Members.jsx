@@ -559,7 +559,7 @@ export function Members() {
             <Field label="Dues Amount ($)"><input style={S.input} type="number" step="0.01" value={form.duesAmount} onChange={e => set('duesAmount', e.target.value)} /></Field>
           </div>
           <Field label="Notes"><textarea style={{ ...S.input, minHeight: 60, resize: 'vertical' }} value={form.notes} onChange={e => set('notes', e.target.value)} /></Field>
-          {modal === 'edit' && <ContactsPanel entityType="member" entityId={editId} entityName={form.businessName} />}
+          {modal === 'edit' && <ContactsPanel entityType="member" entityId={editId} entityName={form.businessName} entityEmail={form.email} />}
           {modal === 'edit' && <AttachmentsPanel entityType="member" entityId={editId} />}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
             <button style={S.btn('secondary')} onClick={close}>Cancel</button>

@@ -3,15 +3,17 @@ import { api } from '../api.js';
 import { S } from '../styles.js';
 import { fmt } from '../format.js';
 import { ContactFormModal } from './ContactFormModal.jsx';
+import { GmailImportModal } from './GmailImportModal.jsx';
 
 const typeIcon = { Phone: '☎', Email: '✉', 'In-Person': '👤', Text: '💬', Mail: '✉', Other: '•' };
 const typeBg = { Phone: 'var(--info)', Email: 'var(--green-600)', 'In-Person': '#7b1fa2', Text: 'var(--warning)', Mail: 'var(--green-500)', Other: '#666' };
 
-export function ContactsPanel({ entityType, entityId, entityName }) {
+export function ContactsPanel({ entityType, entityId, entityName, entityEmail }) {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState({});
   const [logging, setLogging] = useState(null);
+  const [importingGmail, setImportingGmail] = useState(false);
 
   const load = () => {
     setLoading(true);
@@ -42,10 +44,20 @@ export function ContactsPanel({ entityType, entityId, entityName }) {
   if (!entityId) return null;
 
   return (
-    <div style={{ marginTop: 18, paddingTop: 14, borderTop: '1px solid var(--border)' }}>
+    <div className="contacts-panel" style={{ marginTop: 18, paddingTop: 14, borderTop: '1px solid var(--border)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
         <div style={{ fontSize: '.92rem', fontWeight: 600, color: 'var(--green-800)' }}>Activity</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setImportingGmail(true)}
+            disabled={!entityEmail}
+            title={entityEmail ? 'Import Gmail conversations for this contact' : 'Add an email address before importing Gmail conversations'}
+            style={{
+            ...S.btn('navy'), padding: '4px 10px', fontSize: '.75rem',
+            opacity: entityEmail ? 1 : 0.55,
+          }}>
+            Import Gmail
+          </button>
           {['Email', 'Text', 'Phone', 'In-Person', 'Other'].map(t => (
             <button key={t} onClick={() => openLog(t)} style={{
               ...S.btn('secondary'), padding: '4px 10px', fontSize: '.75rem',
@@ -115,6 +127,16 @@ export function ContactsPanel({ entityType, entityId, entityName }) {
           lockEntity
           onClose={() => setLogging(null)}
           onSaved={load}
+        />
+      )}
+      {importingGmail && (
+        <GmailImportModal
+          entityType={entityType}
+          entityId={entityId}
+          entityName={entityName}
+          entityEmail={entityEmail}
+          onClose={() => setImportingGmail(false)}
+          onImported={load}
         />
       )}
     </div>

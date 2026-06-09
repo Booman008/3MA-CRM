@@ -550,7 +550,7 @@ export function Leads() {
             </button>
           </div>
           <Field label="Notes"><textarea style={{ ...S.input, minHeight: 60, resize: 'vertical' }} value={form.notes} onChange={e => set('notes', e.target.value)} /></Field>
-          {modal === 'edit' && <ContactsPanel entityType="lead" entityId={editId} entityName={form.businessName} />}
+          {modal === 'edit' && <ContactsPanel entityType="lead" entityId={editId} entityName={form.businessName} entityEmail={form.email} />}
           {modal === 'edit' && <AttachmentsPanel entityType="lead" entityId={editId} />}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
             <button style={S.btn('secondary')} onClick={close}>Cancel</button>
