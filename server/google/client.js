@@ -14,7 +14,6 @@ function isConfigured() {
   return !!(
     process.env.GOOGLE_CLIENT_ID &&
     process.env.GOOGLE_CLIENT_SECRET &&
-    process.env.GOOGLE_OAUTH_REDIRECT_URI &&
     isEncryptionConfigured()
   );
 }
@@ -22,16 +21,23 @@ function isConfigured() {
 function configurationMessage() {
   if (!process.env.GOOGLE_CLIENT_ID) return 'GOOGLE_CLIENT_ID is not configured';
   if (!process.env.GOOGLE_CLIENT_SECRET) return 'GOOGLE_CLIENT_SECRET is not configured';
-  if (!process.env.GOOGLE_OAUTH_REDIRECT_URI) return 'GOOGLE_OAUTH_REDIRECT_URI is not configured';
   if (!isEncryptionConfigured()) return 'GOOGLE_TOKEN_ENCRYPTION_KEY must be a 32-byte base64 or hex value';
   return null;
 }
 
-function createOAuthClient() {
+function inferRedirectUri(req) {
+  if (process.env.GOOGLE_OAUTH_REDIRECT_URI) return process.env.GOOGLE_OAUTH_REDIRECT_URI;
+  if (!req) return null;
+  const proto = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  return host ? `${String(proto).split(',')[0]}://${host}/api/google/oauth/callback` : null;
+}
+
+function createOAuthClient(redirectUri) {
   return new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-    process.env.GOOGLE_OAUTH_REDIRECT_URI
+    redirectUri || process.env.GOOGLE_OAUTH_REDIRECT_URI
   );
 }
 
@@ -113,5 +119,6 @@ module.exports = {
   createOAuthClient,
   getAuthorizedClient,
   getConnection,
+  inferRedirectUri,
   isConfigured,
 };
