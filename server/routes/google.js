@@ -9,6 +9,7 @@ const {
   createOAuthClient,
   getAuthorizedClient,
   getConnection,
+  inferRedirectUri,
   isConfigured,
 } = require('../google/client');
 const { encryptToken } = require('../google/crypto');
@@ -149,7 +150,9 @@ router.post('/oauth/start', async (req, res) => {
     await db.query('DELETE FROM google_oauth_states WHERE "createdAt" < now() - interval \'10 minutes\'');
     await db.query('INSERT INTO google_oauth_states (state, "userId") VALUES ($1, $2)', [state, req.user.sub]);
 
-    const oauth2Client = createOAuthClient();
+    const redirectUri = inferRedirectUri(req);
+    if (!redirectUri) return res.status(503).json({ error: 'Could not determine Google OAuth redirect URI', code: 'google_unconfigured' });
+    const oauth2Client = createOAuthClient(redirectUri);
     const url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       prompt: 'consent',
@@ -181,7 +184,9 @@ async function oauthCallback(req, res) {
     const userId = stateResult.rows[0]?.userId;
     if (!userId) return fail();
 
-    const oauth2Client = createOAuthClient();
+    const redirectUri = inferRedirectUri(req);
+    if (!redirectUri) return fail();
+    const oauth2Client = createOAuthClient(redirectUri);
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
