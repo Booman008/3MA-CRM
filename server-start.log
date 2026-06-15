@@ -1,0 +1,5 @@
+
+> 3ma-crm@1.0.0 start
+> node server/index.js
+
+3MA-CRM server running at http://localhost:3000

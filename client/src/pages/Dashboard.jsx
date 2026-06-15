@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api } from '../api.js';
+import { api, TOKEN_KEY } from '../api.js';
 import { S } from '../styles.js';
 import { fmt, renewalStatus } from '../format.js';
 import { isArchivedStage, stageColor as stageColorMap } from '../stages.js';
@@ -25,6 +25,12 @@ const statValue = (color) => ({
   fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 900,
   color: color || 'var(--color-navy)',
 });
+const statSubtext = {
+  marginTop: 8,
+  fontSize: '0.8rem',
+  color: 'var(--color-muted)',
+  lineHeight: 1.35,
+};
 
 function openEntityRecord(entityType, entityId) {
   sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: entityType, id: entityId }));
@@ -44,12 +50,122 @@ async function toggleTaskDone(id, completed, reload) {
   reload();
 }
 
+function filenameFromDisposition(disposition) {
+  const match = String(disposition || '').match(/filename="?([^"]+)"?/i);
+  return match?.[1] || `3ma-crm-contacts-licenses-${new Date().toISOString().slice(0, 10)}.csv`;
+}
+
+function openHtmlBlob(htmlBlob) {
+  const url = URL.createObjectURL(htmlBlob);
+  const opened = window.open(url, '_blank', 'noopener,noreferrer');
+  if (opened) {
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    return null;
+  }
+  return url;
+}
+
 export function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [exportingCsv, setExportingCsv] = useState(false);
+  const [creatingSnapshot, setCreatingSnapshot] = useState(false);
+  const [exportError, setExportError] = useState('');
+  const [snapshotUrl, setSnapshotUrl] = useState('');
 
   const load = () => api('/dashboard').then(setData).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
+  useEffect(() => () => {
+    if (snapshotUrl) URL.revokeObjectURL(snapshotUrl);
+  }, [snapshotUrl]);
+
+  const downloadCsv = async () => {
+    setExportingCsv(true);
+    setExportError('');
+    try {
+      const token = localStorage.getItem(TOKEN_KEY);
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const res = await fetch('/api/dashboard/export.csv', { headers });
+
+      if (res.status === 401) {
+        localStorage.removeItem(TOKEN_KEY);
+        window.dispatchEvent(new Event('auth:logout'));
+      }
+
+      if (!res.ok) {
+        let message = res.statusText || `HTTP ${res.status}`;
+        try {
+          const text = await res.text();
+          if (text) {
+            try {
+              const parsed = JSON.parse(text);
+              message = parsed.error || parsed.message || message;
+            } catch {
+              message = text.slice(0, 300);
+            }
+          }
+        } catch {}
+        throw new Error(`${message} (status ${res.status})`);
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filenameFromDisposition(res.headers.get('content-disposition'));
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      setExportError(error?.message || 'Export failed');
+    } finally {
+      setExportingCsv(false);
+    }
+  };
+
+  const createBoardSnapshot = async () => {
+    setCreatingSnapshot(true);
+    setExportError('');
+    if (snapshotUrl) {
+      URL.revokeObjectURL(snapshotUrl);
+      setSnapshotUrl('');
+    }
+    try {
+      const token = localStorage.getItem(TOKEN_KEY);
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const res = await fetch('/api/dashboard/snapshot.html', { headers });
+
+      if (res.status === 401) {
+        localStorage.removeItem(TOKEN_KEY);
+        window.dispatchEvent(new Event('auth:logout'));
+      }
+
+      if (!res.ok) {
+        let message = res.statusText || `HTTP ${res.status}`;
+        try {
+          const text = await res.text();
+          if (text) {
+            try {
+              const parsed = JSON.parse(text);
+              message = parsed.error || parsed.message || message;
+            } catch {
+              message = text.slice(0, 300);
+            }
+          }
+        } catch {}
+        throw new Error(`${message} (status ${res.status})`);
+      }
+
+      const blob = await res.blob();
+      const fallbackUrl = openHtmlBlob(blob);
+      if (fallbackUrl) setSnapshotUrl(fallbackUrl);
+    } catch (error) {
+      setExportError(error?.message || 'Snapshot export failed');
+    } finally {
+      setCreatingSnapshot(false);
+    }
+  };
 
   if (loading) return <div style={S.emptyState}>Loading dashboard...</div>;
   if (!data) return <div style={S.emptyState}>Failed to load dashboard</div>;
@@ -61,10 +177,37 @@ export function Dashboard() {
   const archivedLeadCount = archivedLeadsByStage.reduce((a, s) => a + s.count, 0);
   const totalTracked = data.totalMembers + activeLeadCount + archivedLeadCount;
   const pct = (n) => totalTracked > 0 ? ((n / totalTracked) * 100).toFixed(1) : '0.0';
+  const represented = data.representedLicenseCount ?? data.totalLicenses ?? 0;
+  const programTotal = data.programLicenseTotal ?? 375;
+  const representedPercent = Number(data.representedLicensePercent ?? (programTotal > 0 ? ((represented / programTotal) * 100).toFixed(1) : 0));
+  const representedProgress = Math.max(0, Math.min(representedPercent, 100));
+  const remaining = data.unrepresentedProgramLicenseCount ?? Math.max(programTotal - represented, 0);
 
   return (
     <div>
-      <div style={S.pageTitle}>Dashboard</div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
+        <div style={{ ...S.pageTitle, marginBottom: 0 }}>Dashboard</div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+            <button style={S.btn('secondary')} onClick={downloadCsv} disabled={exportingCsv || creatingSnapshot}>
+              {exportingCsv ? 'Exporting...' : 'Export Data to CSV'}
+            </button>
+            <button style={S.btn('navy')} onClick={createBoardSnapshot} disabled={exportingCsv || creatingSnapshot}>
+              {creatingSnapshot ? 'Creating Snapshot...' : 'Create Board Snapshot'}
+            </button>
+          </div>
+          {exportError && (
+            <div style={{ color: 'var(--color-red)', fontSize: '.8rem', maxWidth: 320, textAlign: 'right' }}>
+              {exportError}
+            </div>
+          )}
+          {snapshotUrl && (
+            <a href={snapshotUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--color-navy)', fontSize: '.8rem', fontWeight: 700 }}>
+              Open Board Snapshot
+            </a>
+          )}
+        </div>
+      </div>
 
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 24 }}>
         <div style={S.statsCard('var(--color-gold)')}>
@@ -72,8 +215,15 @@ export function Dashboard() {
           <div style={statValue()}>{data.totalMembers}</div>
         </div>
         <div style={S.statsCard('var(--color-navy)')}>
-          <div style={statLabel}>Total Licenses</div>
-          <div style={statValue()}>{data.totalLicenses}</div>
+          <div style={statLabel}>Represented Licenses</div>
+          <div style={statValue()}>{represented} / {programTotal}</div>
+          <div style={{ height: 10, borderRadius: 999, background: 'var(--color-light-gray)', overflow: 'hidden', marginTop: 10, border: '1px solid var(--color-divider)' }}>
+            <div style={{ width: `${representedProgress}%`, height: '100%', background: 'var(--color-success)', borderRadius: 999 }} />
+          </div>
+          <div style={statSubtext}>
+            {representedPercent}% of MMCP program represented<br />
+            {remaining} license{remaining === 1 ? '' : 's'} not yet represented
+          </div>
         </div>
         <div style={S.statsCard('var(--color-gold)')}>
           <div style={statLabel}>Total Dues Revenue</div>
@@ -101,7 +251,7 @@ export function Dashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
           <div style={panelTitle}>Marketplace Coverage</div>
           <div style={{ fontSize: '.8rem', color: 'var(--color-muted)' }}>
-            {totalTracked} total license{totalTracked === 1 ? '' : 's'} tracked
+            {totalTracked} total record{totalTracked === 1 ? '' : 's'} tracked
           </div>
         </div>
         {totalTracked === 0 ? (
