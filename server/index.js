@@ -30,8 +30,15 @@ app.use(cors(
 ));
 app.use(express.json({ limit: '10mb' }));
 
-// Serve static frontend files
-app.use(express.static(clientDir));
+// Serve static frontend files. The bundle uses a stable app.js filename, so
+// force revalidation to make Render deploys visible after refresh.
+app.use(express.static(clientDir, {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('index.html') || filePath.endsWith('app.js')) {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    }
+  },
+}));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));

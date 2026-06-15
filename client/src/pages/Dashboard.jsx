@@ -32,12 +32,6 @@ const statSubtext = {
   lineHeight: 1.35,
 };
 
-function openEntityRecord(entityType, entityId) {
-  sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: entityType, id: entityId }));
-  location.hash = entityType === 'member' ? 'members' : 'leads';
-  window.dispatchEvent(new Event('crm:openRecord'));
-}
-
 function jumpToTaskEntity(t) {
   if (!t.entityType || !t.entityId) return;
   sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: t.entityType, id: t.entityId }));
@@ -301,60 +295,6 @@ export function Dashboard() {
               </div>
             )}
           </>
-        )}
-      </div>
-
-      <div style={{ ...S.card, marginBottom: 16 }}>
-        <div style={{ ...panelTitle, marginBottom: 14 }}>Entity Logos</div>
-        {!data.logoEntities?.length ? (
-          <div style={{ color: 'var(--color-muted)', fontSize: '.9rem' }}>No member or lead logos uploaded yet</div>
-        ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
-            {data.logoEntities.map(item => (
-              <button
-                key={`${item.entityType}-${item.entityId}`}
-                onClick={() => openEntityRecord(item.entityType, item.entityId)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  textAlign: 'left',
-                  border: '1px solid var(--color-divider)',
-                  background: '#fff',
-                  borderRadius: 10,
-                  padding: 12,
-                  cursor: 'pointer',
-                }}
-              >
-                <div style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  background: 'var(--color-light-gray)',
-                  border: '1px solid var(--color-divider)',
-                  flexShrink: 0,
-                }}>
-                  {item.logoUrl ? (
-                    <img src={item.logoUrl} alt={`${item.businessName} logo`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : null}
-                </div>
-                <div style={{ minWidth: 0, flex: 1 }}>
-                  <div style={{ fontWeight: 700, color: 'var(--color-navy)', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {item.businessName}
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
-                    <span style={{ ...S.badge(item.entityType === 'member' ? 'var(--color-navy)' : 'var(--color-gold)'), color: item.entityType === 'member' ? '#fff' : 'var(--color-navy)' }}>
-                      {item.entityType === 'member' ? 'Member' : 'Lead'}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '.8rem', color: 'var(--color-muted)' }}>
-                    {item.ownerName || item.membershipTier || item.stage || 'Open record'}
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
         )}
       </div>
 
