@@ -1,7 +1,6 @@
 const express = require('express');
 
 const db = require('../database');
-const r2 = require('../r2');
 const {
   collectUniqueLicenseNumbers,
   expandRecordsForCsv,
@@ -134,7 +133,7 @@ function buildRenewalMetrics(members) {
   };
 }
 
-function buildDashboardPayload({ members, leads, leadsByStage, recentContacts, todayTasks, overdueTasks, logoEntities = [] }) {
+function buildDashboardPayload({ members, leads, leadsByStage, recentContacts, todayTasks, overdueTasks }) {
   const licenseMetrics = buildLicenseMetrics(members, leads);
   const renewalMetrics = buildRenewalMetrics(members);
   const totalDues = members.reduce((sum, member) => sum + (member.duesAmount || 0), 0);
@@ -148,7 +147,6 @@ function buildDashboardPayload({ members, leads, leadsByStage, recentContacts, t
     recentContacts,
     todayTasks,
     overdueTasks,
-    logoEntities,
   };
 }
 
@@ -252,7 +250,6 @@ function renewalRows(title, members) {
 function buildSnapshotHtml(data) {
   const generatedDate = dateStamp();
   const representedPercent = Math.min(Number(data.representedLicensePercent || 0), 100);
-  const averageDues = data.totalMembers > 0 ? data.totalDues / data.totalMembers : 0;
   const activeStages = (data.leadsByStage || []).filter((row) => !ARCHIVED_STAGES.has(row.stage));
   const archivedCount = (data.leadsByStage || [])
     .filter((row) => ARCHIVED_STAGES.has(row.stage))
@@ -261,15 +258,6 @@ function buildSnapshotHtml(data) {
     <tr>
       <td>${escapeHtml(row.stage || 'Unspecified')}</td>
       <td class="num">${escapeHtml(row.count || 0)}</td>
-    </tr>
-  `).join('');
-  const contactRows = (data.recentContacts || []).map((contact) => `
-    <tr>
-      <td>${escapeHtml(formatDate(contact.contactDate))}</td>
-      <td>${escapeHtml(contact.entityName || '')}</td>
-      <td>${escapeHtml(contact.contactType || '')}</td>
-      <td>${escapeHtml(contact.summary || '')}</td>
-      <td>${escapeHtml(contact.nextAction || '')}</td>
     </tr>
   `).join('');
 
@@ -337,13 +325,13 @@ function buildSnapshotHtml(data) {
         ${snapshotStat('Total Members', data.totalMembers)}
         ${snapshotStat('CRM-Tracked Licenses', data.crmTrackedLicenseCount)}
         ${snapshotStat('Non-Member Tracked Licenses', data.nonMemberTrackedLicenseCount)}
-        ${snapshotStat('Total Dues Revenue', formatCurrency(data.totalDues), data.totalMembers > 0 ? `${formatCurrency(averageDues)} average per member` : '')}
+        ${snapshotStat('Total Dues Revenue', formatCurrency(data.totalDues))}
       </div>
     </div>
 
     <div class="grid">
       <section>
-        <div class="section-title">Renewal Risk</div>
+        <div class="section-title">Renewals</div>
         <div class="stats" style="margin-top: 10px;">
           ${snapshotStat('Past Due', data.pastDueMembers.length)}
           ${snapshotStat('Renewing in 30 Days', data.renewals30)}
@@ -370,15 +358,6 @@ function buildSnapshotHtml(data) {
               ${pipelineRows}
               <tr><td>Archived / not pursuing</td><td class="num">${escapeHtml(archivedCount)}</td></tr>
             </tbody>
-          </table>
-        `}
-      </section>
-      <section>
-        <div class="section-title">Recent Contact Activity</div>
-        ${(data.recentContacts || []).length === 0 ? '<p class="muted">No recent contact activity.</p>' : `
-          <table>
-            <thead><tr><th>Date</th><th>Name</th><th>Type</th><th>Summary</th><th>Next Action</th></tr></thead>
-            <tbody>${contactRows}</tbody>
           </table>
         `}
       </section>
@@ -501,48 +480,8 @@ router.get('/snapshot.html', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const [dashboardData, logoMembersResult, logoLeadsResult] = await Promise.all([
-      loadDashboardData(),
-      db.query(
-        `SELECT m.id AS "entityId", 'member' AS "entityType", m."businessName", m."ownerName", m."membershipTier",
-                m."createdAt" AS "updatedAt", a."r2Key" AS "logoR2Key"
-         FROM members m
-         JOIN attachments a ON a.id = m."logoAttachmentId"
-         ORDER BY m."createdAt" DESC
-         LIMIT 8`
-      ),
-      db.query(
-        `SELECT l.id AS "entityId", 'lead' AS "entityType", l."businessName", l."ownerName", l.stage,
-                l."createdAt" AS "updatedAt", a."r2Key" AS "logoR2Key"
-         FROM leads l
-         JOIN attachments a ON a.id = l."logoAttachmentId"
-         ORDER BY l."createdAt" DESC
-         LIMIT 8`
-      ),
-    ]);
-
-    const logoEntities = [...logoMembersResult.rows, ...logoLeadsResult.rows]
-      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-      .slice(0, 8);
-
-    const resolvedLogoEntities = await Promise.all(logoEntities.map(async (row) => {
-      let logoUrl = null;
-      if (row.logoR2Key && r2.isConfigured()) {
-        try { logoUrl = await r2.getInlineUrl(row.logoR2Key); } catch {}
-      }
-      return {
-        entityType: row.entityType,
-        entityId: row.entityId,
-        businessName: row.businessName,
-        ownerName: row.ownerName,
-        stage: row.stage || null,
-        membershipTier: row.membershipTier || null,
-        updatedAt: row.updatedAt,
-        logoUrl,
-      };
-    }));
-
-    res.json(buildDashboardPayload({ ...dashboardData, logoEntities: resolvedLogoEntities }));
+    const dashboardData = await loadDashboardData();
+    res.json(buildDashboardPayload(dashboardData));
   } catch (error) {
     console.error('Failed to load dashboard:', error);
     res.status(500).json({ error: 'Failed to load dashboard' });
