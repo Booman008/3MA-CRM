@@ -270,6 +270,7 @@ function buildSnapshotHtml(data) {
   <style>
     :root { --navy: #0b2b59; --gold: #d6a226; --red: #b3261e; --muted: #5a6d8f; --line: #d9e0ea; --light: #f5f7fa; --success: #237a57; }
     * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     body { margin: 0; background: var(--light); color: #17233c; font-family: Arial, Helvetica, sans-serif; line-height: 1.45; }
     .page { width: min(1060px, calc(100% - 32px)); margin: 24px auto; background: #fff; padding: 34px; border-top: 6px solid var(--gold); box-shadow: 0 12px 32px rgba(11, 43, 89, 0.14); }
     .topbar { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
@@ -295,10 +296,31 @@ function buildSnapshotHtml(data) {
     .num { text-align: right; }
     .footer { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     @media (max-width: 760px) { .hero, .grid, .stats { grid-template-columns: 1fr; } .page { width: 100%; margin: 0; padding: 22px; } .topbar { flex-direction: column; } }
+    @page { size: letter landscape; margin: 0.22in; }
     @media print {
-      body { background: #fff; }
-      .page { width: 100%; margin: 0; box-shadow: none; border-top-width: 4px; }
+      html, body { width: 11in; min-height: 8.5in; background: var(--light); }
+      body { font-size: 10px; line-height: 1.22; }
+      .page { width: 10.56in; margin: 0 auto; padding: 0.18in; border-top-width: 4px; box-shadow: 0 6px 18px rgba(11, 43, 89, 0.10); }
       .print-btn { display: none; }
+      .topbar { padding-bottom: 8px; margin-bottom: 10px; }
+      h1 { font-size: 22px; margin-bottom: 2px; }
+      .date { font-size: 10px; }
+      .hero { grid-template-columns: 1.05fr 1.2fr; gap: 10px; margin-bottom: 10px; }
+      .coverage { padding: 12px 14px; border-left-width: 4px; }
+      .coverage-label { font-size: 9px; }
+      .coverage-value { font-size: 28px; margin: 2px 0; }
+      .progress { height: 10px; margin: 8px 0 4px; }
+      .stats { gap: 7px; }
+      .stat { padding: 7px 9px; border-radius: 6px; }
+      .stat-label, .section-title { font-size: 8.5px; }
+      .stat-value { font-size: 17px; margin-top: 2px; }
+      .stat-detail, .muted { font-size: 9px; margin-top: 2px; }
+      .grid { gap: 10px; }
+      section { margin-top: 9px; }
+      table { margin-top: 5px; font-size: 8.7px; line-height: 1.14; }
+      th { font-size: 7.8px; padding: 4px 5px; border-bottom-width: 1px; }
+      td { padding: 3px 5px; }
+      .footer { margin-top: 9px; padding-top: 6px; font-size: 8.5px; }
       section, .coverage, .stat { break-inside: avoid; }
     }
   </style>
