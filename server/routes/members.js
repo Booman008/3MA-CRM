@@ -26,6 +26,7 @@ function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: String(row?.expirationDate || row?.expiration || row?.renewalDate || '').trim(),
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -33,7 +34,7 @@ function normalizeLicenseRow(row) {
 function normalizeLicenseNo(value) {
   if (value == null) return null;
   if (Array.isArray(value)) {
-    const rows = value.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name);
+    const rows = value.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name || r.expirationDate);
     return rows.length ? JSON.stringify(rows) : null;
   }
   const text = String(value).trim();
@@ -41,7 +42,7 @@ function normalizeLicenseNo(value) {
   try {
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed)) {
-      const rows = parsed.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name);
+      const rows = parsed.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name || r.expirationDate);
       return rows.length ? JSON.stringify(rows) : null;
     }
   } catch {}

@@ -19,17 +19,21 @@ export async function api(path, opts = {}) {
   if (!res.ok) {
     let message = '';
     let rawText = '';
+    let parsed = null;
     try { rawText = await res.text(); } catch {}
     if (rawText) {
       try {
-        const parsed = JSON.parse(rawText);
+        parsed = JSON.parse(rawText);
         message = parsed.error || parsed.message || '';
       } catch {
         message = rawText.slice(0, 300);
       }
     }
     if (!message) message = res.statusText || `HTTP ${res.status}`;
-    throw new Error(`${message} (status ${res.status})`);
+    const error = new Error(`${message} (status ${res.status})`);
+    error.status = res.status;
+    error.data = parsed;
+    throw error;
   }
 
   if (res.status === 204) return null;

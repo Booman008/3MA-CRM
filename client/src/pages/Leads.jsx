@@ -28,6 +28,11 @@ const LEAD_DEFAULTS = {
   lastContactDate: '', nextContactDate: '', notes: '',
   logoAttachmentId: null, logoUrl: null,
 };
+const MEMBER_CONVERSION_DEFAULTS = {
+  businessName: '', licenseNo: '', licenseType: '', county: '',
+  ownerName: '', phone: '', email: '',
+  joinDate: '', renewalDate: '', duesAmount: '', membershipTier: '', notes: '',
+};
 export { STAGES, stageColor };
 const PRIORITIES = ['Low', 'Medium', 'High'];
 
@@ -37,12 +42,63 @@ const priorityColor = {
   High: 'var(--color-red)',
 };
 
+const LEAD_SORT_OPTIONS = [
+  { value: '', label: 'Default' },
+  { value: 'licenseExpirationDateSort', label: 'License Expiration' },
+  { value: 'licenseCountySort', label: 'County' },
+  { value: 'businessName', label: 'Business Name' },
+  { value: 'licenseNameSort', label: 'License Name' },
+  { value: 'licenseNumberSort', label: 'License #' },
+  { value: 'licenseTypeSort', label: 'License Type' },
+  { value: 'ownerName', label: 'Owner' },
+  { value: 'lastContactDate', label: 'Last Contact' },
+  { value: 'nextContactDate', label: 'Next Contact' },
+  { value: 'stage', label: 'Stage' },
+  { value: 'priority', label: 'Priority' },
+];
+
+function realLicenseRows(licenseNo) {
+  return parseLicenseRows(licenseNo).filter(row => row.number || row.type || row.county || row.name || row.expirationDate);
+}
+
+function firstLicenseValue(licenseNo, field) {
+  return realLicenseRows(licenseNo).find(row => row[field])?.[field] || '';
+}
+
+function earliestLicenseExpiration(licenseNo) {
+  return realLicenseRows(licenseNo).map(row => row.expirationDate).filter(Boolean).sort()[0] || '';
+}
+
+function withLeadSortValues(lead) {
+  return {
+    ...lead,
+    licenseNumberSort: firstLicenseValue(lead.licenseNo, 'number'),
+    licenseTypeSort: firstLicenseValue(lead.licenseNo, 'type') || lead.licenseType || '',
+    licenseCountySort: firstLicenseValue(lead.licenseNo, 'county') || lead.county || '',
+    licenseNameSort: firstLicenseValue(lead.licenseNo, 'name'),
+    licenseExpirationDateSort: earliestLicenseExpiration(lead.licenseNo),
+  };
+}
+
 function licenseSummary(licenseNo) {
-  const rows = parseLicenseRows(licenseNo).filter(row => row.number || row.type || row.county || row.name);
+  const rows = realLicenseRows(licenseNo);
   if (rows.length === 0) return '—';
   if (rows.length === 1) return rows[0].number || rows[0].name || rows[0].type || '—';
   const first = rows[0].number || rows[0].name || rows[0].type || 'License';
   return `${first} +${rows.length - 1} more`;
+}
+
+function licenseExpirationSummary(licenseNo) {
+  const expirations = [...new Set(realLicenseRows(licenseNo).map(row => row.expirationDate).filter(Boolean))].sort();
+  if (expirations.length === 0) return '-';
+  const first = fmt.date(expirations[0]);
+  return expirations.length === 1 ? first : `${first} +${expirations.length - 1} more`;
+}
+
+function localDateValue() {
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60 * 1000;
+  return new Date(now.getTime() - offset).toISOString().slice(0, 10);
 }
 
 export function Leads() {
@@ -66,6 +122,11 @@ export function Leads() {
   const [sortDir, setSortDir] = useState('asc');
   const [showArchived, setShowArchived] = useState(false);
   const [activeNameKey, setActiveNameKey] = useState(null);
+  const [conversionLead, setConversionLead] = useState(null);
+  const [conversionForm, setConversionForm] = useState(MEMBER_CONVERSION_DEFAULTS);
+  const [converting, setConverting] = useState(false);
+  const [conversionError, setConversionError] = useState('');
+  const [duplicateMembers, setDuplicateMembers] = useState([]);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -121,23 +182,27 @@ export function Leads() {
     return () => window.removeEventListener('crm:openRecord', checkOpen);
   }, []);
 
-  const leadCounties = [...new Set(allLeads.map(l => l.county).filter(Boolean))].sort();
+  const leadCounties = [...new Set(allLeads.flatMap(l => [
+    l.county,
+    ...realLicenseRows(l.licenseNo).map(row => row.county),
+  ]).filter(Boolean))].sort();
 
   const archivedCount = allLeads.filter(l => isArchivedStage(l.stage)).length;
   const filteredLeads = allLeads.filter(l => {
     if (!showArchived && isArchivedStage(l.stage) && stageFilter !== l.stage) return false;
     if (stageFilter && l.stage !== stageFilter) return false;
     if (priorityFilter && l.priority !== priorityFilter) return false;
-    if (countyFilter && l.county !== countyFilter) return false;
+    if (countyFilter && l.county !== countyFilter && !realLicenseRows(l.licenseNo).some(row => row.county === countyFilter)) return false;
     return true;
   });
-  const leads = view === 'table' ? sortRecords(filteredLeads, sortBy, sortDir) : filteredLeads;
+  const leads = sortRecords(filteredLeads.map(withLeadSortValues), sortBy, sortDir);
   const visibleKanbanStages = showArchived ? ALL_STAGES : ACTIVE_STAGES;
 
   const toggleSort = (key) => {
     setSortDir(nextSortDir(sortBy, sortDir, key));
     setSortBy(key);
   };
+  const toggleSortDir = () => setSortDir(dir => dir === 'asc' ? 'desc' : 'asc');
   const SortTh = ({ label, sortKey }) => (
     <th style={{ ...S.th, cursor: sortKey ? 'pointer' : 'default', userSelect: 'none' }} onClick={() => sortKey && toggleSort(sortKey)}>
       {label}
@@ -164,6 +229,60 @@ export function Leads() {
     setModal('edit');
   };
   const close = () => setModal(null);
+
+  const openConvert = (lead) => {
+    setConversionLead(lead);
+    setConversionForm({
+      ...MEMBER_CONVERSION_DEFAULTS,
+      businessName: lead.businessName || '',
+      licenseNo: lead.licenseNo || '',
+      licenseType: lead.licenseType || firstLicenseType(lead.licenseNo) || '',
+      county: lead.county || firstLicenseValue(lead.licenseNo, 'county') || '',
+      ownerName: lead.ownerName || '',
+      phone: lead.phone || '',
+      email: lead.email || '',
+      joinDate: localDateValue(),
+      notes: lead.notes || '',
+    });
+    setConversionError('');
+    setDuplicateMembers([]);
+  };
+
+  const closeConversion = () => {
+    if (converting) return;
+    setConversionLead(null);
+    setConversionError('');
+    setDuplicateMembers([]);
+  };
+
+  const convertToMember = async () => {
+    if (!conversionLead || converting) return;
+    setConverting(true);
+    setConversionError('');
+    setDuplicateMembers([]);
+    try {
+      const member = await api(`/leads/${conversionLead.id}/convert`, {
+        method: 'POST',
+        body: {
+          ...conversionForm,
+          duesAmount: conversionForm.duesAmount === '' ? null : Number(conversionForm.duesAmount),
+        },
+      });
+      sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: 'member', id: member.id }));
+      setConversionLead(null);
+      location.hash = 'members';
+    } catch (error) {
+      setConversionError(error.message);
+      setDuplicateMembers(error.data?.matches || []);
+    } finally {
+      setConverting(false);
+    }
+  };
+
+  const openExistingMember = (memberId) => {
+    sessionStorage.setItem('crm:openRecord', JSON.stringify({ kind: 'member', id: memberId }));
+    location.hash = 'members';
+  };
 
   const save = async () => {
     const licenseNo = serializeLicenseRows(licenseRows);
@@ -282,6 +401,15 @@ export function Leads() {
           </div>
         )}
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 6, gap: 4 }}>
+          {lead.stage === 'Won' && (
+            <button
+              type="button"
+              onClick={e => { e.stopPropagation(); openConvert(lead); }}
+              style={{ ...S.btn(), padding: '3px 7px', fontSize: '0.62rem' }}
+            >
+              Convert
+            </button>
+          )}
           <button onClick={e => { e.stopPropagation(); remove(lead.id); }}
             style={{ background: 'none', border: 'none', color: 'var(--color-red)', cursor: 'pointer', fontSize: '0.7rem', padding: '2px 4px', opacity: 0.6, fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}
             onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.6'}>
@@ -394,6 +522,26 @@ export function Leads() {
             Clear Filters ({activeLeadFilters})
           </button>
         )}
+        {view === 'kanban' && (
+          <>
+            <select
+              style={S.select}
+              value={sortBy}
+              onChange={e => {
+                setSortBy(e.target.value);
+                if (!e.target.value) setSortDir('asc');
+              }}
+              aria-label="Sort leads"
+            >
+              {LEAD_SORT_OPTIONS.map(option => <option key={option.value} value={option.value}>Sort: {option.label}</option>)}
+            </select>
+            {sortBy && (
+              <button type="button" onClick={toggleSortDir} style={{ ...S.btn('secondary'), padding: '6px 12px' }}>
+                {sortDir === 'asc' ? 'Asc' : 'Desc'}
+              </button>
+            )}
+          </>
+        )}
         <span style={{ color: 'var(--color-muted)', fontSize: '0.82rem', marginLeft: 'auto' }}>
           {leads.length}{leads.length !== allLeads.length ? ` of ${allLeads.length}` : ''} lead{leads.length !== 1 ? 's' : ''}
         </span>
@@ -420,10 +568,12 @@ export function Leads() {
                 <thead><tr>
                   <SortTh label="Business Name" sortKey="businessName" />
                   <SortTh label="Owner" sortKey="ownerName" />
-                  <SortTh label="License #" sortKey="licenseNo" />
-                  <SortTh label="County" sortKey="county" />
+                  <SortTh label="License #" sortKey="licenseNumberSort" />
+                  <SortTh label="Expiration" sortKey="licenseExpirationDateSort" />
+                  <SortTh label="County" sortKey="licenseCountySort" />
                   <SortTh label="Stage" sortKey="stage" />
                   <SortTh label="Priority" sortKey="priority" />
+                  <SortTh label="Last Contact" sortKey="lastContactDate" />
                   <SortTh label="Next Contact" sortKey="nextContactDate" />
                   <SortTh label="Actions" />
                 </tr></thead>
@@ -446,7 +596,8 @@ export function Leads() {
                       </td>
                       <td style={S.td}>{l.ownerName || '—'}</td>
                       <td style={S.td}>{licenseSummary(l.licenseNo)}</td>
-                      <td style={S.td}>{l.county || '—'}</td>
+                      <td style={S.td}>{licenseExpirationSummary(l.licenseNo)}</td>
+                      <td style={S.td}>{l.licenseCountySort || '—'}</td>
                       <td style={S.td}>
                         <select value={l.stage} onChange={e => updateStage(l.id, e.target.value)} style={{
                           ...S.select, padding: '4px 10px',
@@ -465,8 +616,12 @@ export function Leads() {
                         </select>
                       </td>
                       <td style={S.td}><span style={{ ...S.badge(priorityColor[l.priority] || 'var(--color-gold)'), color: l.priority === 'Medium' ? 'var(--color-navy)' : '#fff' }}>{l.priority}</span></td>
+                      <td style={S.td}>{fmt.date(l.lastContactDate)}</td>
                       <td style={S.td}>{fmt.date(l.nextContactDate)}</td>
                       <td style={{ ...S.td, whiteSpace: 'nowrap' }}>
+                        {l.stage === 'Won' && (
+                          <button style={{ ...S.btn(), padding: '4px 10px', marginRight: 6 }} onClick={() => openConvert(l)}>Convert</button>
+                        )}
                         <button style={{ ...S.btn('secondary'), padding: '4px 10px', marginRight: 6 }} onClick={() => openEdit(l)}>Edit</button>
                         <button style={{ ...S.btn('danger'), padding: '4px 10px' }} onClick={() => remove(l.id)}>Del</button>
                       </td>
@@ -520,7 +675,7 @@ export function Leads() {
               Leads can also track multiple licenses, names, and active/inactive status.
             </div>
             {licenseRows.map((row, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.05fr 1.05fr 0.9fr 1.1fr 0.78fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
+              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.05fr 1.05fr 0.9fr 1.1fr 0.82fr 0.78fr 24px', gap: 8, alignItems: 'center', marginBottom: 6 }}>
                 <input style={S.input} value={row.number} onChange={e => setLicenseField(idx, 'number', e.target.value)} placeholder={`License #${idx + 1}`} />
                 <select style={S.select} value={row.type} onChange={e => setLicenseField(idx, 'type', e.target.value)}>
                   <option value="">License Type...</option>
@@ -528,6 +683,7 @@ export function Leads() {
                 </select>
                 <input style={S.input} value={row.county} onChange={e => setLicenseField(idx, 'county', e.target.value)} placeholder="County" />
                 <input style={S.input} value={row.name} onChange={e => setLicenseField(idx, 'name', e.target.value)} placeholder="License Name" />
+                <input style={S.input} type="date" value={row.expirationDate || ''} onChange={e => setLicenseField(idx, 'expirationDate', e.target.value)} title="License expiration date" />
                 <select style={S.select} value={row.status} onChange={e => setLicenseField(idx, 'status', e.target.value)}>
                   {LICENSE_STATUS_OPTIONS.map(status => <option key={status} value={status}>{status}</option>)}
                 </select>
@@ -553,8 +709,86 @@ export function Leads() {
           {modal === 'edit' && <ContactsPanel entityType="lead" entityId={editId} entityName={form.businessName} entityEmail={form.email} />}
           {modal === 'edit' && <AttachmentsPanel entityType="lead" entityId={editId} />}
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
+            {modal === 'edit' && form.stage === 'Won' && (
+              <button
+                style={{ ...S.btn(), marginRight: 'auto' }}
+                onClick={() => {
+                  const lead = { ...form, id: editId, licenseNo: serializeLicenseRows(licenseRows) };
+                  close();
+                  openConvert(lead);
+                }}
+              >
+                Convert to Member
+              </button>
+            )}
             <button style={S.btn('secondary')} onClick={close}>Cancel</button>
             <button style={S.btn()} onClick={save} disabled={!form.businessName}>Save</button>
+          </div>
+        </Modal>
+      )}
+
+      {conversionLead && (
+        <Modal title="Convert Lead to Member" onClose={closeConversion}>
+          <div style={{
+            marginBottom: 16,
+            padding: '10px 12px',
+            borderRadius: 6,
+            borderLeft: '3px solid var(--color-navy)',
+            background: 'var(--color-callout-navy-bg)',
+            color: 'var(--color-navy)',
+            fontSize: '.84rem',
+            lineHeight: 1.5,
+          }}>
+            Review the member details below. Converting will move the lead’s contact history, tasks, files, and logo into the new member record.
+          </div>
+          <div style={S.formGrid}>
+            <Field label="Business Name *"><input style={S.input} value={conversionForm.businessName} onChange={e => setConversionForm(f => ({ ...f, businessName: e.target.value }))} /></Field>
+            <Field label="Owner Name"><input style={S.input} value={conversionForm.ownerName} onChange={e => setConversionForm(f => ({ ...f, ownerName: e.target.value }))} /></Field>
+            <Field label="County"><input style={S.input} value={conversionForm.county} onChange={e => setConversionForm(f => ({ ...f, county: e.target.value }))} /></Field>
+            <Field label="Phone"><input style={S.input} value={conversionForm.phone} onChange={e => setConversionForm(f => ({ ...f, phone: e.target.value }))} /></Field>
+            <Field label="Email"><input style={S.input} type="email" value={conversionForm.email} onChange={e => setConversionForm(f => ({ ...f, email: e.target.value }))} /></Field>
+            <Field label="Membership Tier">
+              <select style={{ ...S.select, width: '100%' }} value={conversionForm.membershipTier} onChange={e => setConversionForm(f => ({ ...f, membershipTier: e.target.value }))}>
+                <option value="">Select...</option>
+                <option>Affiliate</option>
+                <option>Member</option>
+                <option>Board Member</option>
+                <option>Corporate Sponsor</option>
+              </select>
+            </Field>
+            <Field label="Join Date"><input style={S.input} type="date" value={conversionForm.joinDate} onChange={e => setConversionForm(f => ({ ...f, joinDate: e.target.value }))} /></Field>
+            <Field label="Renewal Date"><input style={S.input} type="date" value={conversionForm.renewalDate} onChange={e => setConversionForm(f => ({ ...f, renewalDate: e.target.value }))} /></Field>
+            <Field label="Dues Amount ($)"><input style={S.input} type="number" min="0" step="0.01" value={conversionForm.duesAmount} onChange={e => setConversionForm(f => ({ ...f, duesAmount: e.target.value }))} /></Field>
+          </div>
+          <div style={S.formRow}>
+            <label style={S.label}>Licenses to Transfer</label>
+            <div style={{ fontSize: '.82rem', color: 'var(--color-muted)' }}>
+              {realLicenseRows(conversionForm.licenseNo).length > 0
+                ? realLicenseRows(conversionForm.licenseNo).map(row => [row.number, row.type, row.county].filter(Boolean).join(' · ')).join('; ')
+                : 'No licenses recorded'}
+            </div>
+          </div>
+          <Field label="Notes"><textarea style={{ ...S.input, minHeight: 70, resize: 'vertical' }} value={conversionForm.notes} onChange={e => setConversionForm(f => ({ ...f, notes: e.target.value }))} /></Field>
+          {conversionError && (
+            <div style={{ marginTop: 14, padding: 12, borderRadius: 6, background: 'var(--color-callout-red-bg)', color: 'var(--color-red)' }}>
+              <div style={{ fontWeight: 700 }}>{conversionError}</div>
+              {duplicateMembers.length > 0 && (
+                <div style={{ marginTop: 10, display: 'grid', gap: 8 }}>
+                  {duplicateMembers.map(member => (
+                    <div key={member.id} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center', color: 'var(--color-navy)' }}>
+                      <span>{member.businessName}{member.ownerName ? ` — ${member.ownerName}` : ''}</span>
+                      <button type="button" style={{ ...S.btn('secondary'), padding: '4px 10px' }} onClick={() => openExistingMember(member.id)}>Open Member</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16 }}>
+            <button style={S.btn('secondary')} onClick={closeConversion} disabled={converting}>Cancel</button>
+            <button style={S.btn()} onClick={convertToMember} disabled={converting || !conversionForm.businessName}>
+              {converting ? 'Converting...' : 'Convert to Member'}
+            </button>
           </div>
         </Modal>
       )}
