@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
 const PROGRAM_LICENSE_TOTAL = 375;
-const ARCHIVED_STAGES = new Set(['Not Pursuing', 'Closed/NA', 'Cannot Afford']);
+const ARCHIVED_STAGES = new Set(['Closed/NA']);
 
 const CSV_COLUMNS = [
   'recordType',
@@ -87,7 +87,7 @@ function buildLicenseMetrics(members, leads) {
   const leadLicenseNumbers = collectUniqueLicenseNumbers(leads);
   const allLicenseNumbers = new Set([...memberLicenseNumbers, ...leadLicenseNumbers]);
   const leadLicenseCount = [...leadLicenseNumbers].filter((number) => !memberLicenseNumbers.has(number)).length;
-  const representedLicenseCount = memberLicenseNumbers.size;
+  const representedLicenseCount = allLicenseNumbers.size;
   const representedLicensePercent = Number(((representedLicenseCount / PROGRAM_LICENSE_TOTAL) * 100).toFixed(1));
 
   return {
