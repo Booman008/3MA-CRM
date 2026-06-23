@@ -4,6 +4,7 @@ const crypto = require('crypto');
 
 const db = require('../database');
 const r2 = require('../r2');
+const { parseLicenseRows, licenseIdentity } = require('../licenseUtils');
 
 const router = express.Router();
 
@@ -26,6 +27,7 @@ function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: String(row?.expirationDate || row?.expiration || row?.renewalDate || '').trim(),
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -33,7 +35,7 @@ function normalizeLicenseRow(row) {
 function normalizeLicenseNo(value) {
   if (value == null) return null;
   if (Array.isArray(value)) {
-    const rows = value.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name);
+    const rows = value.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name || r.expirationDate);
     return rows.length ? JSON.stringify(rows) : null;
   }
   const text = String(value).trim();
@@ -41,7 +43,7 @@ function normalizeLicenseNo(value) {
   try {
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed)) {
-      const rows = parsed.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name);
+      const rows = parsed.map(normalizeLicenseRow).filter(r => r.number || r.type || r.county || r.name || r.expirationDate);
       return rows.length ? JSON.stringify(rows) : null;
     }
   } catch {}
@@ -64,6 +66,46 @@ async function withLogoUrl(row) {
 
 async function withLogoUrls(rows) {
   return Promise.all(rows.map(withLogoUrl));
+}
+
+function normalizedText(value) {
+  const text = String(value || '').trim();
+  return text ? text.toLowerCase() : null;
+}
+
+function licenseNumbers(value) {
+  return [...new Set(parseLicenseRows(value).map(licenseIdentity).filter(Boolean))];
+}
+
+async function findDuplicateMembers(client, candidate) {
+  const businessName = normalizedText(candidate.businessName);
+  const email = normalizedText(candidate.email);
+  const candidateLicenses = licenseNumbers(candidate.licenseNo);
+  const result = await client.query(
+    `
+      SELECT id, "businessName", email, "licenseNo", "ownerName"
+      FROM members
+      WHERE ($1::text IS NOT NULL AND lower(trim("businessName")) = $1)
+         OR ($2::text IS NOT NULL AND lower(trim(email)) = $2)
+         OR ($3::boolean = TRUE AND "licenseNo" IS NOT NULL)
+      ORDER BY "businessName", id
+    `,
+    [businessName, email, candidateLicenses.length > 0]
+  );
+
+  return result.rows.filter((member) => {
+    if (businessName && normalizedText(member.businessName) === businessName) return true;
+    if (email && normalizedText(member.email) === email) return true;
+    if (candidateLicenses.length === 0) return false;
+    const memberLicenses = new Set(licenseNumbers(member.licenseNo));
+    return candidateLicenses.some(number => memberLicenses.has(number));
+  }).map(({ id, businessName: name, email: memberEmail, ownerName, licenseNo }) => ({
+    id,
+    businessName: name,
+    email: memberEmail,
+    ownerName,
+    licenseNo,
+  }));
 }
 
 function safeFilename(name) {
@@ -251,6 +293,145 @@ router.post('/bulk', async (req, res) => {
     }
   }
   res.status(201).json({ inserted, failed: failures.length, failures: failures.slice(0, 10) });
+});
+
+router.post('/:id/convert', async (req, res) => {
+  const leadId = Number(req.params.id);
+  if (!Number.isFinite(leadId)) return res.status(400).json({ error: 'Invalid lead id' });
+
+  const {
+    businessName,
+    licenseNo,
+    licenseType,
+    county,
+    ownerName,
+    phone,
+    email,
+    joinDate,
+    renewalDate,
+    duesAmount,
+    membershipTier,
+    notes,
+  } = req.body || {};
+
+  if (!businessName || !String(businessName).trim()) {
+    return res.status(400).json({ error: 'businessName is required' });
+  }
+  const normalizedDuesAmount = duesAmount === '' || duesAmount == null ? null : Number(duesAmount);
+  if (normalizedDuesAmount != null && (!Number.isFinite(normalizedDuesAmount) || normalizedDuesAmount < 0)) {
+    return res.status(400).json({ error: 'duesAmount must be a non-negative number' });
+  }
+
+  try {
+    const memberId = await db.transaction(async (client) => {
+      const leadResult = await client.query(
+        `SELECT id, stage FROM leads WHERE id = $1 FOR UPDATE`,
+        [leadId]
+      );
+      if (leadResult.rowCount === 0) {
+        const error = new Error('Lead not found');
+        error.statusCode = 404;
+        throw error;
+      }
+      if (leadResult.rows[0].stage !== 'Won') {
+        const error = new Error('Only Won leads can be converted to members');
+        error.statusCode = 400;
+        throw error;
+      }
+
+      const normalizedLicenseNo = normalizeLicenseNo(licenseNo);
+      const candidate = { businessName, email, licenseNo: normalizedLicenseNo };
+      const matches = await findDuplicateMembers(client, candidate);
+      if (matches.length > 0) {
+        const error = new Error('A possible matching member already exists');
+        error.statusCode = 409;
+        error.matches = matches;
+        throw error;
+      }
+
+      const inserted = await client.query(
+        `
+          INSERT INTO members (
+            "businessName", "licenseNo", "licenseType", county, "ownerName", phone, email,
+            "joinDate", "renewalDate", "duesAmount", "membershipTier", benefits, notes,
+            "logoAttachmentId"
+          )
+          SELECT
+            $1, $2, $3, $4, $5, $6, $7,
+            $8, $9, $10, $11, '[]', $12,
+            "logoAttachmentId"
+          FROM leads
+          WHERE id = $13
+          RETURNING id
+        `,
+        [
+          String(businessName).trim(),
+          normalizedLicenseNo,
+          licenseType || null,
+          county || null,
+          ownerName || null,
+          phone || null,
+          email || null,
+          joinDate || null,
+          renewalDate || null,
+          normalizedDuesAmount,
+          membershipTier || null,
+          notes || null,
+          leadId,
+        ]
+      );
+      const createdMemberId = inserted.rows[0].id;
+      const memberName = String(businessName).trim();
+
+      await client.query(
+        `UPDATE contact_log
+         SET "entityType" = 'member', "entityId" = $1, "entityName" = $2
+         WHERE "entityType" = 'lead' AND "entityId" = $3`,
+        [createdMemberId, memberName, leadId]
+      );
+      await client.query(
+        `UPDATE tasks
+         SET "entityType" = 'member', "entityId" = $1, "entityName" = $2
+         WHERE "entityType" = 'lead' AND "entityId" = $3`,
+        [createdMemberId, memberName, leadId]
+      );
+      await client.query(
+        `UPDATE attachments
+         SET "entityType" = 'member', "entityId" = $1
+         WHERE "entityType" = 'lead' AND "entityId" = $2`,
+        [createdMemberId, leadId]
+      );
+      await client.query('DELETE FROM leads WHERE id = $1', [leadId]);
+
+      return createdMemberId;
+    });
+
+    const created = await db.query(
+      `SELECT
+         m.id, m."businessName", m."licenseNo", m."licenseType", m.county, m."ownerName", m.phone, m.email,
+         m."joinDate", m."renewalDate", m."duesAmount", m."membershipTier", m.benefits, m.notes, m."createdAt",
+         m."logoAttachmentId", a."r2Key" AS "logoR2Key"
+       FROM members m
+       LEFT JOIN attachments a ON a.id = m."logoAttachmentId"
+       WHERE m.id = $1`,
+      [memberId]
+    );
+    const member = { ...created.rows[0], duesAmount: created.rows[0].duesAmount == null ? null : Number(created.rows[0].duesAmount), logoUrl: null };
+    if (member.logoR2Key && r2.isConfigured()) {
+      try { member.logoUrl = await r2.getInlineUrl(member.logoR2Key); } catch {}
+    }
+    delete member.logoR2Key;
+    res.status(201).json(member);
+  } catch (error) {
+    if (error.statusCode === 409) {
+      return res.status(409).json({ error: error.message, matches: error.matches || [] });
+    }
+    if (error.statusCode === 400 || error.statusCode === 404) {
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+    console.error('Failed to convert lead:', error);
+    res.status(500).json({ error: 'Failed to convert lead' });
+  }
 });
 
 router.post('/:id/logo', upload.single('file'), async (req, res) => {

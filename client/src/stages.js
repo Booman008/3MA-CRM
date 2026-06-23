@@ -5,8 +5,18 @@
 // success-green reserved for the "Won" stage). Archived rows use neutral
 // greys so they read as out-of-funnel.
 
-export const ACTIVE_STAGES = ['New', 'Contacted', 'Qualified', 'Proposal', 'Won', 'Lost', 'FireCraft'];
-export const ARCHIVED_STAGES = ['Not Pursuing', 'Closed/NA', 'Cannot Afford'];
+export const ACTIVE_STAGES = [
+  'New',
+  'Contacted',
+  'Qualified',
+  'Proposal',
+  'Won',
+  'Lost',
+  'FireCraft',
+  'Not Pursuing',
+  'Cannot Afford',
+];
+export const ARCHIVED_STAGES = ['Closed/NA'];
 export const ALL_STAGES = [...ACTIVE_STAGES, ...ARCHIVED_STAGES];
 
 // Backward-compat alias so existing imports of STAGES keep working.

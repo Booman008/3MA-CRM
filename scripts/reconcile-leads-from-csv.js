@@ -158,6 +158,7 @@ function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: parseFlexibleDate(row?.expirationDate || row?.expiration || row?.renewalDate) || '',
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -167,7 +168,7 @@ function parseExistingLicenseRows(value) {
   try {
     const parsed = JSON.parse(value);
     if (Array.isArray(parsed)) {
-      return parsed.map(normalizeLicenseRow).filter((r) => r.number || r.type || r.county || r.name);
+      return parsed.map(normalizeLicenseRow).filter((r) => r.number || r.type || r.county || r.name || r.expirationDate);
     }
   } catch {}
   return String(value)
@@ -179,7 +180,7 @@ function parseExistingLicenseRows(value) {
 
 function licenseKey(row) {
   const n = normalizeLicenseRow(row);
-  return [n.number, n.type, n.county, n.name, n.status].join('');
+  return [n.number, n.type, n.county, n.name, n.expirationDate, n.status].join('');
 }
 
 function dedupeLicenseRows(rows) {
@@ -187,7 +188,7 @@ function dedupeLicenseRows(rows) {
   const out = [];
   for (const r of rows || []) {
     const n = normalizeLicenseRow(r);
-    if (!(n.number || n.type || n.county || n.name)) continue;
+    if (!(n.number || n.type || n.county || n.name || n.expirationDate)) continue;
     const k = licenseKey(n);
     if (seen.has(k)) continue;
     seen.add(k);
@@ -339,6 +340,7 @@ function buildLicenseRowsFromGroup(group) {
     type: r.licenseType,
     county: r.county,
     name: r.businessName,
+    expirationDate: r.expiration,
     status: 'Active',
   })));
 }

@@ -12,6 +12,7 @@ function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: String(row?.expirationDate || row?.expiration || row?.renewalDate || '').trim(),
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -34,7 +35,7 @@ function parseLicenseRows(value) {
 
 function hasLicenseData(row) {
   const normalized = normalizeLicenseRow(row);
-  return Boolean(normalized.number || normalized.type || normalized.county || normalized.name);
+  return Boolean(normalized.number || normalized.type || normalized.county || normalized.name || normalized.expirationDate);
 }
 
 function licenseIdentity(row) {

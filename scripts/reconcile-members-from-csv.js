@@ -167,6 +167,7 @@ function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: parseFlexibleDate(row?.expirationDate || row?.expiration || row?.renewalDate) || '',
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -176,7 +177,7 @@ function parseExistingLicenseRows(value) {
   try {
     const parsed = JSON.parse(value);
     if (Array.isArray(parsed)) {
-      return parsed.map(normalizeLicenseRow).filter((row) => row.number || row.type || row.county || row.name);
+      return parsed.map(normalizeLicenseRow).filter((row) => row.number || row.type || row.county || row.name || row.expirationDate);
     }
   } catch {}
 
@@ -189,7 +190,7 @@ function parseExistingLicenseRows(value) {
 
 function licenseKey(row) {
   const normalized = normalizeLicenseRow(row);
-  return [normalized.number, normalized.type, normalized.county, normalized.name, normalized.status].join('\u001f');
+  return [normalized.number, normalized.type, normalized.county, normalized.name, normalized.expirationDate, normalized.status].join('\u001f');
 }
 
 function dedupeLicenseRows(rows) {
@@ -197,7 +198,7 @@ function dedupeLicenseRows(rows) {
   const output = [];
   for (const row of rows || []) {
     const normalized = normalizeLicenseRow(row);
-    if (!(normalized.number || normalized.type || normalized.county || normalized.name)) continue;
+    if (!(normalized.number || normalized.type || normalized.county || normalized.name || normalized.expirationDate)) continue;
     const key = licenseKey(normalized);
     if (seen.has(key)) continue;
     seen.add(key);
@@ -341,6 +342,7 @@ function buildLicenseRowsFromGroup(group) {
     type: row.licenseType,
     county: row.county,
     name: row.businessName,
+    expirationDate: row.renewalDate,
     status: 'Active',
   })));
 }

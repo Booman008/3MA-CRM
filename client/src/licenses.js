@@ -1,3 +1,5 @@
+import { parseFlexibleDate } from './format.js';
+
 export const LICENSE_STATUS_OPTIONS = ['Active', 'Inactive'];
 
 export const EMPTY_LICENSE_ROW = {
@@ -5,6 +7,7 @@ export const EMPTY_LICENSE_ROW = {
   type: '',
   county: '',
   name: '',
+  expirationDate: '',
   status: 'Active',
 };
 
@@ -14,6 +17,7 @@ export function normalizeLicenseRow(row) {
     type: String(row?.type || '').trim(),
     county: String(row?.county || '').trim(),
     name: String(row?.name || '').trim(),
+    expirationDate: parseFlexibleDate(row?.expirationDate || row?.expiration || row?.renewalDate) || '',
     status: row?.status === 'Inactive' ? 'Inactive' : 'Active',
   };
 }
@@ -25,6 +29,7 @@ export function licenseRowKey(row) {
     normalized.type,
     normalized.county,
     normalized.name,
+    normalized.expirationDate,
     normalized.status,
   ].join('\u001f');
 }
@@ -45,7 +50,7 @@ export function parseLicenseRows(value) {
 export function serializeLicenseRows(rows) {
   const normalized = (rows || [])
     .map(normalizeLicenseRow)
-    .filter(row => row.number || row.type || row.county || row.name);
+    .filter(row => row.number || row.type || row.county || row.name || row.expirationDate);
   return normalized.length ? JSON.stringify(normalized) : null;
 }
 
@@ -54,7 +59,7 @@ export function dedupeLicenseRows(rows) {
   const deduped = [];
   for (const row of rows || []) {
     const normalized = normalizeLicenseRow(row);
-    if (!(normalized.number || normalized.type || normalized.county || normalized.name)) continue;
+    if (!(normalized.number || normalized.type || normalized.county || normalized.name || normalized.expirationDate)) continue;
     const key = licenseRowKey(normalized);
     if (seen.has(key)) continue;
     seen.add(key);
@@ -86,6 +91,6 @@ export function firstLicenseType(value) {
 export function hasRealLicenseRows(rows) {
   return (rows || []).some(row => {
     const normalized = normalizeLicenseRow(row);
-    return normalized.number || normalized.type || normalized.county || normalized.name;
+    return normalized.number || normalized.type || normalized.county || normalized.name || normalized.expirationDate;
   });
 }
