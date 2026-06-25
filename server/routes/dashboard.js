@@ -7,7 +7,6 @@ const {
 } = require('../licenseUtils');
 
 const router = express.Router();
-const PROGRAM_LICENSE_TOTAL = 375;
 const ARCHIVED_STAGES = new Set(['Closed/NA']);
 
 const CSV_COLUMNS = [
@@ -88,17 +87,20 @@ function buildLicenseMetrics(members, leads) {
   const allLicenseNumbers = new Set([...memberLicenseNumbers, ...leadLicenseNumbers]);
   const leadLicenseCount = [...leadLicenseNumbers].filter((number) => !memberLicenseNumbers.has(number)).length;
   const representedLicenseCount = memberLicenseNumbers.size;
-  const representedLicensePercent = Number(((representedLicenseCount / PROGRAM_LICENSE_TOTAL) * 100).toFixed(1));
+  const programLicenseTotal = allLicenseNumbers.size;
+  const representedLicensePercent = Number((
+    programLicenseTotal > 0 ? (representedLicenseCount / programLicenseTotal) * 100 : 0
+  ).toFixed(1));
 
   return {
     totalLicenses: representedLicenseCount,
     totalTrackedLicenses: allLicenseNumbers.size,
     leadLicenseCount,
     licenseCoveragePercent: representedLicensePercent,
-    programLicenseTotal: PROGRAM_LICENSE_TOTAL,
+    programLicenseTotal,
     representedLicenseCount,
     representedLicensePercent,
-    unrepresentedProgramLicenseCount: Math.max(PROGRAM_LICENSE_TOTAL - representedLicenseCount, 0),
+    unrepresentedProgramLicenseCount: Math.max(programLicenseTotal - representedLicenseCount, 0),
     crmTrackedLicenseCount: allLicenseNumbers.size,
     nonMemberTrackedLicenseCount: leadLicenseCount,
   };
