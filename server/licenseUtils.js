@@ -40,7 +40,11 @@ function hasLicenseData(row) {
 
 function licenseIdentity(row) {
   const normalized = normalizeLicenseRow(row);
-  return normalized.number ? normalized.number.toUpperCase() : null;
+  if (normalized.number) return normalized.number.toUpperCase();
+  const nameAsNumber = normalized.name.replace(/\s+/g, '');
+  return /^(?=.*[A-Z])(?=.*\d)[A-Z0-9-]+$/i.test(nameAsNumber)
+    ? nameAsNumber.toUpperCase()
+    : null;
 }
 
 function collectUniqueLicenseNumbers(records) {
