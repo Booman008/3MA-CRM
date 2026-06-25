@@ -215,7 +215,7 @@ export function Dashboard() {
             <div style={{ width: `${representedProgress}%`, height: '100%', background: 'var(--color-success)', borderRadius: 999 }} />
           </div>
           <div style={statSubtext}>
-            {representedPercent}% of MMCP program represented<br />
+            {representedPercent}% of MMCP program represented by members<br />
             {remaining} license{remaining === 1 ? '' : 's'} not yet represented
           </div>
         </div>

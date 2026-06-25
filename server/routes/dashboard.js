@@ -87,7 +87,7 @@ function buildLicenseMetrics(members, leads) {
   const leadLicenseNumbers = collectUniqueLicenseNumbers(leads);
   const allLicenseNumbers = new Set([...memberLicenseNumbers, ...leadLicenseNumbers]);
   const leadLicenseCount = [...leadLicenseNumbers].filter((number) => !memberLicenseNumbers.has(number)).length;
-  const representedLicenseCount = allLicenseNumbers.size;
+  const representedLicenseCount = memberLicenseNumbers.size;
   const representedLicensePercent = Number(((representedLicenseCount / PROGRAM_LICENSE_TOTAL) * 100).toFixed(1));
 
   return {
@@ -339,7 +339,7 @@ function buildSnapshotHtml(data) {
       <div class="coverage">
         <div class="coverage-label">License Representation</div>
         <div class="coverage-value">${escapeHtml(data.representedLicenseCount)} of ${escapeHtml(data.programLicenseTotal)}</div>
-        <div>${escapeHtml(data.representedLicensePercent)}% of MMCP program represented</div>
+        <div>${escapeHtml(data.representedLicensePercent)}% of MMCP program represented by members</div>
         <div class="progress" aria-label="${escapeHtml(data.representedLicensePercent)}% represented"><div></div></div>
         <div class="muted">${escapeHtml(data.unrepresentedProgramLicenseCount)} licenses not yet represented</div>
       </div>
